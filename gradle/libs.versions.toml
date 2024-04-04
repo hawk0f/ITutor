@@ -1,0 +1,96 @@
+[versions]
+agp = "8.3.1"
+kotlin = "1.9.23"
+kotlinx-serialization = "1.6.3"
+coroutines = "1.8.0"
+material = "1.11.0"
+activity = "1.8.2"
+fragment = "1.6.2"
+constraintLayout = "2.1.4"
+ksp = "1.9.23-1.0.19"
+core = "1.12.0"
+splashscreen = "1.0.1"
+lifecycle = "2.7.0"
+navigation = "2.7.7"
+decoro = "1.5.2"
+koin_version = "3.6.0-wasm-alpha2"
+retrofit = "2.9.0"
+retrofit-kotlinx-serialization = "1.0.0"
+okHttp = "5.0.0-alpha.12"
+viewbinding = "8.3.1"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+
+[libraries]
+# Kotlin
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+# Coroutines
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+
+# UIComponents
+android-material = { module = "com.google.android.material:material", version.ref = "material" }
+androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
+
+# Core
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "core" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
+
+# Activity
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
+
+# Fragment
+androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+
+# Lifecycle
+androidx-lifecycle-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+
+# Navigation
+androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+
+#Mask TextView
+decoro = { module = "ru.tinkoff.decoro:decoro", version.ref = "decoro" }
+
+#Koin
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin_version" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin_version" }
+
+# Retrofit
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlinx-serialization" }
+
+# OkHttp
+okHttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okHttp" }
+okHttp = { module = "com.squareup.okhttp3:okhttp" }
+okHttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
+androidx-viewbinding = { group = "androidx.databinding", name = "viewbinding", version.ref = "viewbinding" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+[plugins]
+# AGP - Android Gradle Plugin
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+
+# KSP
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+# Navigation
+androidx-navigation-safeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
+
+# Conventions
+# version for workaround cause without this not working
+conventions-kotlinLibrary = { id = "kotlin-library-conventions", version = "1" }
+conventions-androidApp = { id = "android-app-conventions", version = "1" }
+conventions-androidLibrary = { id = "android-library-conventions", version = "1" }
+conventions-androidFeature = { id = "android-feature-conventions", version = "1" }
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version = "2.0.0-Beta5" }
