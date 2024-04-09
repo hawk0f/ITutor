@@ -7,6 +7,7 @@ plugins {
 
     // KSP
     alias(libs.plugins.ksp) apply false
+
     alias(libs.plugins.jetbrainsKotlinJvm) apply false
     alias(libs.plugins.androidLibrary) version libs.versions.agp apply false
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false

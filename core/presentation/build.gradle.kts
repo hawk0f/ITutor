@@ -9,23 +9,18 @@ android {
 
     defaultConfig {
         minSdk = 31
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
     }
 }
 
@@ -38,6 +33,7 @@ dependencies {
     // UI Components
     api(libs.android.material)
     api(libs.androidx.constraintLayout)
+    api(libs.android.vbpd)
 
     // Core
     api(libs.androidx.core)
@@ -56,5 +52,4 @@ dependencies {
     // Navigation
     api(libs.androidx.navigation.fragment)
     api(libs.androidx.navigation.ui)
-    implementation(libs.androidx.viewbinding)
 }

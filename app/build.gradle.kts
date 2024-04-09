@@ -16,14 +16,19 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
+        }
+        getByName("debug") {
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
         }
     }
     compileOptions {
@@ -31,12 +36,24 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "18"
+    }
+    buildFeatures {
+        viewBinding = true
     }
 }
 
 dependencies {
 
+    //Core
+    implementation(project(":core:presentation"))
+    implementation(project(":core:data"))
+
+    //Features
+    implementation(project(":features:students"))
+    implementation(project(":features:auth"))
+
+    //Activity
     implementation(libs.androidx.activity)
 
     //Koin
