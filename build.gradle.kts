@@ -5,10 +5,15 @@ plugins {
     // Navigation Safe Args
     alias(libs.plugins.androidx.navigation.safeArgs) apply false
 
+    // Hilt
+    alias(libs.plugins.hilt.android) apply false
+
     // KSP
     alias(libs.plugins.ksp) apply false
 
-    alias(libs.plugins.jetbrainsKotlinJvm) apply false
-    alias(libs.plugins.androidLibrary) version libs.versions.agp apply false
+    alias(libs.plugins.androidLibrary) apply false
+
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
+
+    alias(libs.plugins.serialization) apply false
 }

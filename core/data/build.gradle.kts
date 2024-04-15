@@ -1,14 +1,15 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    id("org.jetbrains.kotlin.plugin.serialization") version libs.versions.kotlin apply true
+
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
 
     // KSP
     alias(libs.plugins.ksp)
-    id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace = "dev.hawk0f.core.data"
+    namespace = "dev.hawk0f.itutor.core.data"
     compileSdk = 34
 
     defaultConfig {
@@ -17,25 +18,27 @@ android {
 
     buildTypes {
         getByName("release") {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.0.185:5110/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.0.179:5110/api/\"")
         }
 
         getByName("debug") {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.0.185:5110/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.0.179:5110/api/\"")
         }
     }
 
     buildFeatures {
         buildConfig = true
         viewBinding = true
+        dataBinding = true
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
+
     kotlinOptions {
-        jvmTarget = "18"
+        jvmTarget = "21"
     }
 }
 

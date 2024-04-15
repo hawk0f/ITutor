@@ -6,14 +6,14 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="dev.hawk0f.features.auth.presentation.ui.AuthViewModel" />
+            name="viewmodel"
+            type="dev.hawk0f.itutor.features.auth.presentation.ui.AuthViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="dev.hawk0f.features.auth.presentation.ui.AuthFragment">
+        tools:context=".presentation.ui.AuthFragment">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loader"
@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textEmailAddress"
-                    android:text="@={viewModel.email}"
+                    android:text="@={viewmodel.email}"
                     android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPassword"
-                    android:text="@={viewModel.password}"
+                    android:text="@={viewmodel.password}"
                     android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:padding="16dp"
-                android:onClick="@{() -> viewModel.authUser()}"
+                android:onClick="@{() -> viewmodel.authUser()}"
                 android:text="Sign in"
                 android:textSize="16sp" />
 

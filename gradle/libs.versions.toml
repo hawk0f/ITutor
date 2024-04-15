@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.1"
+agp = "8.3.2"
 kotlin = "1.9.23"
 kotlinx-serialization = "1.6.3"
 coroutines = "1.8.0"
@@ -18,6 +18,11 @@ retrofit = "2.9.0"
 retrofit-kotlinx-serialization = "1.0.0"
 okHttp = "5.0.0-alpha.12"
 vbpd = "1.5.9"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+dagger = "2.51"
 
 [libraries]
 # Kotlin
@@ -58,6 +63,15 @@ decoro = { module = "ru.tinkoff.decoro:decoro", version.ref = "decoro" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin_version" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin_version" }
 
+# Hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
+
+# Javax
+# [javax.inject package](https://docs.oracle.com/javaee/6/api/javax/inject/package-summary.html)
+# [JSR-330](https://javax-inject.github.io/javax-inject/)
+javax-inject = { module = "javax.inject:javax.inject", version = "1" }
+
 # Retrofit
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlinx-serialization" }
@@ -75,14 +89,11 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 # KSP
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
+# Hilt
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+
 # Navigation
 androidx-navigation-safeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 
-# Conventions
-# version for workaround cause without this not working
-conventions-kotlinLibrary = { id = "kotlin-library-conventions", version = "1" }
-conventions-androidApp = { id = "android-app-conventions", version = "1" }
-conventions-androidLibrary = { id = "android-library-conventions", version = "1" }
-conventions-androidFeature = { id = "android-feature-conventions", version = "1" }
-jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version = "2.0.0-Beta5" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

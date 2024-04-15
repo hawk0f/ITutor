@@ -1,10 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
 android {
-    namespace = "dev.hawk0f.core.presentation"
+    namespace = "dev.hawk0f.itutor.core.presentation"
     compileSdk = 34
 
     defaultConfig {
@@ -12,15 +12,18 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "21"
     }
+
     buildFeatures {
         buildConfig = true
         viewBinding = true
+        dataBinding = true
     }
 }
 

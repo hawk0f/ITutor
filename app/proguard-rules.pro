@@ -21,7 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 # Rules for DataMapper
--keep class * implements dev.hawk0f.core.data.utils.DataMapper
+-keep class * implements dev.hawk0f.itutor.core.data.utils.DataMapper
 
 # Rules for Navigation Component Safe Args, Parcelable
 -keep class * implements android.os.Parcelable
