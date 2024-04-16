@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/studentsNavGraph"
+        android:enabled="true"
+        android:icon="@drawable/students_icon"
+        android:title="Ученики" />
+    <item
+        android:id="@+id/lessonsNavGraph"
+        android:icon="@drawable/shedule_icon"
+        android:title="Расписание" />
+    <item
+        android:id="@+id/financeNavGraph"
+        android:icon="@drawable/finance_icon"
+        android:title="Финансы" />
+    <item
+        android:id="@+id/notesNavGraph"
+        android:icon="@drawable/notes_icon"
+        android:title="Заметки" />
+</menu>
