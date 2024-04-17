@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="action_global_authFragment" type="id"/>
-    <item name="action_global_registerFragment" type="id"/>
+    <item name="action_global_authFragment" type="id" />
+    <item name="action_global_registerFragment" type="id" />
+    <item name="action_global_mainContentFragment" type="id" />
 </resources>

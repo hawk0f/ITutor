@@ -1,4 +1,4 @@
-package dev.hawk0f.itutor.app
+package dev.hawk0f.itutor
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

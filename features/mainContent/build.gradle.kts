@@ -42,6 +42,8 @@ dependencies {
 
     implementation(project(":navigation"))
 
+    implementation(project(":features:students"))
+
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

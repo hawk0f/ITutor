@@ -5,9 +5,11 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.extensions.hideKeyboard
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.features.auth.R
 import dev.hawk0f.itutor.features.auth.databinding.FragmentAuthBinding
+import dev.hawk0f.itutor.navigation.R.id.action_global_mainContentFragment
 import dev.hawk0f.itutor.navigation.R.id.action_global_registerFragment
 
 @AndroidEntryPoint
@@ -27,8 +29,7 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         viewModel.clearFields()
     }
 
-    private fun setupViewModel() = with(binding)
-    {
+    private fun setupViewModel() = with(binding) {
         viewmodel = viewModel
         lifecycleOwner = this@AuthFragment.viewLifecycleOwner
     }
@@ -50,16 +51,12 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     }
 
     private fun subscribeToAuth() = with(binding) {
-        viewModel.authState.collectAsUIState(
-            state =
-            {
-                it.setupViewVisibility(group, loader)
-            },
-            onSuccess =
-            {
-                showToastLong("Добро пожаловать, ${it.name}")
-                //TODO navigate to mainContent
-                //findNavController().navigate()
-            })
+        viewModel.authState.collectAsUIState(state = {
+            hideKeyboard()
+            it.setupViewVisibility(group, loader)
+        }, onSuccess = {
+            showToastLong("Добро пожаловать, ${it.name}")
+            findNavController().navigate(action_global_mainContentFragment)
+        })
     }
 }

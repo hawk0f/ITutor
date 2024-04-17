@@ -1,4 +1,4 @@
-package dev.hawk0f.itutor.app.di
+package dev.hawk0f.itutor.di
 
 import dagger.Module
 import dagger.Provides

@@ -10,6 +10,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.appbar.MaterialToolbar
 import dev.hawk0f.itutor.core.presentation.R
 
 /**
@@ -56,6 +57,15 @@ fun Fragment.activityNavController() = requireActivity().findNavController(R.id.
  * @param navHostId flow container view id
  */
 fun Fragment.flowNavController(@IdRes navHostId: Int) = requireActivity().findNavController(navHostId)
+
+/**
+ * Get activity toolbar
+ *
+ * @receiver [Fragment]
+ *
+ * @param toolbarId toolbar id
+ */
+fun Fragment.toolbar(@IdRes toolbarId: Int): MaterialToolbar = requireActivity().findViewById<MaterialToolbar>(toolbarId)
 
 /**
  * Safely navigate to a destination from the current navigation graph.

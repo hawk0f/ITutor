@@ -36,7 +36,6 @@ android {
         }
 
         getByName("debug") {
-            applicationIdSuffix = ".debug"
             isDebuggable = true
         }
     }
@@ -84,16 +83,20 @@ tasks.whenTaskAdded {
     val appNavigation = "${project(":app").projectDir.path}$navigationArgsPath"
     val navigationPath = "${project(":navigation").projectDir.path}$navigationArgsPath"
 
+    fileTree(navigationPath).forEach {
+        it.delete()
+    }
+
     if (this.name.contains("generateSafeArgs"))
     {
         println("Added dependency to task " + this.name)
         this.doLast {
-            fileTree(appNavigation).filter { it.isFile() && it.name.contains("Directions") }.forEach { file ->
+            fileTree(appNavigation).filter { it.isFile && it.name.contains("Directions") }.forEach { file ->
                     println("Changing ${file.name} navigation file")
                     if (file.exists())
                     {
-                        var lines = file.readLines().toMutableList()
-                        lines.add(2, "dev.hawk0f.itutor.R")
+                        val lines = file.readLines().toMutableList()
+                        lines.add(2, "import dev.hawk0f.itutor.R")
                         file.writeText(lines.joinToString("\n"))
                     }
                 }
@@ -104,15 +107,15 @@ tasks.whenTaskAdded {
 
 private fun move(sourceFile: File, destFile: File)
 {
-    if (sourceFile.isDirectory())
+    if (sourceFile.isDirectory)
     {
         val files = sourceFile.listFiles()!!
-        for (file in files) move(file, File(destFile, file.getName()))
+        for (file in files) move(file, File(destFile, file.name))
         if (!sourceFile.delete()) throw RuntimeException()
     }
     else
     {
-        if (!destFile.getParentFile().exists()) if (!destFile.getParentFile().mkdirs()) throw RuntimeException()
+        if (!destFile.parentFile.exists()) if (!destFile.parentFile.mkdirs()) throw RuntimeException()
         if (!sourceFile.renameTo(destFile)) throw RuntimeException()
     }
 }

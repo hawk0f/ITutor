@@ -7,6 +7,9 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import dev.hawk0f.itutor.core.presentation.R
+import dev.hawk0f.itutor.core.presentation.extensions.flowNavController
 
 /**
  * Base class for FlowFragments
@@ -20,19 +23,20 @@ import androidx.navigation.fragment.NavHostFragment
  * @param navHostFragmentId id [FragmentContainerView][androidx.fragment.app.FragmentContainerView]
  * @see [flowNavController]
  */
-abstract class BaseFlowFragment(@LayoutRes layoutId: Int, @IdRes private val navHostFragmentId: Int) : Fragment(layoutId)
+abstract class BaseFlowFragment(@LayoutRes layoutId: Int, @IdRes private val navHostFragmentId: Int, @IdRes private val bnvId: Int) : Fragment(layoutId)
 {
     final override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
 
+        val bottomNavigationView = view.findViewById<BottomNavigationView>(bnvId)
         val navHostFragment = childFragmentManager.findFragmentById(navHostFragmentId) as NavHostFragment
         val navController = navHostFragment.navController
 
-        setupNavigation(navController)
+        setupNavigation(navController, bottomNavigationView)
     }
 
-    protected open fun setupNavigation(navController: NavController)
+    protected open fun setupNavigation(navController: NavController, bottomNavigationView: BottomNavigationView)
     {
     }
 }

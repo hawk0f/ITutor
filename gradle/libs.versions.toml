@@ -13,16 +13,11 @@ splashscreen = "1.0.1"
 lifecycle = "2.7.0"
 navigation = "2.7.7"
 decoro = "1.5.2"
-koin_version = "3.6.0-wasm-alpha2"
-retrofit = "2.9.0"
+retrofit = "2.11.0"
 retrofit-kotlinx-serialization = "1.0.0"
 okHttp = "5.0.0-alpha.12"
 vbpd = "1.5.9"
-junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-appcompat = "1.6.1"
-dagger = "2.51"
+dagger = "2.51.1"
 
 [libraries]
 # Kotlin
@@ -58,10 +53,6 @@ androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", ver
 
 #Mask TextView
 decoro = { module = "ru.tinkoff.decoro:decoro", version.ref = "decoro" }
-
-#Koin
-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin_version" }
-koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin_version" }
 
 # Hilt
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/studentsNavGraph"
+    app:startDestination="@id/studentsFragment">
+
+    <fragment
+        android:id="@+id/studentsFragment"
+        android:name="dev.hawk0f.itutor.features.students.presentation.ui.StudentsFragment"
+        android:label="Ученики" />
+</navigation>
