@@ -1,6 +1,7 @@
 package dev.hawk0f.itutor.core.presentation.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.Group
@@ -128,11 +129,13 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewBinding>(@L
         is NetworkError.Unexpected ->
         {
             showToastLong(this.message)
+            Log.e("Tag", this.message)
         }
 
         is NetworkError.Api ->
         {
             showToastLong(this.message)
+            Log.e("Tag", this.message)
         }
     }
 }

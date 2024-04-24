@@ -14,7 +14,7 @@ interface IBaseDiffModel<T>
 
 /**
  * Base class for fast create [DiffUtil] in
- * [ListAdapter][androidx.recyclerview.widget.ListAdapter], [PagingAdapter][androidx.paging.PagingDataAdapter]
+ * [ListAdapter][androidx.recyclerview.widget.ListAdapter]
  * @see IBaseDiffModel
  * @see DiffUtil.ItemCallback
  */

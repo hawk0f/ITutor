@@ -54,11 +54,11 @@ abstract class BaseRepository
     }
 
     /**
-     * Do network request for and return [Unit]
+     * Do network request for [Response] and return [Unit]
      *
      * @receiver [doNetworkRequest]
      */
-    protected fun <T> doNetworkRequestUnit(request: suspend () -> Response<T>): Flow<Either<NetworkError, Unit>> = doNetworkRequest(request) {
+    protected fun doNetworkRequestUnit(request: suspend () -> Response<Unit>): Flow<Either<NetworkError, Unit>> = doNetworkRequest(request) {
         Either.Right(Unit)
     }
 
@@ -75,13 +75,12 @@ abstract class BaseRepository
      * @see [Flow]
      * @see [Either]
      * @see [NetworkError]
-     * @see [ServerException]
      */
     private fun <T, S> doNetworkRequest(request: suspend () -> Response<T>, successful: (T) -> Either.Right<S>) = flow<Either<NetworkError, S>> {
         request().let {
             when
             {
-                it.isSuccessful && it.body() != null ->
+                it.isSuccessful ->
                 {
                     emit(successful.invoke(it.body()!!))
                 }

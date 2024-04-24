@@ -3,9 +3,9 @@ package dev.hawk0f.itutor.features.auth.presentation.ui
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
+import dev.hawk0f.itutor.core.presentation.models.UserUI
+import dev.hawk0f.itutor.core.presentation.models.toUi
 import dev.hawk0f.itutor.features.auth.domain.usecases.AuthUserUseCase
-import dev.hawk0f.itutor.features.auth.presentation.models.UserUI
-import dev.hawk0f.itutor.features.auth.presentation.models.toUi
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
@@ -18,7 +18,7 @@ class AuthViewModel @Inject constructor(private val authUserUseCase: AuthUserUse
     private val _authState = MutableUIStateFlow<UserUI>()
     val authState = _authState.asStateFlow()
 
-    fun authUser() = authUserUseCase(email, password).collectNetworkRequest(_authState) {
+    fun authUser() = authUserUseCase(email, password).collectNetworkRequestWithMapping(_authState) {
         it.toUi()
     }
 

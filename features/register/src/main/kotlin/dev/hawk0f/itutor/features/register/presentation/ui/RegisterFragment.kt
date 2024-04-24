@@ -4,8 +4,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.domain.CurrentUser
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.hideKeyboard
+import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.features.register.R
 import dev.hawk0f.itutor.features.register.databinding.FragmentRegisterBinding
@@ -13,8 +15,7 @@ import dev.hawk0f.itutor.navigation.R.id.action_global_authFragment
 import dev.hawk0f.itutor.navigation.R.id.action_global_mainContentFragment
 
 @AndroidEntryPoint
-class RegisterFragment :
-        BaseFragment<RegisterViewModel, FragmentRegisterBinding>(R.layout.fragment_register)
+class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding>(R.layout.fragment_register)
 {
     override val viewModel: RegisterViewModel by viewModels()
     override val binding: FragmentRegisterBinding by viewBinding(FragmentRegisterBinding::bind)
@@ -42,7 +43,7 @@ class RegisterFragment :
 
     private fun setupAuthButtonListener() = with(binding) {
         btnGoToSignIn.setOnClickListener {
-            findNavController().navigate(action_global_authFragment)
+            findNavController().navigateSafely(action_global_authFragment)
         }
     }
 
@@ -56,8 +57,9 @@ class RegisterFragment :
             hideKeyboard()
             it.setupViewVisibility(group, loader)
         }, onSuccess = {
+            CurrentUser.setUserId(it.id)
             showToastLong("Добро пожаловать, ${it.name}")
-            findNavController().navigate(action_global_mainContentFragment)
+            findNavController().navigateSafely(action_global_mainContentFragment)
         })
     }
 }

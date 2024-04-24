@@ -83,20 +83,20 @@ tasks.whenTaskAdded {
     val appNavigation = "${project(":app").projectDir.path}$navigationArgsPath"
     val navigationPath = "${project(":navigation").projectDir.path}$navigationArgsPath"
 
-    fileTree(navigationPath).forEach {
-        it.delete()
-    }
+//    fileTree(navigationPath).forEach {
+//        it.delete()
+//    }
 
     if (this.name.contains("generateSafeArgs"))
     {
         println("Added dependency to task " + this.name)
         this.doLast {
-            fileTree(appNavigation).filter { it.isFile && it.name.contains("Directions") }.forEach { file ->
+            fileTree(appNavigation).filter { it.isFile && it.name.contains("Directions") || it.name.contains("Args") }.forEach { file ->
                     println("Changing ${file.name} navigation file")
                     if (file.exists())
                     {
                         val lines = file.readLines().toMutableList()
-                        lines.add(2, "import dev.hawk0f.itutor.R")
+                        lines.add(2, "import dev.hawk0f.itutor.navigation.R")
                         file.writeText(lines.joinToString("\n"))
                     }
                 }

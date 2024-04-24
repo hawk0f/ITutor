@@ -46,5 +46,49 @@ dependencies {
 
     //Hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
     ksp(libs.hilt.compiler)
+}
+
+tasks.whenTaskAdded {
+    val navigationArgsPath = "/build/generated/source/navigation-args"
+    val mainContentNavigation = "${project(":features:mainContent").projectDir.path}$navigationArgsPath"
+    val navigationPath = "${project(":navigation").projectDir.path}$navigationArgsPath"
+
+//    fileTree(navigationPath).forEach {
+//        it.delete()
+//    }
+
+    if (this.name.contains("generateSafeArgs"))
+    {
+        println("Added dependency to task " + this.name)
+        this.doLast {
+            fileTree(mainContentNavigation).filter { it.isFile && it.name.contains("Directions") || it.name.contains("Args") }.forEach { file ->
+                println("Changing ${file.name} navigation file")
+                if (file.exists())
+                {
+                    val lines = file.readLines().toMutableList()
+                    lines.add(2, "import dev.hawk0f.itutor.navigation.R")
+                    file.writeText(lines.joinToString("\n"))
+                }
+            }
+            move(file("$mainContentNavigation"), file("$navigationPath"))
+        }
+    }
+}
+
+private fun move(sourceFile: File, destFile: File)
+{
+    if (sourceFile.isDirectory)
+    {
+        val files = sourceFile.listFiles()!!
+        for (file in files) move(file, File(destFile, file.name))
+        if (!sourceFile.delete()) throw RuntimeException()
+    }
+    else
+    {
+        if (!destFile.parentFile.exists()) if (!destFile.parentFile.mkdirs()) throw RuntimeException()
+        if (!sourceFile.renameTo(destFile)) throw RuntimeException()
+    }
 }

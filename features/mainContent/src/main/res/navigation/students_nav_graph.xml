@@ -6,6 +6,25 @@
 
     <fragment
         android:id="@+id/studentsFragment"
-        android:name="dev.hawk0f.itutor.features.students.presentation.ui.StudentsFragment"
-        android:label="Ученики" />
+        android:name="dev.hawk0f.itutor.features.students.presentation.ui.fragments.StudentFragment"
+        android:label="Ученики">
+        <action
+            android:id="@+id/action_studentsFragment_to_editStudentFragment"
+            app:destination="@id/editStudentFragment" />
+        <action
+            android:id="@+id/action_studentsFragment_to_addStudentFragment"
+            app:destination="@id/addStudentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStudentFragment"
+        android:name="dev.hawk0f.itutor.features.students.presentation.ui.fragments.AddStudentFragment"
+        android:label="Добавление ученика" />
+    <fragment
+        android:id="@+id/editStudentFragment"
+        android:name="dev.hawk0f.itutor.features.students.presentation.ui.fragments.EditStudentFragment"
+        android:label="Редактирование данных">
+        <argument
+            android:name="studentId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

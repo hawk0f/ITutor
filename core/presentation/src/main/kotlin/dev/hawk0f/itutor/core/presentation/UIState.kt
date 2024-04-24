@@ -14,7 +14,6 @@ import dev.hawk0f.itutor.core.domain.Either
  */
 sealed class UIState<T>
 {
-
     /**
      * [Idle] - The default state when there are no active data requests, and the screen has just been opened.
      */

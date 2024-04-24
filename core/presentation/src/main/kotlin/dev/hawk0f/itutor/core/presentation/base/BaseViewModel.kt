@@ -30,7 +30,7 @@ abstract class BaseViewModel : ViewModel()
      *
      * @receiver [collectEither]
      */
-    protected fun <T, S> Flow<Either<NetworkError, T>>.collectNetworkRequest(state: MutableStateFlow<UIState<S>>, resetStateAfterCollect: Boolean = false, mapToUI: (T) -> S) = collectEither(state, resetStateAfterCollect) {
+    protected fun <T, S> Flow<Either<NetworkError, T>>.collectNetworkRequestWithMapping(state: MutableStateFlow<UIState<S>>, resetStateAfterCollect: Boolean = false, mapToUI: (T) -> S) = collectEither(state, resetStateAfterCollect) {
         UIState.Success(mapToUI(it))
     }
 

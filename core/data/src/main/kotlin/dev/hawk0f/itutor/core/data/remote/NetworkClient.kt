@@ -5,8 +5,6 @@ import dev.hawk0f.itutor.core.data.BuildConfig
 import dev.hawk0f.itutor.core.data.utils.jsonClient
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
-import javax.inject.Inject
-import javax.inject.Singleton
 
 class NetworkClient
 {
