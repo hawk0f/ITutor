@@ -33,7 +33,7 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
 
     private fun setupViewModel() = with(binding) {
         viewmodel = viewModel
-        lifecycleOwner = this@AuthFragment.viewLifecycleOwner
+        lifecycleOwner = viewLifecycleOwner
     }
 
     override fun setupListeners()

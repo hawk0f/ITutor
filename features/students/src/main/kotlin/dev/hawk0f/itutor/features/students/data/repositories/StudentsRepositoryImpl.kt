@@ -9,7 +9,7 @@ import javax.inject.Inject
 class StudentsRepositoryImpl @Inject constructor(private val service: StudentService) : BaseRepository(), StudentsRepository
 {
     override fun fetchStudents(userId: Int) = doNetworkRequestForList {
-        service.getAllStudents(userId)
+        service.fetchStudents(userId)
     }
 
     override fun getStudentById(studentId: Int) = doNetworkRequestWithMapping {

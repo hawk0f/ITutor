@@ -30,7 +30,7 @@ class AddStudentFragment : BaseFragment<AddStudentViewModel, FragmentAddStudentB
     private fun setupViewModel() = with(binding)
     {
         viewmodel = viewModel
-        lifecycleOwner = this@AddStudentFragment.viewLifecycleOwner
+        lifecycleOwner = viewLifecycleOwner
     }
 
     override fun setupSubscribers()

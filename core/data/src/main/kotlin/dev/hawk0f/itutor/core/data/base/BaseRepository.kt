@@ -136,7 +136,6 @@ abstract class BaseRepository
      *     }
      * }
      * ```
-     *
      * @see Response.body
      * @see let
      */
@@ -145,29 +144,4 @@ abstract class BaseRepository
         this.body()?.let(block)
         return this
     }
-
-    /**
-     * Convert [File] to [MultipartBody.Part]
-     *
-     * &nbsp
-     *
-     * ## How to use:
-     * ```
-     * override fun uploadAvatar(avatar: String) = doNetworkRequest {
-     *     val file = File(Uri.parse(avatar).path!!)
-     *     service.uploadAvatar(file.toMultipartBodyPart("avatar"))
-     * }
-     * ```
-     *
-     * @receiver [File]
-     *
-     * @param formDataName set name for [MultipartBody.Part.createFormData]
-     *
-     * @return [MultipartBody.Part]
-     *
-     * @see asRequestBody
-     * @see MimeTypeMap
-     * @see toMediaTypeOrNull
-     */
-    protected fun File.toMultipartBodyPart(formDataName: String) = MultipartBody.Part.createFormData(name = formDataName, filename = name, body = asRequestBody(MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)?.toMediaTypeOrNull()))
 }

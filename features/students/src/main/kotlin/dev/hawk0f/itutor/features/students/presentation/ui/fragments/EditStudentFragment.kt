@@ -41,7 +41,7 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
 
     private fun setupViewModel() = with(binding) {
         viewmodel = viewModel
-        lifecycleOwner = this@EditStudentFragment.viewLifecycleOwner
+        lifecycleOwner = viewLifecycleOwner
     }
 
     override fun setupRequests()

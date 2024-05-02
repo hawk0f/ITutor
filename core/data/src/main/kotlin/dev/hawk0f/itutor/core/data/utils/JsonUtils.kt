@@ -7,12 +7,3 @@ internal val jsonClient = Json {
     prettyPrint = true
     ignoreUnknownKeys = true
 }
-
-/**
- * Get Json from [assets][Context.getAssets]
- *
- * @return Json file from [assets][Context.getAssets]
- */
-internal fun Context.jsonFromAssets(fileName: String): String {
-    return this.assets.open(fileName).bufferedReader().use { it.readText() }
-}

@@ -9,19 +9,19 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.features.students.R
-import dev.hawk0f.itutor.features.students.databinding.FragmentStudentsBinding
-import dev.hawk0f.itutor.features.students.presentation.ui.adapter.StudentAdapter
+import dev.hawk0f.itutor.features.students.presentation.ui.adapters.StudentAdapter
 import dev.hawk0f.itutor.features.students.presentation.ui.viewmodels.StudentsViewModel
 import androidx.navigation.fragment.findNavController
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
+import dev.hawk0f.itutor.features.students.databinding.FragmentStudentBinding
 import dev.hawk0f.itutor.navigation.R.id.action_studentsFragment_to_addStudentFragment
 import dev.hawk0f.itutor.navigation.R.id.action_studentsFragment_to_editStudentFragment
 
 @AndroidEntryPoint
-class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentsBinding>(R.layout.fragment_students)
+class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(R.layout.fragment_student)
 {
     override val viewModel: StudentsViewModel by viewModels()
-    override val binding: FragmentStudentsBinding by viewBinding(FragmentStudentsBinding::bind)
+    override val binding: FragmentStudentBinding by viewBinding(FragmentStudentBinding::bind)
 
     private val studentAdapter = StudentAdapter({
         findNavController().navigateSafely(object : NavDirections

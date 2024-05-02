@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lessonsNavGraph"
+    app:startDestination="@id/lessonFragment">
+
+    <fragment
+        android:id="@+id/lessonFragment"
+        android:name="dev.hawk0f.itutor.features.lessons.presentation.ui.fragments.LessonFragment"
+        android:label="Занятия">
+        <action
+            android:id="@+id/action_lessonFragment_to_addLessonFragment"
+            app:destination="@id/addLessonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLessonFragment"
+        android:name="dev.hawk0f.itutor.features.lessons.presentation.ui.fragments.AddLessonFragment"
+        android:label="Добавление занятия" />
+</navigation>

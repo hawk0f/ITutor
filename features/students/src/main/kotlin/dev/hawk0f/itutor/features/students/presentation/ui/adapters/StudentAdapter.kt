@@ -1,4 +1,4 @@
-package dev.hawk0f.itutor.features.students.presentation.ui.adapter
+package dev.hawk0f.itutor.features.students.presentation.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

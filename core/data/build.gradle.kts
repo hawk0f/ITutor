@@ -50,7 +50,7 @@ dependencies {
 
     // Retrofit
     api(libs.retrofit)
-    implementation(libs.retrofit.kotlinx.serialization.converter)
+    implementation(libs.retrofit.converter.kotlinx.serialization)
 
     // OkHttp
     implementation(platform(libs.okHttp.bom))

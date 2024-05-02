@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":navigation"))
 
     implementation(project(":features:students"))
+    implementation(project(":features:lessons"))
 
     //Hilt
     implementation(libs.hilt.android)

@@ -15,7 +15,7 @@ class MainContentFragment : BaseFlowFragment(R.layout.fragment_main_content, R.i
         navController.graph = navGraph
 
         val toolbar = toolbar(dev.hawk0f.itutor.core.presentation.R.id.toolbar)
-        val appBarConfiguration = AppBarConfiguration.Builder(setOf(R.id.studentsNavGraph)).build()
+        val appBarConfiguration = AppBarConfiguration.Builder(setOf(R.id.studentsNavGraph, R.id.lessonsNavGraph)).build()
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
         bottomNavigationView.setupWithNavController(navController)

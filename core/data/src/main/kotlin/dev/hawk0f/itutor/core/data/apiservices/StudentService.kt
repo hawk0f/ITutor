@@ -1,7 +1,6 @@
 package dev.hawk0f.itutor.core.data.apiservices
 
 import dev.hawk0f.itutor.core.data.models.StudentDTO
-import dev.hawk0f.itutor.core.data.models.UserDTO
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -13,7 +12,7 @@ import retrofit2.http.Query
 interface StudentService
 {
     @GET("Students/getAllStudents")
-    suspend fun getAllStudents(@Query("userId") userId: Int): Response<List<StudentDTO>>
+    suspend fun fetchStudents(@Query("userId") userId: Int): Response<List<StudentDTO>>
 
     @GET("Students/getStudentById")
     suspend fun getStudentById(@Query("studentId") studentId: Int): Response<StudentDTO>

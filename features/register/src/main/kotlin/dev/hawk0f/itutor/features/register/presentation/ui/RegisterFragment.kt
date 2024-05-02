@@ -33,7 +33,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
 
     private fun setupViewModel() = with(binding) {
         viewmodel = viewModel
-        lifecycleOwner = this@RegisterFragment.viewLifecycleOwner
+        lifecycleOwner = viewLifecycleOwner
     }
 
     override fun setupListeners()

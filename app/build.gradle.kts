@@ -67,6 +67,7 @@ dependencies {
     implementation(project(":features:auth"))
     implementation(project(":features:register"))
     implementation(project(":features:mainContent"))
+    implementation(project(":features:lessons"))
 
     implementation(project(":navigation"))
 
@@ -83,9 +84,9 @@ tasks.whenTaskAdded {
     val appNavigation = "${project(":app").projectDir.path}$navigationArgsPath"
     val navigationPath = "${project(":navigation").projectDir.path}$navigationArgsPath"
 
-//    fileTree(navigationPath).forEach {
-//        it.delete()
-//    }
+    fileTree(navigationPath).forEach {
+        it.delete()
+    }
 
     if (this.name.contains("generateSafeArgs"))
     {
