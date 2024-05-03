@@ -18,11 +18,11 @@
     <fragment
         android:id="@+id/addStudentFragment"
         android:name="dev.hawk0f.itutor.features.students.presentation.ui.fragments.AddStudentFragment"
-        android:label="Добавление ученика" />
+        android:label="Добавление" />
     <fragment
         android:id="@+id/editStudentFragment"
         android:name="dev.hawk0f.itutor.features.students.presentation.ui.fragments.EditStudentFragment"
-        android:label="Редактирование данных">
+        android:label="Редактирование">
         <argument
             android:name="studentId"
             app:argType="integer" />

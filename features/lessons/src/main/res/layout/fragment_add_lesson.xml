@@ -56,14 +56,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="10dp"
-                    android:hint="Дата">
+                    android:hint="Дата"
+                    app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/date_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="none"
-                        android:text="@={viewmodel.date}"
+                        android:text="@{viewmodel.date}"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -74,14 +74,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="10dp"
-                    android:hint="Время начала">
+                    android:hint="Время начала"
+                    app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/start_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="none"
-                        android:text="@={viewmodel.startTime}"
+                        android:text="@{viewmodel.startTime}"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -92,14 +92,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="10dp"
-                    android:hint="Время конца">
+                    android:hint="Время конца"
+                    app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/end_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="none"
-                        android:text="@={viewmodel.endTime}"
+                        android:text="@{viewmodel.endTime}"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -116,25 +116,24 @@
                     android:id="@+id/recycler_students"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/lesson_student_item" />
+                    tools:listitem="@layout/student_item"/>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/subject_tv"
+                android:id="@+id/subject_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="10dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:hint="Предмет">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/subject_drop_down"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:text="@={viewmodel.subject}"
-                    android:textSize="16sp" />
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:labelFor="@id/subject_layout" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -57,9 +57,9 @@ tasks.whenTaskAdded {
     val mainContentNavigation = "${project(":features:mainContent").projectDir.path}$navigationArgsPath"
     val navigationPath = "${project(":navigation").projectDir.path}$navigationArgsPath"
 
-//    fileTree(navigationPath).forEach {
-//        it.delete()
-//    }
+    fileTree(navigationPath).forEach {
+        it.delete()
+    }
 
     if (this.name.contains("generateSafeArgs"))
     {

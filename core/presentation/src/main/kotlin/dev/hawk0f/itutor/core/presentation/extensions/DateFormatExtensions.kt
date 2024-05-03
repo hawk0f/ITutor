@@ -1,16 +1,39 @@
 package dev.hawk0f.itutor.core.presentation.extensions
 
 import android.icu.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
-fun Date.parseToFormat(formatterPattern: String): String {
-    val formatter = SimpleDateFormat(formatterPattern, Locale.getDefault())
-    return formatter.format(this)
+fun LocalDate.parseToFormat(formatterPattern: String): String
+{
+    val formatter = DateTimeFormatter.ofPattern(formatterPattern, Locale.getDefault())
+    return this.format(formatter)
 }
 
-fun String.parseToFormat(parserPattern: String, formatterPattern: String): String {
-    val parser = SimpleDateFormat(parserPattern, Locale.getDefault())
-    val formatter = SimpleDateFormat(formatterPattern, Locale.getDefault())
+fun LocalTime.parseToFormat(formatterPattern: String): String
+{
+    val formatter = DateTimeFormatter.ofPattern(formatterPattern, Locale.getDefault())
+    return this.format(formatter)
+}
+
+fun String.parseToDate(parserPattern: String): LocalDate
+{
+    val parser = DateTimeFormatter.ofPattern(parserPattern, Locale.getDefault())
+    return LocalDate.parse(this, parser)
+}
+
+fun String.parseToTime(parserPattern: String): LocalTime
+{
+    val parser = DateTimeFormatter.ofPattern(parserPattern, Locale.getDefault())
+    return LocalTime.parse(this, parser)
+}
+
+fun String.parseToFormat(parserPattern: String, formatterPattern: String): String
+{
+    val parser = DateTimeFormatter.ofPattern(parserPattern, Locale.getDefault())
+    val formatter = DateTimeFormatter.ofPattern(formatterPattern, Locale.getDefault())
     return formatter.format(parser.parse(this)!!)
 }

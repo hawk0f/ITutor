@@ -4,16 +4,16 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.features.students.R
+import dev.hawk0f.itutor.features.students.databinding.FragmentStudentBinding
 import dev.hawk0f.itutor.features.students.presentation.ui.adapters.StudentAdapter
 import dev.hawk0f.itutor.features.students.presentation.ui.viewmodels.StudentsViewModel
-import androidx.navigation.fragment.findNavController
-import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
-import dev.hawk0f.itutor.features.students.databinding.FragmentStudentBinding
 import dev.hawk0f.itutor.navigation.R.id.action_studentsFragment_to_addStudentFragment
 import dev.hawk0f.itutor.navigation.R.id.action_studentsFragment_to_editStudentFragment
 
@@ -45,7 +45,12 @@ class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(
         }
     }
 
-    override fun setupListeners() = with(binding) {
+    override fun setupListeners()
+    {
+        setupAddStudentButton()
+    }
+
+    private fun setupAddStudentButton() = with(binding) {
         btnAddStudent.setOnClickListener {
             findNavController().navigateSafely(action_studentsFragment_to_addStudentFragment)
         }

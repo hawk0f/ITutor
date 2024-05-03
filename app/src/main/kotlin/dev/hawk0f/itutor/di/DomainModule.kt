@@ -11,6 +11,7 @@ import dev.hawk0f.itutor.features.lessons.domain.repositories.LessonRepository
 import dev.hawk0f.itutor.features.lessons.domain.repositories.SubjectRepository
 import dev.hawk0f.itutor.features.lessons.domain.usecases.AddLessonUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.DeleteLessonUseCase
+import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchLessonStudentsUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchLessonsUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchSubjectsUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.GetLessonByIdUseCase
@@ -69,4 +70,7 @@ object DomainModule
 
     @Provides
     fun provideFetchSubjectsUseCase(repository: SubjectRepository) = FetchSubjectsUseCase(repository)
+
+    @Provides
+    fun provideFetchLessonStudentsUseCase(repository: LessonRepository) = FetchLessonStudentsUseCase(repository)
 }

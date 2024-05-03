@@ -15,5 +15,17 @@
     <fragment
         android:id="@+id/addLessonFragment"
         android:name="dev.hawk0f.itutor.features.lessons.presentation.ui.fragments.AddLessonFragment"
-        android:label="Добавление занятия" />
+        android:label="Добавление">
+        <action
+            android:id="@+id/action_addLessonFragment_to_studentBottomSheetFragment"
+            app:destination="@id/studentBottomSheetFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/studentBottomSheetFragment"
+        android:name="dev.hawk0f.itutor.features.lessons.presentation.ui.fragments.StudentBottomSheetFragment"
+        android:label="Выбор учеников">
+        <action
+            android:id="@+id/action_studentBottomSheetFragment_to_addLessonFragment"
+            app:destination="@id/addLessonFragment" />
+    </dialog>
 </navigation>

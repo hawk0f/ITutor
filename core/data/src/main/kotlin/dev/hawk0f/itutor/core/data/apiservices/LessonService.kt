@@ -1,7 +1,7 @@
 package dev.hawk0f.itutor.core.data.apiservices
 
 import dev.hawk0f.itutor.core.data.models.LessonDTO
-import dev.hawk0f.itutor.core.data.models.StudentDTO
+import dev.hawk0f.itutor.core.data.models.LessonStudentDTO
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -14,6 +14,9 @@ interface LessonService
 {
     @GET("Lessons/getAllLessons")
     suspend fun fetchLessons(@Query("userId") userId: Int): Response<List<LessonDTO>>
+
+    @GET("Lessons/getLessonStudents")
+    suspend fun getLessonStudents(@Query("userId") userId: Int, @Query("studentsCount") studentsCount: Int): Response<List<LessonStudentDTO>>
 
     @GET("Lessons/getLessonById")
     suspend fun getLessonById(@Query("lessonId") lessonId: Int): Response<LessonDTO>

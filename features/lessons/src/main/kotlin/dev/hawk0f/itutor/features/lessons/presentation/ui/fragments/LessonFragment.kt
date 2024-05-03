@@ -10,7 +10,6 @@ import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.features.lessons.R
 import dev.hawk0f.itutor.features.lessons.databinding.FragmentLessonBinding
 import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.DateLessonsAdapter
-import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.LessonAdapter
 import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.LessonViewModel
 import dev.hawk0f.itutor.navigation.R.id.action_lessonFragment_to_addLessonFragment
 
@@ -70,7 +69,7 @@ class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.la
 
     private fun subscribeToDelete() = with(binding) {
         viewModel.deleteState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
+            it.setupViewVisibility(group, loader, false)
         }, onSuccess = {
             fetchLessons()
         })

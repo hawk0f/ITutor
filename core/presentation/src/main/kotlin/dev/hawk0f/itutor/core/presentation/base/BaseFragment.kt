@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import dev.hawk0f.itutor.core.domain.NetworkError
 import dev.hawk0f.itutor.core.presentation.UIState
 import dev.hawk0f.itutor.core.presentation.extensions.launchAndCollectIn

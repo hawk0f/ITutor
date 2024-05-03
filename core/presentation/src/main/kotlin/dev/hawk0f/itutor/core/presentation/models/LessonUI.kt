@@ -1,6 +1,7 @@
 package dev.hawk0f.itutor.core.presentation.models
 
 import dev.hawk0f.itutor.core.domain.models.Lesson
+import dev.hawk0f.itutor.core.domain.models.LessonStudent
 import dev.hawk0f.itutor.core.domain.models.Student
 import dev.hawk0f.itutor.core.domain.models.Subject
 import dev.hawk0f.itutor.core.presentation.base.IBaseDiffModel
@@ -13,7 +14,7 @@ data class LessonUI(
     val date: String,
     val startTime: String,
     val endTime: String,
-    val students: MutableList<Student>,
+    val students: MutableList<LessonStudent>,
     val studentsNames: String,
     val subject: Subject,
     val userId: Int) : IBaseDiffModel<Int>

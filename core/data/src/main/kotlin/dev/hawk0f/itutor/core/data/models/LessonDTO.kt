@@ -24,7 +24,7 @@ class LessonDTO(
     @SerialName("studentsIds")
     val studentsIds: List<Int>,
     @SerialName("students")
-    val students: MutableList<StudentDTO>? = null,
+    val students: MutableList<LessonStudentDTO>? = null,
     @SerialName("subjectId")
     val subjectId: Int,
     @SerialName("subject")

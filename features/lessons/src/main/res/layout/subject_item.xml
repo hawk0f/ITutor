@@ -12,8 +12,10 @@
         android:id="@+id/subject_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/White"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:padding="10dp"
         android:text="@{subject.subjectName}"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:textColor="@color/Black" />
 </layout>

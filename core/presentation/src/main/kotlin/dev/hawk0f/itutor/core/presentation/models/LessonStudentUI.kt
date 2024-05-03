@@ -1,0 +1,14 @@
+package dev.hawk0f.itutor.core.presentation.models
+
+import dev.hawk0f.itutor.core.domain.models.LessonStudent
+import dev.hawk0f.itutor.core.presentation.base.IBaseDiffModel
+
+data class LessonStudentUI(
+    override val id: Int,
+    val name: String,
+    val fullName: String,
+    val price: Float,
+    var isSelected: Boolean
+) : IBaseDiffModel<Int>
+
+fun LessonStudent.toUI() = LessonStudentUI(id, name, fullName, price, false)

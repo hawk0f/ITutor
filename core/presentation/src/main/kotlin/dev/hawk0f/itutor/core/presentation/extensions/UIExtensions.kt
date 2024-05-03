@@ -52,7 +52,7 @@ fun Fragment.showToastLong(@StringRes textFromRes: Int)
  *
  * @receiver [View]
  */
-fun View.showSoftKeyboard()
+fun View.showKeyboard()
 {
     if (this.requestFocus())
     {
