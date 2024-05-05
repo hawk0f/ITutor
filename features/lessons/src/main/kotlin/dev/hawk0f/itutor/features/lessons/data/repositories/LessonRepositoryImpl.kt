@@ -15,8 +15,8 @@ class LessonRepositoryImpl @Inject constructor(private val lessonService: Lesson
         lessonService.fetchLessons(userId)
     }
 
-    override fun fetchLessonStudents(userId: Int, studentsCount: Int): RemoteWrapper<List<LessonStudent>> = doNetworkRequestForList {
-        lessonService.getLessonStudents(userId, studentsCount)
+    override fun fetchLessonStudents(userId: Int): RemoteWrapper<List<LessonStudent>> = doNetworkRequestForList {
+        lessonService.getLessonStudents(userId)
     }
 
     override fun getLessonById(lessonId: Int): RemoteWrapper<Lesson> = doNetworkRequestWithMapping {

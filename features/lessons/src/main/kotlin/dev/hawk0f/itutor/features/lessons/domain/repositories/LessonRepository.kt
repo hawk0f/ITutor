@@ -10,7 +10,7 @@ interface LessonRepository
 {
     fun fetchLessons(userId: Int): RemoteWrapper<List<Lesson>>
 
-    fun fetchLessonStudents(userId: Int, studentsCount: Int): RemoteWrapper<List<LessonStudent>>
+    fun fetchLessonStudents(userId: Int): RemoteWrapper<List<LessonStudent>>
 
     fun getLessonById(lessonId: Int): RemoteWrapper<Lesson>
 

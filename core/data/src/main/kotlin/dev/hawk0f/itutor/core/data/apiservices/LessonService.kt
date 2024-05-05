@@ -16,7 +16,7 @@ interface LessonService
     suspend fun fetchLessons(@Query("userId") userId: Int): Response<List<LessonDTO>>
 
     @GET("Lessons/getLessonStudents")
-    suspend fun getLessonStudents(@Query("userId") userId: Int, @Query("studentsCount") studentsCount: Int): Response<List<LessonStudentDTO>>
+    suspend fun getLessonStudents(@Query("userId") userId: Int): Response<List<LessonStudentDTO>>
 
     @GET("Lessons/getLessonById")
     suspend fun getLessonById(@Query("lessonId") lessonId: Int): Response<LessonDTO>

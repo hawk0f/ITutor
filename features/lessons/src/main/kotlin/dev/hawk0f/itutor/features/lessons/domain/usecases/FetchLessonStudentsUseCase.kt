@@ -5,5 +5,5 @@ import javax.inject.Inject
 
 class FetchLessonStudentsUseCase @Inject constructor(private val repository: LessonRepository)
 {
-    operator fun invoke(userId: Int, studentsCount: Int) = repository.fetchLessonStudents(userId, studentsCount)
+    operator fun invoke(userId: Int) = repository.fetchLessonStudents(userId)
 }

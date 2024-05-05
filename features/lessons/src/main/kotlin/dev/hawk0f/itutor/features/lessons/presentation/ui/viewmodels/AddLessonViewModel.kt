@@ -53,8 +53,8 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
 
     fun fetchLessonStudents()
     {
-        fetchLessonStudentsUseCase(currentUser.getUserId(), studentsIds.count()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
-            list.map { it.toUI() }
+        fetchLessonStudentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
+            list.map { it.toUI(studentsIds.count()) }
         }
     }
 
@@ -70,7 +70,7 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
         }
         else
         {
-            addLessonUseCase(LessonDTO(date = date.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = ChronoUnit.MINUTES.between(endTime.parseToTime("HH:mm"), startTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = currentUser.getUserId())).collectNetworkRequest(_addState)
+            addLessonUseCase(LessonDTO(id = 0, date = date.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = ChronoUnit.MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = currentUser.getUserId())).collectNetworkRequest(_addState)
         }
     }
 
@@ -81,8 +81,7 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
 
     fun setStudentsIds(ids: ArrayList<Int>)
     {
-        studentsIds.clear()
-        studentsIds.addAll(ids)
+        studentsIds = ids
     }
 
     fun getStudentsIds(): ArrayList<Int>

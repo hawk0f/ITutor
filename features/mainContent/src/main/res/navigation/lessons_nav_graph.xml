@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_addLessonFragment_to_studentBottomSheetFragment"
             app:destination="@id/studentBottomSheetFragment" />
+        <action
+            android:id="@+id/action_addLessonFragment_to_lessonFragment"
+            app:destination="@id/lessonFragment" />
     </fragment>
     <dialog
         android:id="@+id/studentBottomSheetFragment"

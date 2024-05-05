@@ -16,5 +16,5 @@ object TimeSerializer : KSerializer<LocalTime>
 
     override fun deserialize(decoder: Decoder) = LocalTime.parse(decoder.decodeString(), timeFormat)
 
-    override fun serialize(encoder: Encoder, value: LocalTime) = encoder.encodeString(value.toString())
+    override fun serialize(encoder: Encoder, value: LocalTime) = encoder.encodeString(value.format(timeFormat))
 }

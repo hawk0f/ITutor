@@ -8,4 +8,5 @@
     <item name="action_lessonFragment_to_addLessonFragment" type="id" />
     <item name="action_studentBottomSheetFragment_to_addLessonFragment" type="id" />
     <item name="action_addLessonFragment_to_studentBottomSheetFragment" type="id" />
+    <item name="action_addLessonFragment_to_lessonFragment" type="id" />
 </resources>

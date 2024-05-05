@@ -11,4 +11,8 @@ data class LessonStudentUI(
     var isSelected: Boolean
 ) : IBaseDiffModel<Int>
 
-fun LessonStudent.toUI() = LessonStudentUI(id, name, fullName, price, false)
+fun LessonStudent.toUI(studentsCount: Int): LessonStudentUI
+{
+    val price = if (studentsCount > 1) groupPrice else singlePrice
+    return LessonStudentUI(id, name, fullName, price, false)
+}

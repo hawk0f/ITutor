@@ -23,6 +23,7 @@ import dev.hawk0f.itutor.features.lessons.databinding.FragmentAddLessonBinding
 import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.LessonStudentsAdapter
 import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.AddLessonViewModel
 import dev.hawk0f.itutor.navigation.R.id.action_addLessonFragment_to_studentBottomSheetFragment
+import dev.hawk0f.itutor.navigation.R.id.action_addLessonFragment_to_lessonFragment
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -100,8 +101,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         viewModel.subjectState.collectAsUIState(state = {
             it.setupViewVisibility(group, loader)
         }, onSuccess = {
-            val adapter =
-                ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
+            val adapter = ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
             subjectDropDown.setAdapter(adapter)
             subjectDropDown.setOnItemClickListener { _, _, position, _ ->
                 viewModel.setSubjectId(it[position].id)
@@ -111,10 +111,10 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     private fun subscribeToAdd() = with(binding) {
         viewModel.addState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
+            it.setupViewVisibility(group, loader, false)
         }, onSuccess = {
             showToastLong("Добавлен")
-            findNavController().popBackStack()
+            findNavController().navigateSafely(action_addLessonFragment_to_lessonFragment)
         })
     }
 
@@ -159,12 +159,10 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         startTimeTv.inputType = InputType.TYPE_NULL
 
         //Дата
-        val datePickerListener =
-            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                viewModel.date =
-                    LocalDate.of(year, monthOfYear + 1, dayOfMonth).parseToFormat("dd.MM.yyyy")
-                dateTv.setText(viewModel.date)
-            }
+        val datePickerListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            viewModel.date = LocalDate.of(year, monthOfYear + 1, dayOfMonth).parseToFormat("dd.MM.yyyy")
+            dateTv.setText(viewModel.date)
+        }
         dateTv.setOnClickListener {
             val date = viewModel.date.parseToDate("dd.MM.yyyy")
             DatePickerDialog(requireContext(), datePickerListener, date.year, date.monthValue.minus(1), date.dayOfMonth).show()

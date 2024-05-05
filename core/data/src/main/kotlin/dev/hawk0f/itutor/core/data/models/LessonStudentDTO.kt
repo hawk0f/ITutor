@@ -14,9 +14,11 @@ class LessonStudentDTO(
     val name: String,
     @SerialName("fullName")
     val fullName: String,
-    @SerialName("price")
-    val price: Float
+    @SerialName("singlePrice")
+    val singlePrice: Float,
+    @SerialName("groupPrice")
+    val groupPrice: Float
 ) : DataMapper<LessonStudent>
 {
-    override fun toDomain(): LessonStudent = LessonStudent(id, name, fullName, price)
+    override fun toDomain(): LessonStudent = LessonStudent(id, name, fullName, singlePrice, groupPrice)
 }

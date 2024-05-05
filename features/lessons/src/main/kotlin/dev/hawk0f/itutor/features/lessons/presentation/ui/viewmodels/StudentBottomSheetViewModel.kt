@@ -18,7 +18,7 @@ class StudentBottomSheetViewModel @Inject constructor(private val getLessonStude
     private val _lessonStudentsState = MutableUIStateFlow<List<LessonStudentUI>>()
     val lessonStudentsState = _lessonStudentsState.asStateFlow()
 
-    fun getLessonStudents(studentsIds: ArrayList<Int>) = getLessonStudentsUseCase(currentUser.getUserId(), studentsIds.count()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
-        list.map { it.toUI() }
+    fun getLessonStudents(studentsIds: ArrayList<Int>) = getLessonStudentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
+        list.map { it.toUI(studentsIds.count()) }
     }
 }

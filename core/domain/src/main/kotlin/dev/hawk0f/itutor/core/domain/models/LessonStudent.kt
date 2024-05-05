@@ -4,5 +4,6 @@ class LessonStudent(
     val id: Int,
     val name: String,
     val fullName: String,
-    val price: Float
+    val singlePrice: Float,
+    val groupPrice: Float
 )
