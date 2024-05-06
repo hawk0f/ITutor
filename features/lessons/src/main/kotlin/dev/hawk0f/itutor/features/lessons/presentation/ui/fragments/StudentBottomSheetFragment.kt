@@ -1,9 +1,6 @@
 package dev.hawk0f.itutor.features.lessons.presentation.ui.fragments
 
-import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,9 +12,8 @@ import dev.hawk0f.itutor.features.lessons.R
 import dev.hawk0f.itutor.features.lessons.databinding.FragmentStudentBottomSheetBinding
 import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.ChooseStudentAdapter
 import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.StudentBottomSheetViewModel
-import dev.hawk0f.itutor.navigation.R.id.action_studentBottomSheetFragment_to_addLessonFragment
-
-private const val ARG_PARAM1 = "studentIds"
+import dev.hawk0f.itutor.navigation.StudentBottomSheetFragmentArgs
+import dev.hawk0f.itutor.navigation.StudentBottomSheetFragmentDirections
 
 @AndroidEntryPoint
 class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, FragmentStudentBottomSheetBinding>(R.layout.fragment_student_bottom_sheet)
@@ -25,9 +21,13 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
     override val viewModel: StudentBottomSheetViewModel by viewModels()
     override val binding: FragmentStudentBottomSheetBinding by viewBinding(FragmentStudentBottomSheetBinding::bind)
 
-    private var previousStudentIds = ArrayList<Int>()
-
-    private var studentIds = previousStudentIds
+    private lateinit var studentIds: ArrayList<Int>
+    private lateinit var previousList: ArrayList<Int>
+    private lateinit var date: String
+    private lateinit var startTime: String
+    private lateinit var endTime: String
+    private var subjectId: Int = 0
+    private lateinit var subject: String
 
     private val chooseStudentsAdapter = ChooseStudentAdapter {
         if (studentIds.contains(it))
@@ -40,18 +40,22 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            previousStudentIds = it.getIntegerArrayList(ARG_PARAM1) ?: ArrayList()
-            studentIds = previousStudentIds
-        }
-    }
-
     override fun initialize()
     {
+        setupIds()
         setupRecycler()
+    }
+
+    private fun setupIds()
+    {
+        val args = StudentBottomSheetFragmentArgs.fromBundle(requireArguments())
+        previousList = args.studentIds.toCollection(ArrayList())
+        studentIds = previousList
+        date = args.date
+        startTime = args.startTime
+        endTime = args.endTime
+        subjectId = args.subjectId
+        subject = args.subject
     }
 
     private fun setupRecycler() = with(binding) {
@@ -71,11 +75,7 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
         btnSave.setOnClickListener {
             if (studentIds.isNotEmpty())
             {
-                findNavController().navigateSafely(object : NavDirections
-                {
-                    override val actionId: Int = action_studentBottomSheetFragment_to_addLessonFragment
-                    override val arguments: Bundle = bundleOf(ARG_PARAM1 to studentIds)
-                })
+                findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToAddLessonFragment(studentIds.toIntArray(), date, startTime, endTime, subjectId, subject))
             }
             else
             {
@@ -86,11 +86,7 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
 
     private fun setupCancelButton() = with(binding) {
         btnCancel.setOnClickListener {
-            findNavController().navigateSafely(object : NavDirections
-            {
-                override val actionId: Int = action_studentBottomSheetFragment_to_addLessonFragment
-                override val arguments: Bundle = bundleOf(ARG_PARAM1 to previousStudentIds)
-            })
+            findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToAddLessonFragment(previousList.toIntArray(), date, startTime, endTime, subjectId, subject))
         }
     }
 
@@ -114,7 +110,7 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
             it.setupViewVisibility(group, loader)
         }, onSuccess = { list ->
             list.forEach {
-                it.isSelected = previousStudentIds.contains(it.id)
+                it.isSelected = studentIds.contains(it.id)
             }
             chooseStudentsAdapter.submitList(list)
         })

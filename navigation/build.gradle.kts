@@ -39,4 +39,5 @@ dependencies {
     // Navigation
     api(libs.androidx.navigation.fragment)
     api(libs.androidx.navigation.ui)
+    implementation(libs.androidx.core)
 }

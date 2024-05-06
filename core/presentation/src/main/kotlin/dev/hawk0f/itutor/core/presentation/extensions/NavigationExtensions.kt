@@ -65,7 +65,7 @@ fun Fragment.flowNavController(@IdRes navHostId: Int) = requireActivity().findNa
  *
  * @param toolbarId toolbar id
  */
-fun Fragment.toolbar(@IdRes toolbarId: Int): MaterialToolbar = requireActivity().findViewById(toolbarId)
+fun Fragment.activityToolbar(@IdRes toolbarId: Int): MaterialToolbar = requireActivity().findViewById(toolbarId)
 
 /**
  * Safely navigate to a destination from the current navigation graph.

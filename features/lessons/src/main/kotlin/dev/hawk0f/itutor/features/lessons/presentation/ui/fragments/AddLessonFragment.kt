@@ -2,12 +2,9 @@ package dev.hawk0f.itutor.features.lessons.presentation.ui.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.os.Bundle
 import android.text.InputType
 import android.widget.ArrayAdapter
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -22,12 +19,10 @@ import dev.hawk0f.itutor.features.lessons.R
 import dev.hawk0f.itutor.features.lessons.databinding.FragmentAddLessonBinding
 import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.LessonStudentsAdapter
 import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.AddLessonViewModel
-import dev.hawk0f.itutor.navigation.R.id.action_addLessonFragment_to_studentBottomSheetFragment
-import dev.hawk0f.itutor.navigation.R.id.action_addLessonFragment_to_lessonFragment
+import dev.hawk0f.itutor.navigation.AddLessonFragmentArgs
+import dev.hawk0f.itutor.navigation.AddLessonFragmentDirections
 import java.time.LocalDate
 import java.time.LocalTime
-
-private const val ARG_PARAM1 = "studentIds"
 
 @AndroidEntryPoint
 class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBinding>(R.layout.fragment_add_lesson)
@@ -40,15 +35,6 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         fetchLessonStudents()
     }
 
-    override fun onStart()
-    {
-        super.onStart()
-        arguments?.let {
-            viewModel.setStudentsIds(it.getIntegerArrayList(ARG_PARAM1) ?: ArrayList())
-            fetchLessonStudents()
-        }
-    }
-
     override fun initialize()
     {
         setupFields()
@@ -58,7 +44,8 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     private fun setupFields()
     {
-        viewModel.clearFields()
+        val args = AddLessonFragmentArgs.fromBundle(requireArguments())
+        viewModel.setupFields(args.studentIds?.toCollection(ArrayList()), args.date, args.startTime, args.endTime, args.subjectId, args.subject)
     }
 
     private fun setupViewModel() = with(binding) {
@@ -114,7 +101,8 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
             it.setupViewVisibility(group, loader, false)
         }, onSuccess = {
             showToastLong("Добавлен")
-            findNavController().navigateSafely(action_addLessonFragment_to_lessonFragment)
+            val a = findNavController().previousBackStackEntry?.destination
+            findNavController().popBackStack()
         })
     }
 
@@ -147,11 +135,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
     override fun setupListeners() = with(binding) {
         //Кнопка добавления учеников
         addStudentBtn.setOnClickListener {
-            findNavController().navigateSafely(object : NavDirections
-            {
-                override val actionId: Int = action_addLessonFragment_to_studentBottomSheetFragment
-                override val arguments: Bundle = bundleOf(ARG_PARAM1 to viewModel.getStudentsIds())
-            })
+            findNavController().navigateSafely(AddLessonFragmentDirections.actionAddLessonFragmentToStudentBottomSheetFragment(viewModel.getStudentsIds().toIntArray(), viewModel.date, viewModel.startTime, viewModel.endTime, viewModel.getSubjectId(), viewModel.subject))
         }
 
         dateTv.inputType = InputType.TYPE_NULL

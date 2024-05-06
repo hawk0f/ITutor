@@ -53,13 +53,10 @@ dependencies {
 }
 
 tasks.whenTaskAdded {
+    val kotlinPath = "/src/main/kotlin/dev/hawk0f/itutor/navigation/"
     val navigationArgsPath = "/build/generated/source/navigation-args"
     val mainContentNavigation = "${project(":features:mainContent").projectDir.path}$navigationArgsPath"
-    val navigationPath = "${project(":navigation").projectDir.path}$navigationArgsPath"
-
-    fileTree(navigationPath).forEach {
-        it.delete()
-    }
+    val navigationPath = "${project(":navigation").projectDir.path}$kotlinPath"
 
     if (this.name.contains("generateSafeArgs"))
     {
@@ -70,11 +67,14 @@ tasks.whenTaskAdded {
                 if (file.exists())
                 {
                     val lines = file.readLines().toMutableList()
+                    lines.removeAt(0)
+                    lines.add(0, "package dev.hawk0f.itutor.navigation")
+                    lines.remove("import dev.hawk0f.itutor.features.maincontent.R")
                     lines.add(2, "import dev.hawk0f.itutor.navigation.R")
                     file.writeText(lines.joinToString("\n"))
                 }
             }
-            move(file("$mainContentNavigation"), file("$navigationPath"))
+            move(file(mainContentNavigation), file(navigationPath))
         }
     }
 }
@@ -89,7 +89,11 @@ private fun move(sourceFile: File, destFile: File)
     }
     else
     {
-        if (!destFile.parentFile.exists()) if (!destFile.parentFile.mkdirs()) throw RuntimeException()
-        if (!sourceFile.renameTo(destFile)) throw RuntimeException()
+        if (!destFile.parentFile.exists()) if (!destFile.parentFile.mkdirs()) destFile.parentFile.delete()
+        if (!sourceFile.renameTo(destFile))
+        {
+            destFile.delete()
+            if (!sourceFile.renameTo(destFile)) throw RuntimeException()
+        }
     }
 }

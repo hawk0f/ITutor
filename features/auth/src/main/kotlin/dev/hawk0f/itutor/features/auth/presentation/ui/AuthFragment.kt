@@ -11,8 +11,7 @@ import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.features.auth.R
 import dev.hawk0f.itutor.features.auth.databinding.FragmentAuthBinding
-import dev.hawk0f.itutor.navigation.R.id.action_global_mainContentFragment
-import dev.hawk0f.itutor.navigation.R.id.action_global_registerFragment
+import dev.hawk0f.itutor.navigation.AuthFragmentDirections
 
 @AndroidEntryPoint
 class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.fragment_auth)
@@ -43,7 +42,7 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
 
     private fun setupRegButtonListener() = with(binding) {
         btnGoToSignUp.setOnClickListener {
-            findNavController().navigateSafely(action_global_registerFragment)
+            findNavController().navigateSafely(AuthFragmentDirections.actionAuthFragmentToRegisterFragment())
         }
     }
 
@@ -59,7 +58,7 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         }, onSuccess = {
             CurrentUser.setUserId(it.id)
             showToastLong("Добро пожаловать, ${it.name}")
-            findNavController().navigateSafely(action_global_mainContentFragment)
+            findNavController().navigateSafely(AuthFragmentDirections.actionAuthFragmentToMainContentFragment())
         })
     }
 }

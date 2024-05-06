@@ -11,7 +11,7 @@ import dev.hawk0f.itutor.features.lessons.R
 import dev.hawk0f.itutor.features.lessons.databinding.FragmentLessonBinding
 import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.DateLessonsAdapter
 import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.LessonViewModel
-import dev.hawk0f.itutor.navigation.R.id.action_lessonFragment_to_addLessonFragment
+import dev.hawk0f.itutor.navigation.LessonFragmentDirections
 
 @AndroidEntryPoint
 class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.layout.fragment_lesson)
@@ -39,7 +39,7 @@ class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.la
 
     override fun setupListeners() = with(binding) {
         btnAddLesson.setOnClickListener {
-            findNavController().navigateSafely(action_lessonFragment_to_addLessonFragment)
+            findNavController().navigateSafely(LessonFragmentDirections.actionLessonFragmentToAddLessonFragment())
         }
     }
 

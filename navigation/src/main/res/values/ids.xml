@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="action_global_authFragment" type="id" />
-    <item name="action_global_registerFragment" type="id" />
-    <item name="action_global_mainContentFragment" type="id" />
+    <item name="action_authFragment_to_registerFragment" type="id" />
+    <item name="action_authFragment_to_mainContentFragment" type="id" />
+    <item name="action_registerFragment_to_mainContentFragment" type="id" />
     <item name="action_studentsFragment_to_editStudentFragment" type="id" />
     <item name="action_studentsFragment_to_addStudentFragment" type="id" />
     <item name="action_lessonFragment_to_addLessonFragment" type="id" />
     <item name="action_studentBottomSheetFragment_to_addLessonFragment" type="id" />
     <item name="action_addLessonFragment_to_studentBottomSheetFragment" type="id" />
-    <item name="action_addLessonFragment_to_lessonFragment" type="id" />
+    <item name="studentBottomSheetFragment" type="id" />
 </resources>
