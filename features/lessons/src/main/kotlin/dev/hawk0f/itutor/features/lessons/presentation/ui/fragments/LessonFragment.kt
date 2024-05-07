@@ -20,7 +20,7 @@ class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.la
     override val binding: FragmentLessonBinding by viewBinding(FragmentLessonBinding::bind)
 
     private val dateLessonsAdapter = DateLessonsAdapter({
-        //TODO navigate to edit lesson fragment
+        findNavController().navigateSafely(LessonFragmentDirections.actionLessonFragmentToEditLessonFragment(it))
     }, {
         viewModel.deleteLesson(it)
     })
@@ -62,8 +62,8 @@ class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.la
     private fun subscribeToLessons() = with(binding) {
         viewModel.lessonState.collectAsUIState(state = {
             it.setupViewVisibility(group, loader)
-        }, onSuccess = {
-            dateLessonsAdapter.submitList(it)
+        }, onSuccess = { list ->
+            dateLessonsAdapter.submitList(list)
         })
     }
 

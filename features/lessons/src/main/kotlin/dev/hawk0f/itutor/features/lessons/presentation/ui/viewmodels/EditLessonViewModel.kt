@@ -16,18 +16,20 @@ import dev.hawk0f.itutor.core.presentation.models.LessonUI
 import dev.hawk0f.itutor.core.presentation.models.SubjectUI
 import dev.hawk0f.itutor.core.presentation.models.toUI
 import dev.hawk0f.itutor.core.presentation.models.toUi
-import dev.hawk0f.itutor.features.lessons.domain.usecases.AddLessonUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchLessonStudentsUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchSubjectsUseCase
+import dev.hawk0f.itutor.features.lessons.domain.usecases.GetLessonByIdUseCase
+import dev.hawk0f.itutor.features.lessons.domain.usecases.UpdateLessonUseCase
 import kotlinx.coroutines.flow.asStateFlow
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.temporal.ChronoUnit
+import java.time.temporal.ChronoUnit.MINUTES
 import javax.inject.Inject
 
 @HiltViewModel
-class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLessonUseCase, private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val currentUser: CurrentUser) : BaseViewModel()
+class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val getLessonByIdUseCase: GetLessonByIdUseCase, private val updateLessonUseCase: UpdateLessonUseCase, private val currentUser: CurrentUser) : BaseViewModel()
 {
+    private var id = 0
     var parsedDate: String = LocalDate.now().parseToFormat("dd.MM.yyyy")
     var date: LocalDate = LocalDate.now()
     var startTime: String = LocalTime.now().parseToFormat("HH:mm")
@@ -35,11 +37,15 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
     var subject = ""
     private var subjectId = 0
     private var studentsIds = ArrayList<Int>()
+    private var userId = 0
 
     var allStudents = ArrayList<LessonStudentUI>()
 
-    private val _addState = MutableUIStateFlow<Unit>()
-    val addState = _addState.asStateFlow()
+    private val _lessonState = MutableUIStateFlow<LessonUI>()
+    val lessonState = _lessonState.asStateFlow()
+
+    private val _updateState = MutableUIStateFlow<Unit>()
+    val updateState = _updateState.asStateFlow()
 
     private val _subjectState = MutableUIStateFlow<List<SubjectUI>>()
     val subjectState = _subjectState.asStateFlow()
@@ -61,7 +67,11 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
         }
     }
 
-    fun onLessonAdd()
+    fun getLessonById(lessonId: Int) = getLessonByIdUseCase(lessonId).collectNetworkRequestWithMapping(_lessonState) {
+        it.toUi()
+    }
+
+    fun onLessonUpdate()
     {
         if (studentsIds.isEmpty())
         {
@@ -73,7 +83,7 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
         }
         else
         {
-            addLessonUseCase(LessonDTO(id = 0, date = parsedDate.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = ChronoUnit.MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = currentUser.getUserId())).collectNetworkRequest(_addState)
+            updateLessonUseCase(LessonDTO(id = id, date = parsedDate.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = userId)).collectNetworkRequest(_updateState)
         }
     }
 
@@ -82,7 +92,7 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
         _errorState.value = null
     }
 
-    fun getStudentsIds(): MutableList<Int>
+    fun getStudentsIds(): ArrayList<Int>
     {
         return studentsIds
     }
@@ -99,20 +109,20 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
 
     fun getCurrentLesson(): LessonUI
     {
-        return LessonUI(0, parsedDate, date, startTime, endTime, studentsIds, "", Subject(subjectId, subject), currentUser.getUserId())
+        return LessonUI(id, parsedDate, date, startTime, endTime, studentsIds, "", Subject(subjectId, subject), currentUser.getUserId())
     }
 
-    fun setupFields(lessonUI: LessonUI?)
+    fun setLesson(lesson: LessonUI)
     {
-        lessonUI?.let {
-            studentsIds.clear()
-            studentsIds.addAll(lessonUI.studentsIds)
-            date = lessonUI.date
-            parsedDate = lessonUI.date.parseToFormat("dd.MM.yyyy")
-            startTime = lessonUI.startTime
-            endTime = lessonUI.endTime
-            subjectId = lessonUI.subject.id
-            subject = lessonUI.subject.subjectName
-        }
+        id = lesson.id
+        date = lesson.date
+        parsedDate = lesson.date.parseToFormat("dd.MM.yyyy")
+        startTime = lesson.startTime
+        endTime = lesson.endTime
+        studentsIds.clear()
+        studentsIds.addAll(lesson.studentsIds)
+        subjectId = lesson.subject.id
+        subject = lesson.subject.subjectName
+        userId = lesson.userId
     }
 }

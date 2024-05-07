@@ -30,7 +30,7 @@ class EditStudentViewModel @Inject constructor(private val getStudentByIdUseCase
     private val _updateState = MutableUIStateFlow<Unit>()
     val updateState = _updateState.asStateFlow()
 
-    fun setData(student: StudentUI)
+    fun setStudent(student: StudentUI)
     {
         id = student.id
         name = student.fullName.split(' ')[0]

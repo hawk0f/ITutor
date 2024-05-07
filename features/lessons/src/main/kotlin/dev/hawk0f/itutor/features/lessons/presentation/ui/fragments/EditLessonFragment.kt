@@ -18,22 +18,27 @@ import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
 import dev.hawk0f.itutor.core.presentation.extensions.parseToTime
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
+import dev.hawk0f.itutor.core.presentation.models.LessonUI
 import dev.hawk0f.itutor.features.lessons.R
-import dev.hawk0f.itutor.features.lessons.databinding.FragmentAddLessonBinding
+import dev.hawk0f.itutor.features.lessons.databinding.FragmentEditLessonBinding
 import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.LessonStudentsAdapter
-import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.AddLessonViewModel
-import dev.hawk0f.itutor.navigation.AddLessonFragmentArgs
-import dev.hawk0f.itutor.navigation.AddLessonFragmentDirections
+import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.EditLessonViewModel
+import dev.hawk0f.itutor.navigation.EditLessonFragmentArgs
+import dev.hawk0f.itutor.navigation.EditLessonFragmentDirections
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
 import java.util.Calendar
 
 @AndroidEntryPoint
-class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBinding>(R.layout.fragment_add_lesson)
+class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonBinding>(R.layout.fragment_edit_lesson)
 {
-    override val viewModel: AddLessonViewModel by viewModels()
-    override val binding: FragmentAddLessonBinding by viewBinding(FragmentAddLessonBinding::bind)
+    override val viewModel: EditLessonViewModel by viewModels()
+    override val binding: FragmentEditLessonBinding by viewBinding(FragmentEditLessonBinding::bind)
+
+    private var lessonId: Int = 0
+
+    private var lesson: LessonUI? = null
 
     private val lessonStudentsAdapter = LessonStudentsAdapter {
         viewModel.removeStudentId(it)
@@ -43,14 +48,25 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
     override fun initialize()
     {
         setupFields()
-        setupViewModel()
         setupRecycler()
     }
 
     private fun setupFields()
     {
-        val args = AddLessonFragmentArgs.fromBundle(requireArguments())
-        viewModel.setupFields(args.lesson)
+        val args = EditLessonFragmentArgs.fromBundle(requireArguments())
+        lessonId = args.lessonId
+        lesson = args.lesson
+
+        if (lesson != null)
+        {
+            viewModel.setLesson(lesson!!)
+            setupViewModel()
+            fetchLessonStudents()
+        }
+        else
+        {
+            fetchLesson()
+        }
     }
 
     private fun setupViewModel() = with(binding) {
@@ -68,7 +84,11 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
     override fun setupRequests()
     {
         fetchSubjects()
-        fetchLessonStudents()
+    }
+
+    private fun fetchLesson()
+    {
+        viewModel.getLessonById(lessonId)
     }
 
     private fun fetchSubjects()
@@ -83,27 +103,38 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     override fun setupSubscribers()
     {
+        subscribeToLesson()
         subscribeToSubjects()
         subscribeToLessonStudents()
-        subscribeToAdd()
+        subscribeToUpdate()
         subscribeToError()
     }
 
+    private fun subscribeToLesson() = with(binding) {
+        viewModel.lessonState.collectAsUIState(state = {
+            it.setupViewVisibility(group, loader)
+        }, onSuccess = { lesson ->
+            viewModel.setLesson(lesson)
+            setupViewModel()
+            fetchLessonStudents()
+        })
+    }
+
     private fun subscribeToSubjects() = with(binding) {
-        viewModel.subjectState.collectAsUIState {
-            val adapter = ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
+        viewModel.subjectState.collectAsUIState { list ->
+            val adapter = ArrayAdapter(requireContext(), R.layout.subject_item, list.map { subject -> subject.subjectName })
             subjectDropDown.setAdapter(adapter)
             subjectDropDown.setOnItemClickListener { _, _, position, _ ->
-                viewModel.setSubjectId(it[position].id)
+                viewModel.setSubjectId(list[position].id)
             }
         }
     }
 
-    private fun subscribeToAdd() = with(binding) {
-        viewModel.addState.collectAsUIState(state = {
+    private fun subscribeToUpdate() = with(binding) {
+        viewModel.updateState.collectAsUIState(state = {
             it.setupViewVisibility(group, loader, false)
         }, onSuccess = {
-            showToastLong("Добавлен")
+            showToastLong("Обновлён")
             findNavController().popBackStack()
         })
     }
@@ -150,7 +181,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     private fun setupChooseStudentsButton() = with(binding) {
         chooseStudentBtn.setOnClickListener {
-            findNavController().navigateSafely(AddLessonFragmentDirections.actionAddLessonFragmentToStudentBottomSheetFragment(viewModel.getCurrentLesson()))
+            findNavController().navigateSafely(EditLessonFragmentDirections.actionEditLessonFragmentToStudentBottomSheetFragment(viewModel.getCurrentLesson()))
         }
     }
 
@@ -175,10 +206,9 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         builderDate.addOnPositiveButtonClickListener {
             val calendar: Calendar = Calendar.getInstance()
             calendar.setTimeInMillis(it)
-            val date = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
-            viewModel.parsedDate = date.parseToFormat("dd.MM.yyyy")
-            viewModel.date = date
-
+            viewModel.parsedDate =
+                LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
+                    .parseToFormat("dd.MM.yyyy")
             dateTv.setText(viewModel.parsedDate)
         }
     }

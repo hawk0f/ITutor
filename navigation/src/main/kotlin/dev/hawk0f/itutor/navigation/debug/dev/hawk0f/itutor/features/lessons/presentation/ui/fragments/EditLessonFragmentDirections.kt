@@ -10,11 +10,11 @@ import java.lang.UnsupportedOperationException
 import kotlin.Int
 import kotlin.Suppress
 
-public class AddLessonFragmentDirections private constructor() {
-  private data class ActionAddLessonFragmentToStudentBottomSheetFragment(
+public class EditLessonFragmentDirections private constructor() {
+  private data class ActionEditLessonFragmentToStudentBottomSheetFragment(
     public val lesson: LessonUI,
   ) : NavDirections {
-    public override val actionId: Int = R.id.action_addLessonFragment_to_studentBottomSheetFragment
+    public override val actionId: Int = R.id.action_editLessonFragment_to_studentBottomSheetFragment
 
     public override val arguments: Bundle
       @Suppress("CAST_NEVER_SUCCEEDS")
@@ -33,7 +33,7 @@ public class AddLessonFragmentDirections private constructor() {
   }
 
   public companion object {
-    public fun actionAddLessonFragmentToStudentBottomSheetFragment(lesson: LessonUI): NavDirections
-        = ActionAddLessonFragmentToStudentBottomSheetFragment(lesson)
+    public fun actionEditLessonFragmentToStudentBottomSheetFragment(lesson: LessonUI): NavDirections
+        = ActionEditLessonFragmentToStudentBottomSheetFragment(lesson)
   }
 }

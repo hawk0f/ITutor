@@ -2,44 +2,58 @@ package dev.hawk0f.itutor.navigation
 
 import dev.hawk0f.itutor.navigation.R
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.navigation.NavDirections
+import dev.hawk0f.itutor.core.presentation.models.LessonUI
+import java.io.Serializable
 import kotlin.Int
-import kotlin.IntArray
-import kotlin.String
+import kotlin.Suppress
 
 public class StudentBottomSheetFragmentDirections private constructor() {
   private data class ActionStudentBottomSheetFragmentToAddLessonFragment(
-    public val studentIds: IntArray? = null,
-    public val date: String? = null,
-    public val startTime: String? = null,
-    public val endTime: String? = null,
-    public val subjectId: Int = 0,
-    public val subject: String? = null,
+    public val lesson: LessonUI? = null,
   ) : NavDirections {
     public override val actionId: Int = R.id.action_studentBottomSheetFragment_to_addLessonFragment
 
     public override val arguments: Bundle
+      @Suppress("CAST_NEVER_SUCCEEDS")
       get() {
         val result = Bundle()
-        result.putIntArray("studentIds", this.studentIds)
-        result.putString("date", this.date)
-        result.putString("startTime", this.startTime)
-        result.putString("endTime", this.endTime)
-        result.putInt("subjectId", this.subjectId)
-        result.putString("subject", this.subject)
+        if (Parcelable::class.java.isAssignableFrom(LessonUI::class.java)) {
+          result.putParcelable("lesson", this.lesson as Parcelable?)
+        } else if (Serializable::class.java.isAssignableFrom(LessonUI::class.java)) {
+          result.putSerializable("lesson", this.lesson as Serializable?)
+        }
+        return result
+      }
+  }
+
+  private data class ActionStudentBottomSheetFragmentToEditLessonFragment(
+    public val lessonId: Int = 0,
+    public val lesson: LessonUI? = null,
+  ) : NavDirections {
+    public override val actionId: Int = R.id.action_studentBottomSheetFragment_to_editLessonFragment
+
+    public override val arguments: Bundle
+      @Suppress("CAST_NEVER_SUCCEEDS")
+      get() {
+        val result = Bundle()
+        result.putInt("lessonId", this.lessonId)
+        if (Parcelable::class.java.isAssignableFrom(LessonUI::class.java)) {
+          result.putParcelable("lesson", this.lesson as Parcelable?)
+        } else if (Serializable::class.java.isAssignableFrom(LessonUI::class.java)) {
+          result.putSerializable("lesson", this.lesson as Serializable?)
+        }
         return result
       }
   }
 
   public companion object {
-    public fun actionStudentBottomSheetFragmentToAddLessonFragment(
-      studentIds: IntArray? = null,
-      date: String? = null,
-      startTime: String? = null,
-      endTime: String? = null,
-      subjectId: Int = 0,
-      subject: String? = null,
-    ): NavDirections = ActionStudentBottomSheetFragmentToAddLessonFragment(studentIds, date,
-        startTime, endTime, subjectId, subject)
+    public fun actionStudentBottomSheetFragmentToAddLessonFragment(lesson: LessonUI? = null):
+        NavDirections = ActionStudentBottomSheetFragmentToAddLessonFragment(lesson)
+
+    public fun actionStudentBottomSheetFragmentToEditLessonFragment(lessonId: Int = 0,
+        lesson: LessonUI? = null): NavDirections =
+        ActionStudentBottomSheetFragmentToEditLessonFragment(lessonId, lesson)
   }
 }

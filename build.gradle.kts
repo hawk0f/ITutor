@@ -8,6 +8,9 @@ plugins {
     // Hilt
     alias(libs.plugins.hilt.android) apply false
 
+    // Kapt
+    alias(libs.plugins.kapt) apply false
+
     // KSP
     alias(libs.plugins.ksp) apply false
 

@@ -7,13 +7,13 @@
 
         <variable
             name="viewmodel"
-            type="dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.AddLessonViewModel" />
+            type="dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.EditLessonViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.fragments.AddLessonFragment">
+        tools:context=".presentation.ui.fragments.EditLessonFragment">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loader"
@@ -30,10 +30,10 @@
             android:id="@+id/group"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:constraint_referenced_ids="fields_container_add" />
+            app:constraint_referenced_ids="fields_container_edit" />
 
         <LinearLayout
-            android:id="@+id/fields_container_add"
+            android:id="@+id/fields_container_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -43,6 +43,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/fields_container_add"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="5dp"
@@ -63,6 +64,7 @@
                         android:id="@+id/date_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:inputType="date"
                         android:text="@{viewmodel.parsedDate}"
                         android:textSize="16sp" />
 
@@ -81,6 +83,7 @@
                         android:id="@+id/start_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:inputType="time"
                         android:text="@{viewmodel.startTime}"
                         android:textSize="16sp" />
 
@@ -99,6 +102,7 @@
                         android:id="@+id/end_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:inputType="time"
                         android:text="@{viewmodel.endTime}"
                         android:textSize="16sp" />
 
@@ -115,7 +119,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_students"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/student_item" />
             </LinearLayout>
 
@@ -140,14 +145,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add_lesson"
+                android:id="@+id/btn_edit_lesson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="10dp"
-                android:onClick="@{() -> viewmodel.onLessonAdd()}"
+                android:onClick="@{() -> viewmodel.onLessonUpdate()}"
                 android:padding="16dp"
-                android:text="Добавить занятие"
+                android:text="Сохранить изменения"
                 android:textSize="16sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
+    // Kapt
+    alias(libs.plugins.kapt)
 }
 
 android {

@@ -26,14 +26,14 @@ class LessonViewModel @Inject constructor(private val fetchLessonsUseCase: Fetch
         val dateLessonsList = ArrayList<DateLessonsUI>()
         list.forEach { lesson ->
             val lessonUI = lesson.toUi()
-            val currentDateLessons = dateLessonsList.firstOrNull { it.date == lessonUI.date }
+            val currentDateLessons = dateLessonsList.firstOrNull { it.date == lessonUI.parsedDate }
             if (currentDateLessons != null)
             {
                 currentDateLessons.lessons.add(lessonUI)
             }
             else
             {
-                val newDateLessons = DateLessonsUI(lessonUI.date, lessons = ArrayList<LessonUI>().apply {
+                val newDateLessons = DateLessonsUI(lessonUI.parsedDate, lessons = ArrayList<LessonUI>().apply {
                     add(lessonUI)
                 })
                 dateLessonsList.add(newDateLessons)

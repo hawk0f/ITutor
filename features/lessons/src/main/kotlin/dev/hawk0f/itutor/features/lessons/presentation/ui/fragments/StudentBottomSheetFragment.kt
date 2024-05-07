@@ -8,10 +8,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseBottomSheet
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
+import dev.hawk0f.itutor.core.presentation.models.LessonUI
 import dev.hawk0f.itutor.features.lessons.R
 import dev.hawk0f.itutor.features.lessons.databinding.FragmentStudentBottomSheetBinding
 import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.ChooseStudentAdapter
 import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.StudentBottomSheetViewModel
+import dev.hawk0f.itutor.navigation.R.id.editLessonFragment
 import dev.hawk0f.itutor.navigation.StudentBottomSheetFragmentArgs
 import dev.hawk0f.itutor.navigation.StudentBottomSheetFragmentDirections
 
@@ -22,12 +24,8 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
     override val binding: FragmentStudentBottomSheetBinding by viewBinding(FragmentStudentBottomSheetBinding::bind)
 
     private lateinit var studentIds: ArrayList<Int>
-    private lateinit var previousList: ArrayList<Int>
-    private lateinit var date: String
-    private lateinit var startTime: String
-    private lateinit var endTime: String
-    private var subjectId: Int = 0
-    private lateinit var subject: String
+
+    private lateinit var lesson: LessonUI
 
     private val chooseStudentsAdapter = ChooseStudentAdapter {
         if (studentIds.contains(it))
@@ -49,13 +47,8 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
     private fun setupIds()
     {
         val args = StudentBottomSheetFragmentArgs.fromBundle(requireArguments())
-        previousList = args.studentIds.toCollection(ArrayList())
-        studentIds = previousList
-        date = args.date
-        startTime = args.startTime
-        endTime = args.endTime
-        subjectId = args.subjectId
-        subject = args.subject
+        lesson = args.lesson
+        studentIds = lesson.studentsIds.toCollection(ArrayList())
     }
 
     private fun setupRecycler() = with(binding) {
@@ -75,7 +68,16 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
         btnSave.setOnClickListener {
             if (studentIds.isNotEmpty())
             {
-                findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToAddLessonFragment(studentIds.toIntArray(), date, startTime, endTime, subjectId, subject))
+                lesson.studentsIds.clear()
+                lesson.studentsIds.addAll(studentIds)
+                if (findNavController().previousBackStackEntry?.destination?.id == editLessonFragment)
+                {
+                    findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToEditLessonFragment(lesson = lesson))
+                }
+                else
+                {
+                    findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToAddLessonFragment(lesson = lesson))
+                }
             }
             else
             {
@@ -86,7 +88,14 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
 
     private fun setupCancelButton() = with(binding) {
         btnCancel.setOnClickListener {
-            findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToAddLessonFragment(previousList.toIntArray(), date, startTime, endTime, subjectId, subject))
+            if (findNavController().previousBackStackEntry?.destination?.id == editLessonFragment)
+            {
+                findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToEditLessonFragment(lesson = lesson))
+            }
+            else
+            {
+                findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToAddLessonFragment(lesson = lesson))
+            }
         }
     }
 

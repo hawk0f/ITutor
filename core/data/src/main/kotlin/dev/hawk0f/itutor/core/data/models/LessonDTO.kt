@@ -22,7 +22,7 @@ class LessonDTO(
     @SerialName("durationInMinutes")
     val durationInMinutes: Long,
     @SerialName("studentsIds")
-    val studentsIds: List<Int>,
+    val studentsIds: MutableList<Int>,
     @SerialName("students")
     val students: MutableList<LessonStudentDTO>? = null,
     @SerialName("subjectId")
@@ -33,5 +33,5 @@ class LessonDTO(
     val userId: Int
 ) : DataMapper<Lesson>
 {
-    override fun toDomain(): Lesson = Lesson(id, date, startTime, startTime.plusMinutes(durationInMinutes), studentsIds, students!!.map { it.toDomain() }.toMutableList(), subjectId, subject!!.toDomain(), userId)
+    override fun toDomain(): Lesson = Lesson(id, date, startTime, startTime.plusMinutes(durationInMinutes), studentsIds, students!!.map { it.toDomain() }.toMutableList(), subject!!.toDomain(), userId)
 }

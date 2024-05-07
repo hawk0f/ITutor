@@ -1,6 +1,5 @@
 package dev.hawk0f.itutor.features.students.presentation.ui.fragments
 
-import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -10,6 +9,7 @@ import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.features.students.R
 import dev.hawk0f.itutor.features.students.databinding.FragmentEditStudentBinding
 import dev.hawk0f.itutor.features.students.presentation.ui.viewmodels.EditStudentViewModel
+import dev.hawk0f.itutor.navigation.EditStudentFragmentArgs
 
 private const val ARG_PARAM1 = "studentId"
 
@@ -21,17 +21,15 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
 
     private var studentId: Int = 0
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            studentId = it.getInt(ARG_PARAM1)
-        }
-    }
-
     override fun initialize()
     {
+        setupArguments()
         setupFields()
+    }
+
+    private fun setupArguments()
+    {
+        studentId = EditStudentFragmentArgs.fromBundle(requireArguments()).studentId
     }
 
     private fun setupFields()
@@ -64,14 +62,14 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
         viewModel.studentState.collectAsUIState(state = {
             it.setupViewVisibility(group, loader)
         }, onSuccess = {
-            viewModel.setData(it)
+            viewModel.setStudent(it)
             setupViewModel()
         })
     }
 
     private fun subscribeToUpdate() = with(binding) {
         viewModel.updateState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
+            it.setupViewVisibility(group, loader, false)
         }, onSuccess = {
             showToastLong("Успешно обновлено")
             findNavController().popBackStack()
