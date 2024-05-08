@@ -17,10 +17,8 @@ retrofit = "2.11.0"
 okHttp = "5.0.0-alpha.14"
 vbpd = "1.5.9"
 dagger = "2.51.1"
-junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-appcompat = "1.6.1"
+any-chart = "1.1.5"
+mp-android-chart = "3.1.0"
 
 [libraries]
 # Kotlin
@@ -44,6 +42,10 @@ androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "
 
 # Fragment
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+
+# Chart Libraries
+any-chart = { group = "com.github.AnyChart", name = "AnyChart-Android", version.ref = "any-chart" }
+mp-android-chart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mp-android-chart" }
 
 # Lifecycle
 androidx-lifecycle-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }

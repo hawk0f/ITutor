@@ -206,9 +206,9 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
         builderDate.addOnPositiveButtonClickListener {
             val calendar: Calendar = Calendar.getInstance()
             calendar.setTimeInMillis(it)
-            viewModel.parsedDate =
-                LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
-                    .parseToFormat("dd.MM.yyyy")
+            viewModel.date = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
+            viewModel.parsedDate = viewModel.date.parseToFormat("dd.MM.yyyy")
+
             dateTv.setText(viewModel.parsedDate)
         }
     }

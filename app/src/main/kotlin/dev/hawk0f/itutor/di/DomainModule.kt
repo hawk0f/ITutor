@@ -7,6 +7,9 @@ import dagger.hilt.android.components.ViewModelComponent
 import dev.hawk0f.itutor.core.domain.CurrentUser
 import dev.hawk0f.itutor.features.auth.domain.repositories.UserAuthRepository
 import dev.hawk0f.itutor.features.auth.domain.usecases.AuthUserUseCase
+import dev.hawk0f.itutor.features.finance.domain.repositories.PaymentRepository
+import dev.hawk0f.itutor.features.finance.domain.usecases.FetchPaymentsUseCase
+import dev.hawk0f.itutor.features.finance.domain.usecases.UpdatePaymentUseCase
 import dev.hawk0f.itutor.features.lessons.domain.repositories.LessonRepository
 import dev.hawk0f.itutor.features.lessons.domain.repositories.SubjectRepository
 import dev.hawk0f.itutor.features.lessons.domain.usecases.AddLessonUseCase
@@ -29,6 +32,7 @@ import dev.hawk0f.itutor.features.students.domain.usecases.UpdateStudentUseCase
 @InstallIn(ViewModelComponent::class)
 object DomainModule
 {
+    //User
     @Provides
     fun provideCurrentUser() = CurrentUser
 
@@ -38,6 +42,7 @@ object DomainModule
     @Provides
     fun provideRegisterUserUseCase(repository: UserRegisterRepository) = RegisterUserUseCase(repository)
 
+    //Students
     @Provides
     fun provideAddStudentUseCase(repository: StudentsRepository) = AddStudentUseCase(repository)
 
@@ -53,6 +58,7 @@ object DomainModule
     @Provides
     fun provideUpdateStudentUseCase(repository: StudentsRepository) = UpdateStudentUseCase(repository)
 
+    //Lessons
     @Provides
     fun provideAddLessonUseCase(repository: LessonRepository) = AddLessonUseCase(repository)
 
@@ -69,8 +75,16 @@ object DomainModule
     fun provideUpdateLessonUseCase(repository: LessonRepository) = UpdateLessonUseCase(repository)
 
     @Provides
+    fun provideFetchLessonStudentsUseCase(repository: LessonRepository) = FetchLessonStudentsUseCase(repository)
+
+    //Subjects
+    @Provides
     fun provideFetchSubjectsUseCase(repository: SubjectRepository) = FetchSubjectsUseCase(repository)
 
+    //Payments
     @Provides
-    fun provideFetchLessonStudentsUseCase(repository: LessonRepository) = FetchLessonStudentsUseCase(repository)
+    fun provideFetchPaymentsUseCase(repository: PaymentRepository) = FetchPaymentsUseCase(repository)
+
+    @Provides
+    fun provideUpdatePaymentUseCase(repository: PaymentRepository) = UpdatePaymentUseCase(repository)
 }

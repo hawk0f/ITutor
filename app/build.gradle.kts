@@ -71,6 +71,7 @@ dependencies {
     implementation(project(":features:register"))
     implementation(project(":features:mainContent"))
     implementation(project(":features:lessons"))
+    implementation(project(":features:finance"))
 
     implementation(project(":navigation"))
 

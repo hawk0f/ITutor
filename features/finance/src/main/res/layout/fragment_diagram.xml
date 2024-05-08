@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.fragments.DiagramFragment">
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="tag_group_scroll_view, chart" />
+
+    <HorizontalScrollView
+        android:id="@+id/tag_group_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
+            style="@style/Widget.Material3.ChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/current_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Текущий месяц" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/previous_three_months"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Предыдущие 3 месяца" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/previous_six_months"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Предыдущие 6 месяцев" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tag_group_scroll_view" />
+
+</RelativeLayout>

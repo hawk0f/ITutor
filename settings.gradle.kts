@@ -3,7 +3,6 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven { url = uri("https://jitpack.io") }
     }
 }
 dependencyResolutionManagement {
@@ -28,3 +27,4 @@ include(":features:register")
 include(":features:mainContent")
 include(":navigation")
 include(":features:lessons")
+include(":features:finance")

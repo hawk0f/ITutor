@@ -10,7 +10,7 @@
         android:icon="@drawable/shedule_icon"
         android:title="Расписание" />
     <item
-        android:id="@+id/financeNavGraph"
+        android:id="@+id/financeFragment"
         android:icon="@drawable/finance_icon"
         android:title="Финансы" />
     <item

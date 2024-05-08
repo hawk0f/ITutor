@@ -5,4 +5,8 @@
     app:startDestination="@id/studentsNavGraph">
     <include app:graph="@navigation/students_nav_graph" />
     <include app:graph="@navigation/lessons_nav_graph" />
+    <fragment
+        android:id="@+id/financeFragment"
+        android:name="dev.hawk0f.itutor.features.finance.presentation.ui.fragments.FinanceFragment"
+        android:label="Финансы" />
 </navigation>
