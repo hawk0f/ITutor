@@ -116,7 +116,7 @@
                     android:id="@+id/recycler_students"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/student_item" />
+                    tools:listitem="@layout/lesson_student_item" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout

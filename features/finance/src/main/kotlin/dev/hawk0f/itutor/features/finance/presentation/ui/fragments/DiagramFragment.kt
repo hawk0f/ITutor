@@ -41,9 +41,9 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
         chart.setDrawBarShadow(false);
         chart.setDrawGridBackground(false);
 
-        val mv: MyMarkerViewKt = MyMarkerViewKt(requireContext(), R.layout.custom_marker_view)
-        mv.chartView = chart // For bounds control
-        chart.marker = mv // Set the marker to the chart
+        val mv = MyMarkerViewKt(requireContext(), R.layout.custom_marker_view)
+        mv.chartView = chart
+        chart.marker = mv
 
         val l: Legend = chart.legend
         l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
@@ -53,14 +53,14 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
         l.yOffset = 0f
         l.xOffset = 10f
         l.yEntrySpace = 0f
-        l.setTextSize(8f)
+        l.setTextSize(12f)
 
         val xAxis = chart.xAxis
         xAxis.granularity = 1f
         xAxis.setCenterAxisLabels(true)
 
         val leftAxis = chart.axisLeft
-        leftAxis.valueFormatter = object : ValueFormatter()
+        leftAxis.valueFormatter = object : ValueFormatter() // Столбец слева, значения
         {
             override fun getFormattedValue(value: Float): String
             {
@@ -72,8 +72,6 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
         leftAxis.axisMinimum = 0f
 
         chart.axisRight.isEnabled = false
-        //anyChart.clear()
-        //anyChart.setChart(null)
     }
 
     override fun setupRequests()
@@ -100,10 +98,9 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
     }
 
     private fun buildMpChart(payments: List<PaymentUI>) = with(binding) {
-
-        val groupSpace = 0.08f
-        val barSpace = 0.03f // x4 DataSet
-        val barWidth = 0.2f // x4 DataSet
+        val groupSpace = 0.04f
+        val barSpace = 0.15f
+        val barWidth = 0.1f
         // (0.2 + 0.03) * 4 + 0.08 = 1.00 -> interval per "group"
 
         val currentMonth =
@@ -188,79 +185,6 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
         super.onResume()
         fetchPayments()
     }
-
-//    private fun buildAnyChart(payments: List<PaymentUI>) = with(binding) {
-//        val cartesian: Cartesian = AnyChart.column()
-//
-//        val currentMonth =
-//            LocalDate.now().month.getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("ru"))
-//
-//        var currentMonthProfit = 0f
-//        var currentMonthPotentialProfit = 0f
-//
-//        payments.forEach { payment ->
-//            if (payment.date.month.getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("ru"))
-//                    .equals(currentMonth))
-//            {
-//                if (payment.hasPaid)
-//                {
-//                    currentMonthProfit += payment.price
-//                    currentMonthPotentialProfit += payment.price
-//                }
-//                else
-//                {
-//                    currentMonthPotentialProfit += payment.price
-//                }
-//            }
-//        }
-//
-////        val previousMonth = LocalDate.now().month.minus(1).getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("ru"))
-////        var previousMonthProfit = 0f
-////        successfulTransactions.forEach { transaction ->
-////            if (LocalDate.parse(transaction.lesson!!.date, DateTimeFormatter.ofPattern("dd.MM.yyyy")).month.getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("ru")).equals(previousMonth))
-////            {
-////                previousMonthProfit += transaction.price
-////            }
-////        }
-////
-////        val prepreviousMonth = LocalDate.now().month.minus(2).getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("ru"))
-////        var prepreviousMonthProfit = 0f
-////        successfulTransactions.forEach { transaction ->
-////            if (LocalDate.parse(transaction.lesson!!.date, DateTimeFormatter.ofPattern("dd.MM.yyyy")).month.getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("ru")).equals(prepreviousMonth))
-////            {
-////                prepreviousMonthProfit += transaction.price
-////            }
-////        }
-//
-//        val data: MutableList<DataEntry> = ArrayList()
-////        data.add(ValueDataEntry(prepreviousMonth, prepreviousMonthProfit))
-////        data.add(ValueDataEntry(previousMonth, previousMonthProfit))
-//        data.add(ValueDataEntry(currentMonth, currentMonthProfit))
-//
-//        val column: Column = cartesian.column(data)
-//
-//        column.tooltip().titleFormat("{%X}").position(Position.CENTER_BOTTOM)
-//            .anchor(Anchor.CENTER_BOTTOM).offsetX(0.0).offsetY(5.0)
-//            .format("{%Value}{groupsSeparator: } р.")
-//
-//        cartesian.animation(true)
-//        cartesian.title("Доход: $currentMonthProfit Р")
-//        cartesian.title().fontSize(25)
-//
-//        cartesian.yScale().minimum(0.0)
-//
-//        cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: } р.")
-//
-//        cartesian.tooltip().positionMode(TooltipPositionMode.POINT)
-//        cartesian.interactivity().hoverMode(HoverMode.BY_X)
-//
-//        cartesian.xAxis(0).title("Месяц")
-//        cartesian.yAxis(0).title("Заработок")
-//
-//        anyChart.setChart(cartesian)
-//
-//        anyChart.invalidate()
-//    }
 
     override fun onValueSelected(e: Entry?, h: Highlight?)
     {

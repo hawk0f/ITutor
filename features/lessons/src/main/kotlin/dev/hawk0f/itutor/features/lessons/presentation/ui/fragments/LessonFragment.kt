@@ -37,7 +37,12 @@ class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.la
         }
     }
 
-    override fun setupListeners() = with(binding) {
+    override fun setupListeners()
+    {
+        setupAddLessonButton()
+    }
+
+    private fun setupAddLessonButton() = with(binding) {
         btnAddLesson.setOnClickListener {
             findNavController().navigateSafely(LessonFragmentDirections.actionLessonFragmentToAddLessonFragment())
         }
@@ -67,11 +72,8 @@ class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.la
         })
     }
 
-    private fun subscribeToDelete() = with(binding) {
-        viewModel.deleteState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader, false)
-        }, onSuccess = {
-            fetchLessons()
-        })
+    private fun subscribeToDelete()
+    {
+        viewModel.deleteState.collectAsUIState { fetchLessons() }
     }
 }

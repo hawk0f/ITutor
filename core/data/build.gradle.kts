@@ -18,11 +18,11 @@ android {
 
     buildTypes {
         getByName("release") {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.0.185:5110/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.0.179:5110/api/\"")
         }
 
         getByName("debug") {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.0.185:5110/api/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.0.179:5110/api/\"")
         }
     }
 

@@ -121,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/student_item" />
+                    tools:listitem="@layout/lesson_student_item" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout

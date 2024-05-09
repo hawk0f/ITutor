@@ -91,7 +91,8 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     private fun subscribeToSubjects() = with(binding) {
         viewModel.subjectState.collectAsUIState {
-            val adapter = ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
+            val adapter =
+                ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
             subjectDropDown.setAdapter(adapter)
             subjectDropDown.setOnItemClickListener { _, _, position, _ ->
                 viewModel.setSubjectId(it[position].id)
@@ -118,14 +119,15 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         }
     }
 
-    private fun subscribeToLessonStudents()
-    {
-        viewModel.lessonStudentsState.collectAsUIState { list ->
+    private fun subscribeToLessonStudents() = with(binding) {
+        viewModel.lessonStudentsState.collectAsUIState(state = {
+            it.setupViewVisibility(group, loader)
+        }, onSuccess = { list ->
             viewModel.allStudents.clear()
             viewModel.allStudents.addAll(list)
 
             updateAdapterList()
-        }
+        })
     }
 
     private fun updateAdapterList()
@@ -175,7 +177,8 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         builderDate.addOnPositiveButtonClickListener {
             val calendar: Calendar = Calendar.getInstance()
             calendar.setTimeInMillis(it)
-            val date = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
+            val date =
+                LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
             viewModel.parsedDate = date.parseToFormat("dd.MM.yyyy")
             viewModel.date = date
 

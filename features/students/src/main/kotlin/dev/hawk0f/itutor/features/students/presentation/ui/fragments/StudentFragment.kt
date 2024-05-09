@@ -16,6 +16,7 @@ import dev.hawk0f.itutor.features.students.presentation.ui.adapters.StudentAdapt
 import dev.hawk0f.itutor.features.students.presentation.ui.viewmodels.StudentsViewModel
 import dev.hawk0f.itutor.navigation.R.id.action_studentsFragment_to_addStudentFragment
 import dev.hawk0f.itutor.navigation.R.id.action_studentsFragment_to_editStudentFragment
+import dev.hawk0f.itutor.navigation.StudentFragmentDirections
 
 @AndroidEntryPoint
 class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(R.layout.fragment_student)
@@ -24,11 +25,7 @@ class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(
     override val binding: FragmentStudentBinding by viewBinding(FragmentStudentBinding::bind)
 
     private val studentAdapter = StudentAdapter({
-        findNavController().navigateSafely(object : NavDirections
-        {
-            override val actionId: Int = action_studentsFragment_to_editStudentFragment
-            override val arguments: Bundle = bundleOf("studentId" to it)
-        })
+        findNavController().navigateSafely(StudentFragmentDirections.actionStudentsFragmentToEditStudentFragment(it))
     }, {
         viewModel.deleteStudent(it)
     })
@@ -52,7 +49,7 @@ class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(
 
     private fun setupAddStudentButton() = with(binding) {
         btnAddStudent.setOnClickListener {
-            findNavController().navigateSafely(action_studentsFragment_to_addStudentFragment)
+            findNavController().navigateSafely(StudentFragmentDirections.actionStudentsFragmentToAddStudentFragment())
         }
     }
 
@@ -80,11 +77,8 @@ class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(
         })
     }
 
-    private fun subscribeToDelete() = with(binding) {
-        viewModel.deleteState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
-        }, onSuccess = {
-            fetchStudents()
-        })
+    private fun subscribeToDelete()
+    {
+        viewModel.deleteState.collectAsUIState { fetchStudents() }
     }
 }

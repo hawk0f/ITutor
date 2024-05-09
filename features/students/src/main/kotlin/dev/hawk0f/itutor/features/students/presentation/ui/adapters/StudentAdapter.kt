@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.hawk0f.itutor.core.presentation.base.BaseDiffUtilItemCallback
 import dev.hawk0f.itutor.core.presentation.models.StudentUI
-import dev.hawk0f.itutor.features.students.databinding.ItemStudentBinding
+import dev.hawk0f.itutor.features.students.databinding.StudentItemBinding
 
 class StudentAdapter(private val onStudentClick: (studentId: Int) -> Unit, private val onDeleteClick: (studentId: Int) -> Unit) : ListAdapter<StudentUI, StudentAdapter.StudentItemViewHolder>(BaseDiffUtilItemCallback())
 {
@@ -17,7 +17,7 @@ class StudentAdapter(private val onStudentClick: (studentId: Int) -> Unit, priva
         getItem(position)?.let { holder.bind(it, onStudentClick, onDeleteClick) }
     }
 
-    class StudentItemViewHolder(private val binding: ItemStudentBinding) : RecyclerView.ViewHolder(binding.root)
+    class StudentItemViewHolder(private val binding: StudentItemBinding) : RecyclerView.ViewHolder(binding.root)
     {
         fun bind(studentUi: StudentUI, onStudentClick: (studentId: Int) -> Unit, onDeleteClick: (studentId: Int) -> Unit) = with(binding) {
             student = studentUi
@@ -34,7 +34,7 @@ class StudentAdapter(private val onStudentClick: (studentId: Int) -> Unit, priva
             fun inflateFrom(parent: ViewGroup): StudentItemViewHolder
             {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemStudentBinding.inflate(layoutInflater, parent, false)
+                val binding = StudentItemBinding.inflate(layoutInflater, parent, false)
                 return StudentItemViewHolder(binding)
             }
         }

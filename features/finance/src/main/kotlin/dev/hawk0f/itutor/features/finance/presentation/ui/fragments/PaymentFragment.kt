@@ -57,9 +57,8 @@ class PaymentFragment : BaseFragment<PaymentViewModel, FragmentPaymentBinding>(R
         })
     }
 
-    private fun subscribeToUpdate() = with(binding) {
-        viewModel.updateState.collectAsUIState {
-            //showToastLong("Статус обновлён")
-        }
+    private fun subscribeToUpdate()
+    {
+        viewModel.updateState.collectAsUIState { /* showToastLong("Статус обновлён") */ }
     }
 }
