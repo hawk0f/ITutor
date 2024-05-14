@@ -37,8 +37,8 @@ class EditStudentViewModel @Inject constructor(private val getStudentByIdUseCase
         surname = student.fullName.split(' ')[1]
         age = student.age.toString()
         phoneNumber = student.phoneNumber
-        singlePrice = student.singlePrice.toString()
-        groupPrice = student.groupPrice.toString()
+        singlePrice = student.singlePrice.toInt().toString()
+        groupPrice = student.groupPrice.toInt().toString()
         note = student.note
         userId = student.userId
     }

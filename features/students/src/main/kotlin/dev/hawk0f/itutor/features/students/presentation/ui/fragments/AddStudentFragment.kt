@@ -9,6 +9,11 @@ import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.features.students.R
 import dev.hawk0f.itutor.features.students.databinding.FragmentAddStudentBinding
 import dev.hawk0f.itutor.features.students.presentation.ui.viewmodels.AddStudentViewModel
+import ru.tinkoff.decoro.FormattedTextChangeListener
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
+import ru.tinkoff.decoro.watchers.FormatWatcher
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 @AndroidEntryPoint
 class AddStudentFragment : BaseFragment<AddStudentViewModel, FragmentAddStudentBinding>(R.layout.fragment_add_student)
@@ -27,8 +32,7 @@ class AddStudentFragment : BaseFragment<AddStudentViewModel, FragmentAddStudentB
         viewModel.clearFields()
     }
 
-    private fun setupViewModel() = with(binding)
-    {
+    private fun setupViewModel() = with(binding) {
         viewmodel = viewModel
         lifecycleOwner = viewLifecycleOwner
     }
@@ -38,13 +42,26 @@ class AddStudentFragment : BaseFragment<AddStudentViewModel, FragmentAddStudentB
         subscribeToAdd()
     }
 
-    private fun subscribeToAdd() = with(binding)
-    {
+    private fun subscribeToAdd() = with(binding) {
         viewModel.addState.collectAsUIState(state = {
             it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
             showToastLong("Успешное добавление")
             findNavController().popBackStack()
         })
+    }
+
+    override fun setupListeners()
+    {
+        setupPhoneNumberTextChange()
+    }
+
+    private fun setupPhoneNumberTextChange() = with(binding)
+    {
+        val slots = UnderscoreDigitSlotsParser().parseSlots("+7 ___ ___-__-__")
+        val mask: MaskImpl = MaskImpl.createTerminated(slots)
+        mask.isForbidInputWhenFilled = true
+        val formatWatcher: FormatWatcher = MaskFormatWatcher(mask)
+        formatWatcher.installOn(phoneNumberEditText)
     }
 }

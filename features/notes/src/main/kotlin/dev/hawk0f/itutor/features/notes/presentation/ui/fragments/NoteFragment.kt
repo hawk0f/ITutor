@@ -1,14 +1,17 @@
 package dev.hawk0f.itutor.features.notes.presentation.ui.fragments
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.features.notes.R
 import dev.hawk0f.itutor.features.notes.databinding.FragmentNoteBinding
 import dev.hawk0f.itutor.features.notes.presentation.ui.adapters.NoteAdapter
 import dev.hawk0f.itutor.features.notes.presentation.ui.viewmodels.NoteViewModel
+import dev.hawk0f.itutor.navigation.NoteFragmentDirections
 
 @AndroidEntryPoint
 class NoteFragment : BaseFragment<NoteViewModel, FragmentNoteBinding>(R.layout.fragment_note)
@@ -17,7 +20,7 @@ class NoteFragment : BaseFragment<NoteViewModel, FragmentNoteBinding>(R.layout.f
     override val binding: FragmentNoteBinding by viewBinding(FragmentNoteBinding::bind)
 
     private val noteAdapter = NoteAdapter({
-        //TODO Navigate to EditNoteFragment
+        findNavController().navigateSafely(NoteFragmentDirections.actionNoteFragmentToEditNoteFragment(it))
     }, {
         viewModel.deleteNote(it)
     })
@@ -66,9 +69,14 @@ class NoteFragment : BaseFragment<NoteViewModel, FragmentNoteBinding>(R.layout.f
         })
     }
 
-    override fun setupListeners() = with(binding) {
+    override fun setupListeners()
+    {
+        setupAddNoteButton()
+    }
+
+    private fun setupAddNoteButton() = with(binding) {
         btnAddNote.setOnClickListener {
-            //TODO navigate to AddNoteFragment
+            findNavController().navigateSafely(NoteFragmentDirections.actionNoteFragmentToAddNoteFragment())
         }
     }
 }

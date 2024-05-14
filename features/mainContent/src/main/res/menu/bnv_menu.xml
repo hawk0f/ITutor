@@ -4,17 +4,21 @@
         android:id="@+id/studentsNavGraph"
         android:enabled="true"
         android:icon="@drawable/students_icon"
-        android:title="Ученики" />
+        android:title="@string/students"
+        android:tooltipText="@null" />
     <item
         android:id="@+id/lessonsNavGraph"
         android:icon="@drawable/shedule_icon"
-        android:title="Расписание" />
+        android:title="@string/lessons"
+        android:tooltipText="@null" />
     <item
         android:id="@+id/financeFragment"
         android:icon="@drawable/finance_icon"
-        android:title="Финансы" />
+        android:title="@string/finance"
+        android:tooltipText="@null" />
     <item
         android:id="@+id/notesNavGraph"
         android:icon="@drawable/notes_icon"
-        android:title="Заметки" />
+        android:title="@string/notes"
+        android:tooltipText="@null" />
 </menu>

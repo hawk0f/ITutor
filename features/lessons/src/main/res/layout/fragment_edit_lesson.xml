@@ -46,8 +46,7 @@
                 android:id="@+id/fields_container_add"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight=".7"
+                android:layout_weight="0.7"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -55,16 +54,13 @@
                     android:id="@+id/date_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="10dp"
-                    android:hint="Дата"
+                    android:hint="@string/date"
                     app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/date_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="date"
                         android:text="@{viewmodel.parsedDate}"
                         android:textSize="16sp" />
 
@@ -74,16 +70,13 @@
                     android:id="@+id/start_time_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="10dp"
-                    android:hint="Время начала"
+                    android:hint="@string/startTime"
                     app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/start_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="time"
                         android:text="@{viewmodel.startTime}"
                         android:textSize="16sp" />
 
@@ -93,16 +86,13 @@
                     android:id="@+id/end_time_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="10dp"
-                    android:hint="Время конца"
+                    android:hint="@string/endTime"
                     app:hintAnimationEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/end_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="time"
                         android:text="@{viewmodel.endTime}"
                         android:textSize="16sp" />
 
@@ -112,15 +102,13 @@
                     android:id="@+id/choose_student_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Ученики"
+                    android:text="@string/students"
                     app:icon="@android:drawable/ic_input_add" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_students"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/lesson_student_item" />
             </LinearLayout>
 
@@ -129,9 +117,7 @@
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="10dp"
-                android:hint="Предмет"
+                android:hint="@string/subject"
                 app:hintAnimationEnabled="false">
 
                 <AutoCompleteTextView
@@ -148,11 +134,8 @@
                 android:id="@+id/btn_edit_lesson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="10dp"
                 android:onClick="@{() -> viewmodel.onLessonUpdate()}"
-                android:padding="16dp"
-                android:text="Сохранить изменения"
+                android:text="@string/save_changes"
                 android:textSize="16sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

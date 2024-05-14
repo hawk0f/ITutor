@@ -26,7 +26,7 @@ class DateLessonsAdapter(private val onLessonClick: (lessonId: Int) -> Unit, pri
             date.text = dateLessonsUI.date
             val lessonAdapter = LessonAdapter(onLessonClick, onDeleteClick)
             lessonAdapter.submitList(dateLessonsUI.lessons)
-            recyclerDateLessons.adapter = lessonAdapter
+            recyclerLessons.adapter = lessonAdapter
         }
 
         companion object

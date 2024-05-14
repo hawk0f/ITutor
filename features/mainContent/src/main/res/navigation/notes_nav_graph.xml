@@ -7,5 +7,24 @@
     <fragment
         android:id="@+id/noteFragment"
         android:name="dev.hawk0f.itutor.features.notes.presentation.ui.fragments.NoteFragment"
-        android:label="Заметки" />
+        android:label="@string/notes">
+        <action
+            android:id="@+id/action_noteFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/action_noteFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="dev.hawk0f.itutor.features.notes.presentation.ui.fragments.AddNoteFragment"
+        android:label="@string/adding_note" />
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="dev.hawk0f.itutor.features.notes.presentation.ui.fragments.EditNoteFragment"
+        android:label="@string/editing_note">
+        <argument
+            android:name="noteId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

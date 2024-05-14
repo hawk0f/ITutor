@@ -1,5 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">ITutor</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="back_to_auth">Back to Auth</string>
+    <string name="sign_in">Sign In</string>
+    <string name="go_to_sign_up">Go to Sign Up</string>
+    <string name="add_student">Add student</string>
+    <string name="add_lesson">Add lesson</string>
+    <string name="add_note">Add note</string>
+    <string name="save_changes">Save changes</string>
+    <string name="note_header">Header</string>
+    <string name="start_note_hear">Start writing your note hear</string>
+    <string name="name">Name</string>
+    <string name="date">Date</string>
+    <string name="startTime">Start time</string>
+    <string name="endTime">End time</string>
+    <string name="surname">Surname</string>
+    <string name="age">Age</string>
+    <string name="note">Note</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="singlePrice">Price for single lesson</string>
+    <string name="groupPrice">Price for group lesson</string>
+    <string name="subject">Subject</string>
+    <string name="students">Students</string>
+    <string name="my_students">My students</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="current_month">For the current month</string>
+    <string name="previous_three_months">For the last 3 months</string>
+    <string name="previous_six_months">For the last 6 months</string>
+    <string name="statistic">Statistic</string>
+
+
+    <string name="auth">Authorization</string>
+    <string name="reg">Registration</string>
+    <string name="editing_student">Editing a student</string>
+    <string name="adding_student">Adding a student</string>
+    <string name="lessons">Lessons</string>
+    <string name="editing_lesson">Editing a lesson</string>
+    <string name="adding_lesson">Adding a lesson</string>
+    <string name="notes">Notes</string>
+    <string name="editing_note">Editing a note</string>
+    <string name="adding_note">Adding a note</string>
+    <string name="finance">Finance</string>
+
 
 </resources>

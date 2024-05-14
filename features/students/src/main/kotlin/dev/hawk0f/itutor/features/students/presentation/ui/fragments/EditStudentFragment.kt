@@ -10,8 +10,10 @@ import dev.hawk0f.itutor.features.students.R
 import dev.hawk0f.itutor.features.students.databinding.FragmentEditStudentBinding
 import dev.hawk0f.itutor.features.students.presentation.ui.viewmodels.EditStudentViewModel
 import dev.hawk0f.itutor.navigation.EditStudentFragmentArgs
-
-private const val ARG_PARAM1 = "studentId"
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
+import ru.tinkoff.decoro.watchers.FormatWatcher
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 @AndroidEntryPoint
 class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStudentBinding>(R.layout.fragment_edit_student)
@@ -74,5 +76,19 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
             showToastLong("Успешно обновлено")
             findNavController().popBackStack()
         })
+    }
+
+    override fun setupListeners()
+    {
+        setupPhoneNumberTextChange()
+    }
+
+    private fun setupPhoneNumberTextChange() = with(binding)
+    {
+        val slots = UnderscoreDigitSlotsParser().parseSlots("+7 ___ ___-__-__")
+        val mask: MaskImpl = MaskImpl.createTerminated(slots)
+        mask.isForbidInputWhenFilled = true
+        val formatWatcher: FormatWatcher = MaskFormatWatcher(mask)
+        formatWatcher.installOn(phoneNumberEditText)
     }
 }

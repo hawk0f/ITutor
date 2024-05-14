@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/studentsFragment"
         android:name="dev.hawk0f.itutor.features.students.presentation.ui.fragments.StudentFragment"
-        android:label="Ученики">
+        android:label="@string/students">
         <action
             android:id="@+id/action_studentsFragment_to_editStudentFragment"
             app:destination="@id/editStudentFragment"
@@ -26,11 +26,11 @@
     <fragment
         android:id="@+id/addStudentFragment"
         android:name="dev.hawk0f.itutor.features.students.presentation.ui.fragments.AddStudentFragment"
-        android:label="Добавление" />
+        android:label="@string/adding_student" />
     <fragment
         android:id="@+id/editStudentFragment"
         android:name="dev.hawk0f.itutor.features.students.presentation.ui.fragments.EditStudentFragment"
-        android:label="Редактирование">
+        android:label="@string/editing_student">
         <argument
             android:name="studentId"
             app:argType="integer" />

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/lessonFragment"
         android:name="dev.hawk0f.itutor.features.lessons.presentation.ui.fragments.LessonFragment"
-        android:label="Занятия"
+        android:label="@string/lessons"
         tools:layout="@layout/fragment_lesson">
         <action
             android:id="@+id/action_lessonFragment_to_addLessonFragment"
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/addLessonFragment"
         android:name="dev.hawk0f.itutor.features.lessons.presentation.ui.fragments.AddLessonFragment"
-        android:label="Добавление"
+        android:label="@string/adding_lesson"
         tools:layout="@layout/fragment_add_lesson">
         <action
             android:id="@+id/action_addLessonFragment_to_studentBottomSheetFragment"
@@ -39,9 +39,9 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <argument
             android:name="lesson"
+            android:defaultValue="@null"
             app:argType="dev.hawk0f.itutor.core.presentation.models.LessonUI"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <dialog
         android:id="@+id/studentBottomSheetFragment"
@@ -71,7 +71,7 @@
     <fragment
         android:id="@+id/editLessonFragment"
         android:name="dev.hawk0f.itutor.features.lessons.presentation.ui.fragments.EditLessonFragment"
-        android:label="Редактирование"
+        android:label="@string/editing_lesson"
         tools:layout="@layout/fragment_edit_lesson">
         <argument
             android:name="lessonId"
@@ -86,8 +86,8 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <argument
             android:name="lesson"
+            android:defaultValue="@null"
             app:argType="dev.hawk0f.itutor.core.presentation.models.LessonUI"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
 </navigation>

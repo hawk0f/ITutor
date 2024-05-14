@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/authFragment"
         android:name="dev.hawk0f.itutor.features.auth.presentation.ui.AuthFragment"
-        android:label="Авторизация"
+        android:label="@string/auth"
         tools:layout="@layout/fragment_auth">
         <action
             android:id="@+id/action_authFragment_to_registerFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="dev.hawk0f.itutor.features.register.presentation.ui.RegisterFragment"
-        android:label="Регистрация"
+        android:label="@string/reg"
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_mainContentFragment"
@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/mainContentFragment"
         android:name="dev.hawk0f.itutor.features.maincontent.MainContentFragment"
-        tools:layout="@layout/fragment_main_content" >
+        tools:layout="@layout/fragment_main_content">
         <action
             android:id="@+id/action_mainContentFragment_to_authFragment"
             app:destination="@id/authFragment"

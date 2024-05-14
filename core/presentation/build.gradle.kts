@@ -45,6 +45,12 @@ dependencies {
     api(libs.androidx.core)
     api(libs.androidx.core.splashscreen)
 
+    // Shimmer
+    api(libs.shimmer)
+
+    // LiveData
+    api(libs.androidx.lifecycle.livedata)
+
     // Activity
     api(libs.androidx.activity)
 
