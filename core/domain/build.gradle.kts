@@ -17,4 +17,5 @@ dependencies {
 
     // Javax Inject
     api(libs.javax.inject)
+    implementation(libs.androidx.annotation.jvm)
 }

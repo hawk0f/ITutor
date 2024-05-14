@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.hawk0f.itutor.core.data.apiservices.LessonService
+import dev.hawk0f.itutor.core.data.apiservices.NoteService
 import dev.hawk0f.itutor.core.data.apiservices.PaymentService
 import dev.hawk0f.itutor.core.data.apiservices.StudentService
 import dev.hawk0f.itutor.core.data.apiservices.SubjectService
@@ -18,6 +19,8 @@ import dev.hawk0f.itutor.features.lessons.data.repositories.LessonRepositoryImpl
 import dev.hawk0f.itutor.features.lessons.data.repositories.SubjectRepositoryImpl
 import dev.hawk0f.itutor.features.lessons.domain.repositories.LessonRepository
 import dev.hawk0f.itutor.features.lessons.domain.repositories.SubjectRepository
+import dev.hawk0f.itutor.features.notes.domain.repositories.NoteRepository
+import dev.hawk0f.itutor.features.notes.data.repositories.NoteRepositoryImpl
 import dev.hawk0f.itutor.features.register.data.repositories.UserRegisterRepositoryImpl
 import dev.hawk0f.itutor.features.register.domain.repositories.UserRegisterRepository
 import dev.hawk0f.itutor.features.students.data.repositories.StudentsRepositoryImpl
@@ -77,6 +80,15 @@ object DataModule
     @Provides
     fun providePaymentService(client: NetworkClient) = client.provideApiService<PaymentService>()
 
+    //Notes
+    @Singleton
+    @Provides
+    fun provideNoteService(client: NetworkClient) = client.provideApiService<NoteService>()
+
+    @Singleton
+    @Provides
+    fun provideNoteRepository(service: NoteService): NoteRepository = NoteRepositoryImpl(service)
+    
     //Network Client
     @Singleton
     @Provides

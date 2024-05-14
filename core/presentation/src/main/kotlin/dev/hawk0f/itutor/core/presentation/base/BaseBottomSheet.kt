@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -19,10 +18,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import dev.hawk0f.itutor.core.domain.NetworkError
+import dev.hawk0f.itutor.core.presentation.R
 import dev.hawk0f.itutor.core.presentation.UIState
 import dev.hawk0f.itutor.core.presentation.extensions.launchAndCollectIn
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import kotlinx.coroutines.flow.StateFlow
+
+private const val COLLAPSED_HEIGHT = 700
 
 abstract class BaseBottomSheet<ViewModel : BaseViewModel, Binding : ViewBinding>(@LayoutRes private val layoutId: Int) : BottomSheetDialogFragment()
 {
@@ -32,6 +34,7 @@ abstract class BaseBottomSheet<ViewModel : BaseViewModel, Binding : ViewBinding>
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog
     {
         val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.isDraggable(false)
         //dialog.setOnShowListener { setupBottomSheetBackgroundTransparent(it) }
         return dialog
     }
@@ -43,7 +46,7 @@ abstract class BaseBottomSheet<ViewModel : BaseViewModel, Binding : ViewBinding>
         bottomSheet.setBackgroundColor(Color.TRANSPARENT)
     }
 
-    protected fun Dialog.isDraggable(isDraggable: Boolean)
+    private fun Dialog.isDraggable(isDraggable: Boolean)
     {
         setCanceledOnTouchOutside(isDraggable)
         setOnShowListener { setupDraggable(it, isDraggable) }
@@ -56,7 +59,7 @@ abstract class BaseBottomSheet<ViewModel : BaseViewModel, Binding : ViewBinding>
     {
         val bottomSheetDialog = dialogInterface as BottomSheetDialog
         val bottomSheet = bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) ?: return
-        bottomSheet.setBackgroundColor(Color.TRANSPARENT)
+        //bottomSheet.setBackgroundColor(Color.TRANSPARENT)
         val behavior: BottomSheetBehavior<*> = BottomSheetBehavior.from(bottomSheet)
         behavior.isDraggable = isDraggable
     }
@@ -90,6 +93,22 @@ abstract class BaseBottomSheet<ViewModel : BaseViewModel, Binding : ViewBinding>
 
     protected open fun setupSubscribers()
     {
+    }
+
+    override fun onStart()
+    {
+        super.onStart()
+
+        val density = requireContext().resources.displayMetrics.density
+
+        dialog?.let {
+            // Находим сам bottomSheet и достаём из него Behaviour
+            val bottomSheet = it.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            val behavior = BottomSheetBehavior.from(bottomSheet)
+
+            // Выставляем высоту для состояния collapsed и выставляем состояние collapsed
+            behavior.peekHeight = (COLLAPSED_HEIGHT * density).toInt()
+        }
     }
 
     /**
@@ -160,21 +179,14 @@ abstract class BaseBottomSheet<ViewModel : BaseViewModel, Binding : ViewBinding>
      */
     private fun NetworkError.setupApiErrors() = when (this)
     {
-        is NetworkError.Timeout ->
-        {
-            showToastLong("Timeout")
-        }
-
-        is NetworkError.Unexpected ->
-        {
-            showToastLong(this.message)
-            Log.e("Tag", this.message)
-        }
-
         is NetworkError.Api ->
         {
-            showToastLong(this.message)
-            Log.e("Tag", this.message)
+            showToastLong(stringRes)
+        }
+
+        else ->
+        {
+            showToastLong(R.string.server_connection_error)
         }
     }
 }

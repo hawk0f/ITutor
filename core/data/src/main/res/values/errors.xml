@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //User
+    <string name="no_user_with_this_email_and_password">No user exists with this email and password</string>
+    <string name="user_with_this_email_already_exist">User with this email is already exist</string>
+    <string name="error_get_user_data">Error receiving user data</string>
+    <string name="error_user_auth">Error auth user</string>
+    <string name="error_user_register">Error register user</string>
+    <string name="error_user_update">Error updating user</string>
+    <string name="error_user_delete">Error deleting user</string>
+
+    //Lesson
+    <string name="lesson_already_exist">Lesson with this data is already exist</string>
+    <string name="error_get_lessons_data">Error receiving lessons data</string>
+    <string name="error_get_lesson_data">Error receiving lesson data</string>
+    <string name="error_get_lesson_students_data">Error receiving students in lesson data</string>
+    <string name="error_lesson_add">Error adding session</string>
+    <string name="error_lesson_update">Error updating session</string>
+    <string name="error_lesson_delete">Error deleting session</string>
+
+    //Student
+    <string name="student_already_exist">Student with this data is already exist</string>
+    <string name="error_get_students_data">Error receiving students data</string>
+    <string name="error_get_student_data">Error receiving student data</string>
+    <string name="error_student_add">Error adding student</string>
+    <string name="error_student_update">Error updating student</string>
+    <string name="error_student_delete">Error deleting student</string>
+
+    //Note
+    <string name="note_already_exist">Note with this data is already exist</string>
+    <string name="error_get_notes_data">Error receiving notes data</string>
+    <string name="error_get_note_data">Error receiving note data</string>
+    <string name="error_note_add">Error adding note</string>
+    <string name="error_note_update">Error updating note</string>
+    <string name="error_note_delete">Error deleting note</string>
+
+    //Payment
+    <string name="error_get_payments_data">Error receiving payments data</string>
+    <string name="error_payment_update">Error updating payment</string>
+
+    //Subject
+    <string name="error_get_subjects">Error receiving subjects</string>
+
+</resources>

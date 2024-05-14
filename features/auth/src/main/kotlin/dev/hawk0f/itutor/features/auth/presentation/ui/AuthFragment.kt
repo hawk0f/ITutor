@@ -54,7 +54,7 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     private fun subscribeToAuth() = with(binding) {
         viewModel.authState.collectAsUIState(state = {
             hideKeyboard()
-            it.setupViewVisibility(group, loader, false)
+            it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
             CurrentUser.setUserId(it.id)
             showToastLong("Добро пожаловать, ${it.name}")

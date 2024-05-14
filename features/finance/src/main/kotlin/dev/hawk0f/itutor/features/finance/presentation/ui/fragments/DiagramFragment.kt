@@ -1,6 +1,7 @@
 package dev.hawk0f.itutor.features.finance.presentation.ui.fragments
 
 import android.graphics.Color
+import android.view.View
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.mikephil.charting.components.Legend
@@ -13,6 +14,7 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.extensions.parentLoader
 import dev.hawk0f.itutor.core.presentation.models.PaymentUI
 import dev.hawk0f.itutor.features.finance.R
 import dev.hawk0f.itutor.features.finance.databinding.FragmentDiagramBinding
@@ -91,13 +93,14 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
 
     private fun subscribeToPayments() = with(binding) {
         viewModel.paymentState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
+            it.setupViewVisibilityLinear(group, parentLoader(R.id.loader))
         }, onSuccess = {
             buildMpChart(it)
         })
     }
 
     private fun buildMpChart(payments: List<PaymentUI>) = with(binding) {
+        chart.visibility = View.VISIBLE
         val groupSpace = 0.04f
         val barSpace = 0.15f
         val barWidth = 0.1f

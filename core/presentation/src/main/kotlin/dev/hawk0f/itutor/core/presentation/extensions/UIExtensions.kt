@@ -4,8 +4,10 @@ import android.app.Activity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import com.google.android.material.progressindicator.LinearProgressIndicator
 
 /**
  * Fast show [Toast]
@@ -16,6 +18,8 @@ fun Fragment.showToastShort(text: String)
 {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 }
+
+fun Fragment.parentLoader(@IdRes loaderId: Int): LinearProgressIndicator = requireParentFragment().requireView().findViewById(loaderId)
 
 /**
  * Fast show [Toast]

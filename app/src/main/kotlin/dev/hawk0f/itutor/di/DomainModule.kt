@@ -19,6 +19,12 @@ import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchLessonsUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchSubjectsUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.GetLessonByIdUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.UpdateLessonUseCase
+import dev.hawk0f.itutor.features.notes.domain.repositories.NoteRepository
+import dev.hawk0f.itutor.features.notes.domain.usecases.AddNoteUseCase
+import dev.hawk0f.itutor.features.notes.domain.usecases.DeleteNoteUseCase
+import dev.hawk0f.itutor.features.notes.domain.usecases.FetchNotesUseCase
+import dev.hawk0f.itutor.features.notes.domain.usecases.GetNoteByIdUseCase
+import dev.hawk0f.itutor.features.notes.domain.usecases.UpdateNoteUseCase
 import dev.hawk0f.itutor.features.register.domain.usecases.RegisterUserUseCase
 import dev.hawk0f.itutor.features.register.domain.repositories.UserRegisterRepository
 import dev.hawk0f.itutor.features.students.domain.repositories.StudentsRepository
@@ -87,4 +93,20 @@ object DomainModule
 
     @Provides
     fun provideUpdatePaymentUseCase(repository: PaymentRepository) = UpdatePaymentUseCase(repository)
+
+    //Notes
+    @Provides
+    fun provideFetchNotesUseCase(repository: NoteRepository) = FetchNotesUseCase(repository)
+
+    @Provides
+    fun provideGetNoteByIdUseCase(repository: NoteRepository) = GetNoteByIdUseCase(repository)
+
+    @Provides
+    fun provideAddNoteUseCase(repository: NoteRepository) = AddNoteUseCase(repository)
+
+    @Provides
+    fun provideUpdateNoteUseCase(repository: NoteRepository) = UpdateNoteUseCase(repository)
+
+    @Provides
+    fun provideDeleteNoteUseCase(repository: NoteRepository) = DeleteNoteUseCase(repository)
 }

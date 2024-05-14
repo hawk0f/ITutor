@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //User
+    <string name="no_user_with_this_email_and_password">Пользователя с такой почтой и паролем не существует</string>
+    <string name="user_with_this_email_already_exist">Пользователь с такой почтой уже существует</string>
+    <string name="error_get_user_data">Ошибка получения данных о пользователе</string>
+    <string name="error_user_auth">Ошибка авторизации пользователя</string>
+    <string name="error_user_register">Ошибка при регистрации пользователя</string>
+    <string name="error_user_update">Ошибка при обновлении пользователя</string>
+    <string name="error_user_delete">Ошибка при удалении пользователя</string>
+
+    //Lesson
+    <string name="lesson_already_exist">Занятие с такими данными уже существует</string>
+    <string name="error_get_lessons_data">Ошибка получения данных о занятиях</string>
+    <string name="error_get_lesson_data">Ошибка получения данных о занятии</string>
+    <string name="error_get_lesson_students_data">Ошибка получения данных об учениках в занятии</string>
+    <string name="error_lesson_add">Ошибка при добавлении занятия</string>
+    <string name="error_lesson_update">Ошибка при обновлении занятия</string>
+    <string name="error_lesson_delete">Ошибка при удалении занятия</string>
+
+    //Student
+    <string name="student_already_exist">Ученик с такими данными уже существует</string>
+    <string name="error_get_students_data">Ошибка получения данных об учениках</string>
+    <string name="error_get_student_data">Ошибка получения данных об ученике</string>
+    <string name="error_student_add">Ошибка при добавлении ученика</string>
+    <string name="error_student_update">Ошибка при обновлении ученика</string>
+    <string name="error_student_delete">Ошибка при удалении ученика</string>
+
+    //Note
+    <string name="note_already_exist">Заметка с такими данными уже существует</string>
+    <string name="error_get_notes_data">Ошибка получения данных о заметках</string>
+    <string name="error_get_note_data">Ошибка получения данных о заметке</string>
+    <string name="error_note_add">Ошибка при добавлении заметки</string>
+    <string name="error_note_update">Ошибка при обновлении заметки</string>
+    <string name="error_note_delete">Ошибка при удалении заметки</string>
+
+    //Payment
+    <string name="error_get_payments_data">Ошибка получения данных о платежах</string>
+    <string name="error_payment_update">Ошибка при обновлении платежа</string>
+
+    //Subject
+    <string name="error_get_subjects">Ошибка получения предметов</string>
+
+</resources>

@@ -60,7 +60,7 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
 
     private fun subscribeToStudent() = with(binding) {
         viewModel.studentState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
+            it.setupViewVisibilityCircular(group, loader)
         }, onSuccess = {
             viewModel.setStudent(it)
             setupViewModel()
@@ -69,7 +69,7 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
 
     private fun subscribeToUpdate() = with(binding) {
         viewModel.updateState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader, false)
+            it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
             showToastLong("Успешно обновлено")
             findNavController().popBackStack()

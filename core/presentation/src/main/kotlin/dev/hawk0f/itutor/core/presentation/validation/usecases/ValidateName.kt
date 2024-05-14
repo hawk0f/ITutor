@@ -17,11 +17,6 @@ class ValidateName(private val context: Context) : Validator
                 ValidationResult(isSuccessful = false, context.getString(R.string.field_must_be_filled))
             }
 
-            text.matches(Regex(".*\\p{InCyrillic}.*")) ->
-            {
-                ValidationResult(isSuccessful = false, context.getString(R.string.write_in_latin))
-            }
-
             !text.matches(Regex("^[\\p{L} ]+$")) ->
             {
                 ValidationResult(isSuccessful = false, context.getString(R.string.incorrect_name))

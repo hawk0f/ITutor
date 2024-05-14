@@ -41,7 +41,7 @@ class AddStudentFragment : BaseFragment<AddStudentViewModel, FragmentAddStudentB
     private fun subscribeToAdd() = with(binding)
     {
         viewModel.addState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader, false)
+            it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
             showToastLong("Успешное добавление")
             findNavController().popBackStack()

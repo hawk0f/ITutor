@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="field_must_be_filled">Поле должно быть заполнено</string>
-    <string name="invalid_email">Неправильный адрес электронной почты</string>
-    <string name="incorrect_name">Некорректное имя</string>
-    <string name="write_in_latin">Напишите на латинице: a-Z</string>
-    <string name="name_must_contain_at_least_2_characters">Имя должно содержать минимум 2 символа</string>
-    <string name="complete_your_phone_number">Допишите номер телефона до конца</string>
-    <string name="password_do_not_match">Пароли не совпадают</string>
-    <string name="password_must_not_be_less_than_6_characters">Пароль не должен быть меньше 6 символов</string>
+    <string name="field_must_be_filled">Field must be filled</string>
+
+    <string name="invalid_email">Invalid email address</string>
+
+    <string name="incorrect_name">Incorrect name</string>
+    <string name="name_must_contain_at_least_2_characters">Name must contain at least 2 characters</string>
+
+    <string name="complete_your_phone_number">Complete your phone number</string>
+
+    <string name="password_do_not_match">Passwords do not match</string>
+    <string name="password_must_not_be_less_than_6_characters">Password must be at least 6 characters long</string>
+
+    <string name="server_connection_error">Server connection error</string>
 
 </resources>

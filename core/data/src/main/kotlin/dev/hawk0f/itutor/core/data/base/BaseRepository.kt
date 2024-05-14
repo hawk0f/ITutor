@@ -1,8 +1,8 @@
 package dev.hawk0f.itutor.core.data.base
 
 import android.util.Log
-import android.webkit.MimeTypeMap
 import dev.hawk0f.itutor.core.data.BuildConfig
+import dev.hawk0f.itutor.core.data.R
 import dev.hawk0f.itutor.core.data.utils.DataMapper
 import dev.hawk0f.itutor.core.data.utils.jsonClient
 import dev.hawk0f.itutor.core.domain.Either
@@ -12,12 +12,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
-import java.io.File
 import java.io.InterruptedIOException
 
 /**
@@ -87,7 +83,7 @@ abstract class BaseRepository
 
                 else ->
                 {
-                    emit(Either.Left(NetworkError.Api(it.errorBody().toApiError())))
+                    emit(Either.Left(NetworkError.Api(R.string::class.java.getDeclaredField(it.errorBody()!!.string()).getInt(null))))
                 }
             }
         }
@@ -101,12 +97,12 @@ abstract class BaseRepository
 
             else ->
             {
-                val message = exception.localizedMessage ?: "Error Occurred!"
+                val message = exception.localizedMessage
                 if (BuildConfig.DEBUG)
                 {
-                    Log.d(this@BaseRepository.javaClass.simpleName, message)
+                    Log.d(this@BaseRepository.javaClass.simpleName, message ?: "Error occured!")
                 }
-                emit(Either.Left(NetworkError.Unexpected(message)))
+                emit(Either.Left(NetworkError.Unexpected))
             }
         }
     }

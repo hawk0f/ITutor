@@ -1,7 +1,6 @@
 package dev.hawk0f.itutor.core.presentation.base
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.Group
@@ -10,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import dev.hawk0f.itutor.core.domain.NetworkError
+import dev.hawk0f.itutor.core.presentation.R
 import dev.hawk0f.itutor.core.presentation.UIState
 import dev.hawk0f.itutor.core.presentation.extensions.launchAndCollectIn
 import dev.hawk0f.itutor.core.presentation.extensions.screenInputs
@@ -33,8 +34,8 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewBinding>(@L
 
         initialize()
         setupListeners()
-        setupRequests()
         setupSubscribers()
+        setupRequests()
     }
 
     protected open fun initialize()
@@ -94,7 +95,34 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewBinding>(@L
      *
      * @param showViewIfSuccess whether to show views if the request is successful
      */
-    protected fun <T> UIState<T>.setupViewVisibility(group: Group, loader: CircularProgressIndicator, showViewIfSuccess: Boolean = true)
+    protected fun <T> UIState<T>.setupViewVisibilityCircular(group: Group, loader: CircularProgressIndicator, showViewIfSuccess: Boolean = true)
+    {
+        fun showLoader(isVisible: Boolean)
+        {
+            group.isVisible = !isVisible
+            loader.isVisible = isVisible
+        }
+
+        when (this)
+        {
+            is UIState.Idle ->
+            {
+            }
+
+            is UIState.Loading -> showLoader(true)
+            is UIState.Error -> showLoader(false)
+            is UIState.Success -> showLoader(!showViewIfSuccess)
+        }
+    }
+
+    /**
+     * Setup views visibility depending on [UIState] states.
+     *
+     * @receiver [UIState]
+     *
+     * @param showViewIfSuccess whether to show views if the request is successful
+     */
+    protected fun <T> UIState<T>.setupViewVisibilityLinear(group: Group, loader: LinearProgressIndicator, showViewIfSuccess: Boolean = true)
     {
         fun showLoader(isVisible: Boolean)
         {
@@ -121,21 +149,14 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewBinding>(@L
      */
     private fun NetworkError.setupApiErrors() = when (this)
     {
-        is NetworkError.Timeout ->
-        {
-            showToastLong("Timeout")
-        }
-
-        is NetworkError.Unexpected ->
-        {
-            showToastLong(this.message)
-            Log.e("Tag", this.message)
-        }
-
         is NetworkError.Api ->
         {
-            showToastLong(this.message)
-            Log.e("Tag", this.message)
+            showToastLong(stringRes)
+        }
+
+        else ->
+        {
+            showToastLong(R.string.server_connection_error)
         }
     }
 }

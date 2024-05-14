@@ -54,7 +54,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
     private fun subscribeToReg() = with(binding) {
         viewModel.regState.collectAsUIState(state = {
             hideKeyboard()
-            it.setupViewVisibility(group, loader, false)
+            it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
             CurrentUser.setUserId(it.id)
             showToastLong("Добро пожаловать, ${it.name}")

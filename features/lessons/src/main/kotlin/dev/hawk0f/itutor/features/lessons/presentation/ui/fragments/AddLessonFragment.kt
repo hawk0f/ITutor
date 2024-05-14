@@ -91,8 +91,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     private fun subscribeToSubjects() = with(binding) {
         viewModel.subjectState.collectAsUIState {
-            val adapter =
-                ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
+            val adapter = ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
             subjectDropDown.setAdapter(adapter)
             subjectDropDown.setOnItemClickListener { _, _, position, _ ->
                 viewModel.setSubjectId(it[position].id)
@@ -102,7 +101,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     private fun subscribeToAdd() = with(binding) {
         viewModel.addState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader, false)
+            it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
             showToastLong("Добавлен")
             findNavController().popBackStack()
@@ -121,7 +120,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     private fun subscribeToLessonStudents() = with(binding) {
         viewModel.lessonStudentsState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
+            it.setupViewVisibilityCircular(group, loader)
         }, onSuccess = { list ->
             viewModel.allStudents.clear()
             viewModel.allStudents.addAll(list)

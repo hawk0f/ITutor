@@ -9,4 +9,5 @@
         android:id="@+id/financeFragment"
         android:name="dev.hawk0f.itutor.features.finance.presentation.ui.fragments.FinanceFragment"
         android:label="Финансы" />
+    <include app:graph="@navigation/notes_nav_graph" />
 </navigation>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="success_data_updated">Данные успешно обновлены</string>
+
+    <string name="success_lesson_added">Занятие успешно добавлено</string>
+    <string name="success_lesson_updated">Занятие успешно обновлено</string>
+    <string name="success_lesson_deleted">Занятие успешно удалено</string>
+
+    <string name="success_student_added">Ученик успешно добавлен</string>
+    <string name="success_student_updated">Ученик успешно обновлён</string>
+    <string name="success_student_deleted">Ученик успешно удалён</string>
+
+    <string name="success_note_added">Заметка успешно добавлена</string>
+    <string name="success_note_updated">Заметка успешно обновлена</string>
+    <string name="success_note_deleted">Заметка успешно удалена</string>
+
+    <string name="success_transaction_updated">Транзакция успешно обновлена</string>
+
+</resources>

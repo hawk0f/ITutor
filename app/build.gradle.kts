@@ -72,6 +72,7 @@ dependencies {
     implementation(project(":features:mainContent"))
     implementation(project(":features:lessons"))
     implementation(project(":features:finance"))
+    implementation(project(":features:notes"))
 
     implementation(project(":navigation"))
 

@@ -1,9 +1,6 @@
 package dev.hawk0f.itutor.features.students.presentation.ui.fragments
 
-import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -14,8 +11,6 @@ import dev.hawk0f.itutor.features.students.R
 import dev.hawk0f.itutor.features.students.databinding.FragmentStudentBinding
 import dev.hawk0f.itutor.features.students.presentation.ui.adapters.StudentAdapter
 import dev.hawk0f.itutor.features.students.presentation.ui.viewmodels.StudentsViewModel
-import dev.hawk0f.itutor.navigation.R.id.action_studentsFragment_to_addStudentFragment
-import dev.hawk0f.itutor.navigation.R.id.action_studentsFragment_to_editStudentFragment
 import dev.hawk0f.itutor.navigation.StudentFragmentDirections
 
 @AndroidEntryPoint
@@ -71,14 +66,17 @@ class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(
 
     private fun subscribeToStudents() = with(binding) {
         viewModel.studentState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
+            it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = {
             studentAdapter.submitList(it)
         })
     }
 
-    private fun subscribeToDelete()
-    {
-        viewModel.deleteState.collectAsUIState { fetchStudents() }
+    private fun subscribeToDelete() = with(binding) {
+        viewModel.deleteState.collectAsUIState(state = {
+            it.setupViewVisibilityLinear(group, loader, false)
+        }, onSuccess = {
+            fetchStudents()
+        })
     }
 }

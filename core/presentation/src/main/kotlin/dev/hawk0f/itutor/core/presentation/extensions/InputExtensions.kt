@@ -168,11 +168,6 @@ fun TextInputLayout.setupNameValidator() = with(editText as TextInputEditText) {
                     this@setupNameValidator.error = context.getString(R.string.field_must_be_filled)
                 }
 
-                this.matches(Regex(".*\\p{InCyrillic}.*")) ->
-                {
-                    this@setupNameValidator.error = context.getString(R.string.write_in_latin)
-                }
-
                 !this.matches(Regex("^[\\p{L} ]+$")) ->
                 {
                     this@setupNameValidator.error = context.getString(R.string.incorrect_name)

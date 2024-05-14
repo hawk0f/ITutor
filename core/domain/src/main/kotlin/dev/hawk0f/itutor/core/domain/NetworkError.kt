@@ -1,5 +1,7 @@
 package dev.hawk0f.itutor.core.domain
 
+import androidx.annotation.StringRes
+
 /**
  * Wrapper class for network errors
  */
@@ -11,12 +13,12 @@ sealed class NetworkError {
     data object Timeout : NetworkError()
 
     /**
-     * State for default errors from server size
+     * State for default errors from server side
      */
-    class Api(val message: String) : NetworkError()
+    class Api(@StringRes val stringRes: Int) : NetworkError()
 
     /**
      * State for unexpected exceptions, for example «HTTP code - 500» or exceptions when mapping models
      */
-    class Unexpected(val message: String) : NetworkError()
+    data object Unexpected : NetworkError()
 }

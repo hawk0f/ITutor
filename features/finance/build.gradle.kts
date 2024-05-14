@@ -46,7 +46,6 @@ dependencies {
 
     implementation(project(":navigation"))
 
-    implementation(libs.any.chart)
     implementation(libs.mp.android.chart)
 
     //Hilt

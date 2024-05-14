@@ -112,7 +112,7 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
 
     private fun subscribeToLesson() = with(binding) {
         viewModel.lessonState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
+            it.setupViewVisibilityCircular(group, loader)
         }, onSuccess = { lesson ->
             viewModel.setLesson(lesson)
             setupViewModel()
@@ -132,7 +132,7 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
 
     private fun subscribeToUpdate() = with(binding) {
         viewModel.updateState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader, false)
+            it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
             showToastLong("Обновлён")
             findNavController().popBackStack()

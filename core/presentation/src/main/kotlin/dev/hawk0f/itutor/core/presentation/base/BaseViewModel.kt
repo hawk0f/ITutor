@@ -30,7 +30,7 @@ abstract class BaseViewModel : ViewModel()
      *
      * @receiver [collectEither]
      */
-    protected fun <T, S> Flow<Either<NetworkError, T>>.collectNetworkRequestWithMapping(state: MutableStateFlow<UIState<S>>, resetStateAfterCollect: Boolean = false, mapToUI: (T) -> S) = collectEither(state, resetStateAfterCollect) {
+    protected fun <T, S> Flow<Either<NetworkError, T>>.collectNetworkRequestWithMapping(state: MutableStateFlow<UIState<S>>, resetStateAfterCollect: Boolean = true, mapToUI: (T) -> S) = collectEither(state, resetStateAfterCollect) {
         UIState.Success(mapToUI(it))
     }
 
@@ -58,10 +58,11 @@ abstract class BaseViewModel : ViewModel()
                     is Either.Right -> state.value = successful(it.value)
                 }
             }
-            if (resetStateAfterCollect)
-            {
-                state.reset()
-            }
+        }
+
+        if (resetStateAfterCollect)
+        {
+            state.reset()
         }
     }
 }

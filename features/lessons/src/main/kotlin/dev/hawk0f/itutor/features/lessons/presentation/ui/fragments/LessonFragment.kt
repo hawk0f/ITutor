@@ -66,14 +66,17 @@ class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.la
 
     private fun subscribeToLessons() = with(binding) {
         viewModel.lessonState.collectAsUIState(state = {
-            it.setupViewVisibility(group, loader)
+            it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = { list ->
             dateLessonsAdapter.submitList(list)
         })
     }
 
-    private fun subscribeToDelete()
-    {
-        viewModel.deleteState.collectAsUIState { fetchLessons() }
+    private fun subscribeToDelete() = with(binding) {
+        viewModel.deleteState.collectAsUIState(state = {
+            it.setupViewVisibilityLinear(group, loader, false)
+        }, onSuccess = {
+            fetchLessons()
+        })
     }
 }

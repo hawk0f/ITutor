@@ -2,7 +2,7 @@
 agp = "8.4.0"
 kotlin = "2.0.0-RC2"
 kotlinx-serialization = "1.6.3"
-coroutines = "1.8.1-Beta"
+coroutines = "1.8.1"
 material = "1.12.0"
 activity = "1.9.0"
 fragment = "1.7.0"
@@ -17,8 +17,12 @@ retrofit = "2.11.0"
 okHttp = "5.0.0-alpha.14"
 vbpd = "1.5.9"
 dagger = "2.51.1"
-any-chart = "1.1.5"
 mp-android-chart = "3.1.0"
+annotationJvm = "1.7.1"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
 
 [libraries]
 # Kotlin
@@ -44,7 +48,6 @@ androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 
 # Chart Libraries
-any-chart = { group = "com.github.AnyChart", name = "AnyChart-Android", version.ref = "any-chart" }
 mp-android-chart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mp-android-chart" }
 
 # Lifecycle
@@ -76,6 +79,11 @@ retrofit-converter-kotlinx-serialization = { module = "com.squareup.retrofit2:co
 okHttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okHttp" }
 okHttp = { module = "com.squareup.okhttp3:okhttp" }
 okHttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
+androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotationJvm" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
 [plugins]
 # AGP - Android Gradle Plugin
