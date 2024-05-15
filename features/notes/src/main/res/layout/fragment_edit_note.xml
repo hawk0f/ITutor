@@ -43,7 +43,7 @@
             android:id="@+id/text_ed"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.6"
             android:background="@color/Transparent"
             android:gravity="top|start"
             android:hint="@string/start_note_hear"
@@ -55,7 +55,6 @@
             android:id="@+id/btn_update_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewmodel.updateNote()}"
             android:text="@string/save_changes"
             android:textSize="16sp" />
 

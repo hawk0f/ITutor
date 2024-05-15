@@ -2,6 +2,7 @@ package dev.hawk0f.itutor.core.presentation.extensions
 
 import android.util.Patterns
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.textfield.TextInputEditText
@@ -13,7 +14,7 @@ import dev.hawk0f.itutor.core.presentation.validation.Validator
 /**
  * Get text with [toString] & [trim] from Input
  */
-val TextInputEditText.fullText: String get() = this.text.toString().trim()
+val EditText.fullText: String get() = this.text.toString().trim()
 
 /**
  * @receiver [ViewBinding]
@@ -73,7 +74,7 @@ fun Fragment.validateInputs(vararg validatorWithInput: Pair<Validator, TextInput
     val validationResultsPair = validatorWithInput.map {
         val validator = it.first
         val inputLayout = it.second
-        val inputEdit = (inputLayout.editText as TextInputEditText)
+        val inputEdit = (inputLayout.editText as EditText)
 
         Pair(validator.invoke(inputEdit.fullText), inputLayout)
     }
@@ -101,7 +102,7 @@ fun Fragment.validateInputs(vararg validatorWithInput: Pair<Validator, TextInput
     {
         // If no error, clear errors and execute success function
         validationResultsPair.map {
-            it.second.isErrorEnabled = false
+            it.second.error = null
         }
         hideKeyboard()
         successful()
@@ -118,8 +119,7 @@ private fun hasError(vararg validationResults: ValidationResult) = validationRes
     !it.isSuccessful
 }
 
-/** region Validators */
-fun TextInputLayout.setupIsEmptyValidator() = with(editText as TextInputEditText) {
+fun TextInputLayout.setupIsEmptyValidator() = with(editText as EditText) {
     setOnFocusChangeListener { _, hasFocus ->
         when
         {
@@ -130,7 +130,7 @@ fun TextInputLayout.setupIsEmptyValidator() = with(editText as TextInputEditText
 
             else ->
             {
-                this@setupIsEmptyValidator.isErrorEnabled = false
+                this@setupIsEmptyValidator.error = null
             }
         }
     }
@@ -152,7 +152,7 @@ fun TextInputLayout.setupEmailValidator() = with(editText as TextInputEditText) 
 
             else ->
             {
-                this@setupEmailValidator.isErrorEnabled = false
+                this@setupEmailValidator.error = null
             }
         }
     }
@@ -181,8 +181,7 @@ fun TextInputLayout.setupNameValidator() = with(editText as TextInputEditText) {
         }
         else
         {
-            this@setupNameValidator.isHelperTextEnabled = false
-            this@setupNameValidator.isErrorEnabled = false
+            this@setupNameValidator.error = null
         }
     }
 }
@@ -196,19 +195,19 @@ fun TextInputLayout.setupPhoneValidator() = with(editText as TextInputEditText) 
                 this@setupPhoneValidator.error = context.getString(R.string.field_must_be_filled)
             }
 
-            !hasFocus && fullText.length < 18 ->
+            !hasFocus && fullText.length < 16 ->
             {
                 this@setupPhoneValidator.error = context.getString(R.string.complete_your_phone_number)
             }
 
             hasFocus ->
             {
-                this@setupPhoneValidator.isErrorEnabled = false
+                this@setupPhoneValidator.error = null
             }
 
             else ->
             {
-                this@setupPhoneValidator.isErrorEnabled = false
+                this@setupPhoneValidator.error = null
             }
         }
     }
@@ -230,14 +229,13 @@ fun TextInputLayout.setupPasswordValidator() = with(editText as TextInputEditTex
 
             hasFocus ->
             {
-                this@setupPasswordValidator.isErrorEnabled = false
+                this@setupPasswordValidator.error = null
             }
 
             else ->
             {
-                this@setupPasswordValidator.isErrorEnabled = false
+                this@setupPasswordValidator.error = null
             }
         }
     }
 }
-// endregion

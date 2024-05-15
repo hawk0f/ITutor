@@ -16,6 +16,7 @@ import dev.hawk0f.itutor.core.presentation.models.LessonUI
 import dev.hawk0f.itutor.core.presentation.models.SubjectUI
 import dev.hawk0f.itutor.core.presentation.models.toUI
 import dev.hawk0f.itutor.core.presentation.models.toUi
+import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateIsEmpty
 import dev.hawk0f.itutor.features.lessons.domain.usecases.AddLessonUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchLessonStudentsUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchSubjectsUseCase
@@ -26,7 +27,7 @@ import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 
 @HiltViewModel
-class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLessonUseCase, private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val currentUser: CurrentUser) : BaseViewModel()
+class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLessonUseCase, private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val currentUser: CurrentUser, val validateIsEmpty: ValidateIsEmpty) : BaseViewModel()
 {
     var parsedDate: String = LocalDate.now().parseToFormat("dd.MM.yyyy")
     var date: LocalDate = LocalDate.now()
@@ -47,9 +48,6 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
     private val _lessonStudentsState = MutableUIStateFlow<List<LessonStudentUI>>()
     val lessonStudentsState = _lessonStudentsState.asStateFlow()
 
-    private val _errorState = MutableLiveData<String?>(null)
-    val errorState: LiveData<String?> = _errorState
-
     fun fetchSubjects() = fetchSubjectsUseCase().collectNetworkRequestWithMapping(_subjectState) { list ->
         list.map { it.toUi() }
     }
@@ -61,26 +59,7 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
         }
     }
 
-    fun onLessonAdd()
-    {
-        if (studentsIds.isEmpty())
-        {
-            _errorState.value = "Выберите учеников"
-        }
-        else if (subjectId == 0)
-        {
-            _errorState.value = "Выберите предмет"
-        }
-        else
-        {
-            addLessonUseCase(LessonDTO(id = 0, date = parsedDate.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = ChronoUnit.MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = currentUser.getUserId())).collectNetworkRequest(_addState)
-        }
-    }
-
-    fun clearErrorText()
-    {
-        _errorState.value = null
-    }
+    fun addLesson() = addLessonUseCase(LessonDTO(id = 0, date = parsedDate.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = ChronoUnit.MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = currentUser.getUserId())).collectNetworkRequest(_addState)
 
     fun getStudentsIds(): MutableList<Int>
     {

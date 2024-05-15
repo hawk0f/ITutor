@@ -55,7 +55,6 @@
             android:id="@+id/btn_add_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewmodel.addNote()}"
             android:text="@string/add_note"
             android:textSize="16sp" />
 

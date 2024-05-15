@@ -8,7 +8,11 @@ import dev.hawk0f.itutor.core.domain.CurrentUser
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.hideKeyboard
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
+import dev.hawk0f.itutor.core.presentation.extensions.setupEmailValidator
+import dev.hawk0f.itutor.core.presentation.extensions.setupNameValidator
+import dev.hawk0f.itutor.core.presentation.extensions.setupPasswordValidator
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
+import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
 import dev.hawk0f.itutor.features.register.R
 import dev.hawk0f.itutor.features.register.databinding.FragmentRegisterBinding
 import dev.hawk0f.itutor.navigation.RegisterFragmentDirections
@@ -25,9 +29,13 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
         setupViewModel()
     }
 
-    private fun setupFields()
+    private fun setupFields() = with(binding)
     {
         viewModel.clearFields()
+        nameLayout.setupNameValidator()
+        surnameLayout.setupNameValidator()
+        emailLayout.setupEmailValidator()
+        passwordLayout.setupPasswordValidator()
     }
 
     private fun setupViewModel() = with(binding) {
@@ -37,12 +45,27 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
 
     override fun setupListeners()
     {
+        setupRegButtonListener()
         setupAuthButtonListener()
     }
 
     private fun setupAuthButtonListener() = with(binding) {
         btnGoToSignIn.setOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    private fun setupRegButtonListener() = with(binding)
+    {
+        btnSignUp.setOnClickListener{
+            validateInputs(
+                Pair(viewModel.validateName, nameLayout),
+                Pair(viewModel.validateName, surnameLayout),
+                Pair(viewModel.validateEmail, emailLayout),
+                Pair(viewModel.validatePassword, passwordLayout)
+            ) {
+                viewModel.registerUser()
+            }
         }
     }
 

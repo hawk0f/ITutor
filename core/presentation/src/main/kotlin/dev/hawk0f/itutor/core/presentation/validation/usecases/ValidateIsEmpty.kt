@@ -1,11 +1,13 @@
 package dev.hawk0f.itutor.core.presentation.validation.usecases
 
 import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.hawk0f.itutor.core.presentation.R
 import dev.hawk0f.itutor.core.presentation.validation.ValidationResult
 import dev.hawk0f.itutor.core.presentation.validation.Validator
+import javax.inject.Inject
 
-class ValidateIsEmpty(private val context: Context) : Validator
+class ValidateIsEmpty @Inject constructor(@ApplicationContext private val context: Context) : Validator
 {
 
     override operator fun invoke(text: String): ValidationResult

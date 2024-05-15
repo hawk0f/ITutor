@@ -16,6 +16,19 @@ class DiagramViewModel @Inject constructor(private val fetchPaymentsUseCase: Fet
     private val _paymentState = MutableUIStateFlow<List<PaymentUI>>()
     val paymentState = _paymentState.asStateFlow()
 
+    private val payments = ArrayList<PaymentUI>()
+
+    fun setPayments(newPayments: List<PaymentUI>)
+    {
+        payments.clear()
+        payments.addAll(newPayments)
+    }
+
+    fun getPayments() : List<PaymentUI>
+    {
+        return payments
+    }
+
     fun fetchPayments() = fetchPaymentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_paymentState) { list ->
         list.map { it.toUi() }
     }

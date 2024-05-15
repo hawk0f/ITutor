@@ -16,6 +16,7 @@ import dev.hawk0f.itutor.core.presentation.models.LessonUI
 import dev.hawk0f.itutor.core.presentation.models.SubjectUI
 import dev.hawk0f.itutor.core.presentation.models.toUI
 import dev.hawk0f.itutor.core.presentation.models.toUi
+import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateIsEmpty
 import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchLessonStudentsUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.FetchSubjectsUseCase
 import dev.hawk0f.itutor.features.lessons.domain.usecases.GetLessonByIdUseCase
@@ -27,7 +28,7 @@ import java.time.temporal.ChronoUnit.MINUTES
 import javax.inject.Inject
 
 @HiltViewModel
-class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val getLessonByIdUseCase: GetLessonByIdUseCase, private val updateLessonUseCase: UpdateLessonUseCase, private val currentUser: CurrentUser) : BaseViewModel()
+class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val getLessonByIdUseCase: GetLessonByIdUseCase, private val updateLessonUseCase: UpdateLessonUseCase, private val currentUser: CurrentUser, val validateIsEmpty: ValidateIsEmpty) : BaseViewModel()
 {
     private var id = 0
     var parsedDate: String = LocalDate.now().parseToFormat("dd.MM.yyyy")
@@ -53,9 +54,6 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
     private val _lessonStudentsState = MutableUIStateFlow<List<LessonStudentUI>>()
     val lessonStudentsState = _lessonStudentsState.asStateFlow()
 
-    private val _errorState = MutableLiveData<String?>(null)
-    val errorState: LiveData<String?> = _errorState
-
     fun fetchSubjects() = fetchSubjectsUseCase().collectNetworkRequestWithMapping(_subjectState) { list ->
         list.map { it.toUi() }
     }
@@ -71,26 +69,7 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
         it.toUi()
     }
 
-    fun onLessonUpdate()
-    {
-        if (studentsIds.isEmpty())
-        {
-            _errorState.value = "Выберите учеников"
-        }
-        else if (subjectId == 0)
-        {
-            _errorState.value = "Выберите предмет"
-        }
-        else
-        {
-            updateLessonUseCase(LessonDTO(id = id, date = parsedDate.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = userId)).collectNetworkRequest(_updateState)
-        }
-    }
-
-    fun clearErrorText()
-    {
-        _errorState.value = null
-    }
+    fun updateLesson() = updateLessonUseCase(LessonDTO(id = id, date = parsedDate.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = userId)).collectNetworkRequest(_updateState)
 
     fun getStudentsIds(): ArrayList<Int>
     {

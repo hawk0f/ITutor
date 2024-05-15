@@ -1,10 +1,8 @@
 package dev.hawk0f.itutor.core.presentation.extensions
 
-import android.icu.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.util.Date
 import java.util.Locale
 
 fun LocalDate.parseToFormat(formatterPattern: String): String

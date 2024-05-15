@@ -16,7 +16,9 @@ import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.core.presentation.extensions.parseToDate
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
 import dev.hawk0f.itutor.core.presentation.extensions.parseToTime
+import dev.hawk0f.itutor.core.presentation.extensions.setupIsEmptyValidator
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
+import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
 import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
 import dev.hawk0f.itutor.core.presentation.models.LessonUI
 import dev.hawk0f.itutor.features.lessons.R
@@ -49,6 +51,7 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
     {
         setupFields()
         setupRecycler()
+        setupValidators()
     }
 
     private fun setupFields()
@@ -81,6 +84,11 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
         }
     }
 
+    private fun setupValidators() = with(binding)
+    {
+        subjectLayout.setupIsEmptyValidator()
+    }
+
     override fun setupRequests()
     {
         fetchSubjects()
@@ -107,7 +115,6 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
         subscribeToSubjects()
         subscribeToLessonStudents()
         subscribeToUpdate()
-        subscribeToError()
     }
 
     private fun subscribeToLesson() = with(binding) {
@@ -139,16 +146,6 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
         })
     }
 
-    private fun subscribeToError()
-    {
-        viewModel.errorState.observe(viewLifecycleOwner) {
-            it?.let {
-                showToastLong(it)
-                viewModel.clearErrorText()
-            }
-        }
-    }
-
     private fun subscribeToLessonStudents()
     {
         viewModel.lessonStudentsState.collectAsUIState { list ->
@@ -177,6 +174,22 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
         setupDatePicker()
         setupStartTimePicker()
         setupEndTimePicker()
+        setupEditLessonButtonListener()
+    }
+
+    private fun setupEditLessonButtonListener() = with(binding) {
+        btnEditLesson.setOnClickListener {
+            validateInputs(Pair(viewModel.validateIsEmpty, subjectLayout)) {
+                if (lessonStudentsAdapter.currentList.isEmpty())
+                {
+                    showToastLong("Выберите учеников")
+                }
+                else
+                {
+                    viewModel.updateLesson()
+                }
+            }
+        }
     }
 
     private fun setupChooseStudentsButton() = with(binding) {

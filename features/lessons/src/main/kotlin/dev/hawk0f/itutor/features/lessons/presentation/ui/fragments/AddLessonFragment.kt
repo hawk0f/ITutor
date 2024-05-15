@@ -16,7 +16,9 @@ import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.core.presentation.extensions.parseToDate
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
 import dev.hawk0f.itutor.core.presentation.extensions.parseToTime
+import dev.hawk0f.itutor.core.presentation.extensions.setupIsEmptyValidator
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
+import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
 import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
 import dev.hawk0f.itutor.features.lessons.R
 import dev.hawk0f.itutor.features.lessons.databinding.FragmentAddLessonBinding
@@ -45,6 +47,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         setupFields()
         setupViewModel()
         setupRecycler()
+        setupValidators()
     }
 
     private fun setupFields()
@@ -63,6 +66,10 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
             layoutManager = LinearLayoutManager(context)
             adapter = lessonStudentsAdapter
         }
+    }
+
+    private fun setupValidators() = with(binding) {
+        subjectLayout.setupIsEmptyValidator()
     }
 
     override fun setupRequests()
@@ -86,12 +93,12 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         subscribeToSubjects()
         subscribeToLessonStudents()
         subscribeToAdd()
-        subscribeToError()
     }
 
     private fun subscribeToSubjects() = with(binding) {
         viewModel.subjectState.collectAsUIState {
-            val adapter = ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
+            val adapter =
+                ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
             subjectDropDown.setAdapter(adapter)
             subjectDropDown.setOnItemClickListener { _, _, position, _ ->
                 viewModel.setSubjectId(it[position].id)
@@ -106,16 +113,6 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
             showToastLong("Добавлен")
             findNavController().popBackStack()
         })
-    }
-
-    private fun subscribeToError()
-    {
-        viewModel.errorState.observe(viewLifecycleOwner) {
-            it?.let {
-                showToastLong(it)
-                viewModel.clearErrorText()
-            }
-        }
     }
 
     private fun subscribeToLessonStudents() = with(binding) {
@@ -147,6 +144,22 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         setupDatePicker()
         setupStartTimePicker()
         setupEndTimePicker()
+        setupAddLessonButtonListener()
+    }
+
+    private fun setupAddLessonButtonListener() = with(binding) {
+        btnAddLesson.setOnClickListener {
+            validateInputs(Pair(viewModel.validateIsEmpty, subjectLayout)) {
+                if (lessonStudentsAdapter.currentList.isEmpty())
+                {
+                    showToastLong("Выберите учеников")
+                }
+                else
+                {
+                    viewModel.addLesson()
+                }
+            }
+        }
     }
 
     private fun setupChooseStudentsButton() = with(binding) {

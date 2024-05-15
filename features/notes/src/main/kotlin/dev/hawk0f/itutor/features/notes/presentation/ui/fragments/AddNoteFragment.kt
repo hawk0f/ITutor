@@ -4,7 +4,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.string
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.extensions.fullText
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.features.notes.R
 import dev.hawk0f.itutor.features.notes.databinding.FragmentAddNoteBinding
@@ -41,8 +43,26 @@ class AddNoteFragment : BaseFragment<AddNoteViewModel, FragmentAddNoteBinding>(R
         viewModel.addState.collectAsUIState(state = {
             it.setupViewVisibilityLinear(group, loader, false)
         }, onSuccess = {
-            showToastLong("Успешное добавление")
+            showToastLong(string.success_note_added)
             findNavController().popBackStack()
         })
+    }
+
+    override fun setupListeners()
+    {
+        setupAddNoteButtonListener()
+    }
+
+    private fun setupAddNoteButtonListener() = with(binding) {
+        btnAddNote.setOnClickListener {
+            if (textEd.fullText.isEmpty())
+            {
+                showToastLong(string.fill_note_text)
+            }
+            else
+            {
+                viewModel.addNote()
+            }
+        }
     }
 }

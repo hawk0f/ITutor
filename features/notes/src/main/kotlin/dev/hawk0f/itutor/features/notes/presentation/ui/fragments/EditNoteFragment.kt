@@ -4,7 +4,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.string
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.extensions.fullText
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.features.notes.R
 import dev.hawk0f.itutor.features.notes.databinding.FragmentEditNoteBinding
@@ -69,8 +71,26 @@ class EditNoteFragment : BaseFragment<EditNoteViewModel, FragmentEditNoteBinding
         viewModel.updateState.collectAsUIState(state = {
             it.setupViewVisibilityLinear(group, loader, false)
         }, onSuccess = {
-            showToastLong("Успешно обновлена")
+            showToastLong(string.success_note_updated)
             findNavController().popBackStack()
         })
+    }
+
+    override fun setupListeners()
+    {
+        setupEditNoteButtonListener()
+    }
+
+    private fun setupEditNoteButtonListener() = with(binding) {
+        btnUpdateNote.setOnClickListener {
+            if (textEd.fullText.isEmpty())
+            {
+                showToastLong(string.fill_note_text)
+            }
+            else
+            {
+                viewModel.updateNote()
+            }
+        }
     }
 }

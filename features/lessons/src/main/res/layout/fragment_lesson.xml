@@ -32,6 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="15dp"
         android:text="@string/add_lesson"
         app:icon="@android:drawable/ic_input_add"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"

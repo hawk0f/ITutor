@@ -4,6 +4,12 @@ plugins {
 
     // Kapt
     alias(libs.plugins.kapt)
+
+    // Hilt
+    alias(libs.plugins.hilt.android)
+
+    // KSP
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -64,4 +70,8 @@ dependencies {
     // Navigation
     api(libs.androidx.navigation.fragment)
     api(libs.androidx.navigation.ui)
+
+    //Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 }

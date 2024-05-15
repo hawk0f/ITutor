@@ -133,7 +133,6 @@
                 android:id="@+id/btn_add_lesson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> viewmodel.onLessonAdd()}"
                 android:text="@string/add_lesson"
                 android:textSize="16sp" />
         </LinearLayout>

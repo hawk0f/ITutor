@@ -6,13 +6,16 @@ import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.models.StudentUI
 import dev.hawk0f.itutor.core.presentation.models.toUi
+import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateIsEmpty
+import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateName
+import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidatePhone
 import dev.hawk0f.itutor.features.students.domain.usecases.GetStudentByIdUseCase
 import dev.hawk0f.itutor.features.students.domain.usecases.UpdateStudentUseCase
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class EditStudentViewModel @Inject constructor(private val getStudentByIdUseCase: GetStudentByIdUseCase, private val updateStudentUseCase: UpdateStudentUseCase) : BaseViewModel()
+class EditStudentViewModel @Inject constructor(private val getStudentByIdUseCase: GetStudentByIdUseCase, val validateName: ValidateName, val validateIsEmpty: ValidateIsEmpty, val validatePhone: ValidatePhone, private val updateStudentUseCase: UpdateStudentUseCase) : BaseViewModel()
 {
     private var id = 0
     var name = ""
