@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.fragments.EditLessonFragment">
+        android:paddingHorizontal="10dp">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loader"
@@ -30,10 +30,10 @@
             android:id="@+id/group"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:constraint_referenced_ids="fields_container_edit" />
+            app:constraint_referenced_ids="fields_container_add" />
 
         <LinearLayout
-            android:id="@+id/fields_container_edit"
+            android:id="@+id/fields_container_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -43,10 +43,9 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/fields_container_add"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.7"
+                android:layout_weight="0.6"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -54,6 +53,7 @@
                     android:id="@+id/date_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:hint="@string/date"
                     app:hintAnimationEnabled="false">
 
@@ -66,42 +66,53 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/start_time_input_layout"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/startTime"
-                    app:hintAnimationEnabled="false">
+                    android:layout_marginBottom="5dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/start_time_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@{viewmodel.startTime}"
-                        android:textSize="16sp" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/start_time_input_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:hint="@string/startTime"
+                        app:hintAnimationEnabled="false">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/start_time_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@{viewmodel.startTime}"
+                            android:textSize="16sp" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/end_time_input_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/endTime"
-                    app:hintAnimationEnabled="false">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/end_time_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@{viewmodel.endTime}"
-                        android:textSize="16sp" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/end_time_input_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:hint="@string/endTime"
+                        app:hintAnimationEnabled="false">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/end_time_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@{viewmodel.endTime}"
+                            android:textSize="16sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                     android:id="@+id/choose_student_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/students"
                     app:icon="@android:drawable/ic_input_add" />
 
@@ -109,7 +120,7 @@
                     android:id="@+id/recycler_students"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/lesson_student_item" />
+                    tools:listitem="@layout/student_in_lesson_item" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -134,6 +145,8 @@
                 android:id="@+id/btn_edit_lesson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:padding="15dp"
                 android:text="@string/save_changes"
                 android:textSize="16sp" />
         </LinearLayout>

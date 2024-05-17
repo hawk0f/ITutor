@@ -19,7 +19,7 @@ import dev.hawk0f.itutor.core.presentation.extensions.parseToTime
 import dev.hawk0f.itutor.core.presentation.extensions.setupIsEmptyValidator
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
-import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
+import dev.hawk0f.itutor.core.presentation.models.StudentInLessonUI
 import dev.hawk0f.itutor.core.presentation.models.LessonUI
 import dev.hawk0f.itutor.features.lessons.R
 import dev.hawk0f.itutor.features.lessons.databinding.FragmentEditLessonBinding
@@ -158,7 +158,7 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
 
     private fun updateAdapterList()
     {
-        val list = ArrayList<LessonStudentUI>()
+        val list = ArrayList<StudentInLessonUI>()
         viewModel.allStudents.forEach {
             if (viewModel.getStudentsIds().contains(it.id))
             {

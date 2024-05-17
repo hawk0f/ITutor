@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.hawk0f.itutor.core.data.apiservices.LessonService
 import dev.hawk0f.itutor.core.data.apiservices.NoteService
-import dev.hawk0f.itutor.core.data.apiservices.PaymentService
+import dev.hawk0f.itutor.core.data.apiservices.LessonStudentService
 import dev.hawk0f.itutor.core.data.apiservices.StudentService
 import dev.hawk0f.itutor.core.data.apiservices.SubjectService
 import dev.hawk0f.itutor.core.data.apiservices.UserService
@@ -74,11 +74,11 @@ object DataModule
     //Payments
     @Singleton
     @Provides
-    fun providePaymentRepository(service: PaymentService): PaymentRepository = PaymentRepositoryImpl(service)
+    fun providePaymentRepository(service: LessonStudentService): PaymentRepository = PaymentRepositoryImpl(service)
 
     @Singleton
     @Provides
-    fun providePaymentService(client: NetworkClient) = client.provideApiService<PaymentService>()
+    fun providePaymentService(client: NetworkClient) = client.provideApiService<LessonStudentService>()
 
     //Notes
     @Singleton

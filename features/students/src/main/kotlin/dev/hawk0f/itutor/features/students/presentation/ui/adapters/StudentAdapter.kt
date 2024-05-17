@@ -14,13 +14,14 @@ class StudentAdapter(private val onStudentClick: (studentId: Int) -> Unit, priva
 
     override fun onBindViewHolder(holder: StudentItemViewHolder, position: Int)
     {
-        getItem(position)?.let { holder.bind(it, onStudentClick, onDeleteClick) }
+        getItem(position)?.let { holder.bind(it, currentList.indexOf(it) + 1, onStudentClick, onDeleteClick) }
     }
 
     class StudentItemViewHolder(private val binding: StudentItemBinding) : RecyclerView.ViewHolder(binding.root)
     {
-        fun bind(studentUi: StudentUI, onStudentClick: (studentId: Int) -> Unit, onDeleteClick: (studentId: Int) -> Unit) = with(binding) {
+        fun bind(studentUi: StudentUI, studentNumber: Int, onStudentClick: (studentId: Int) -> Unit, onDeleteClick: (studentId: Int) -> Unit) = with(binding) {
             student = studentUi
+            studentIdTv.text = studentNumber.toString()
             root.setOnClickListener {
                 onStudentClick(studentUi.id)
             }

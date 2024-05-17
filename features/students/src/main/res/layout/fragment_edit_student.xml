@@ -11,7 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingHorizontal="10dp">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loader"
@@ -45,8 +46,10 @@
                 android:id="@+id/nameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:hint="@string/name"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                app:hintAnimationEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameEditText"
@@ -62,8 +65,10 @@
                 android:id="@+id/surnameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:hint="@string/surname"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                app:hintAnimationEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surnameEditText"
@@ -79,8 +84,10 @@
                 android:id="@+id/ageLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:hint="@string/age"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                app:hintAnimationEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ageEditText"
@@ -96,8 +103,10 @@
                 android:id="@+id/phoneNumberLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:hint="@string/phoneNumber"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                app:hintAnimationEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phoneNumberEditText"
@@ -113,8 +122,10 @@
                 android:id="@+id/singlePriceLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:hint="@string/singlePrice"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                app:hintAnimationEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/singlePriceEditText"
@@ -130,8 +141,10 @@
                 android:id="@+id/groupPriceLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:hint="@string/groupPrice"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                app:hintAnimationEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/groupPriceEditText"
@@ -148,7 +161,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/note"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                app:hintAnimationEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/noteEditText"
@@ -164,8 +178,11 @@
                 android:id="@+id/btn_add_student"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:padding="15dp"
                 android:text="@string/save_changes"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                app:cornerRadius="12dp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

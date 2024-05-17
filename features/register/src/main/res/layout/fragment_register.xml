@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp">
+        android:paddingHorizontal="10dp">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loader"
@@ -42,6 +42,7 @@
                 android:id="@+id/nameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:hint="@string/name"
                 app:errorEnabled="true">
 
@@ -59,6 +60,7 @@
                 android:id="@+id/surnameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:hint="@string/surname"
                 app:errorEnabled="true">
 
@@ -76,6 +78,7 @@
                 android:id="@+id/emailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:hint="@string/email"
                 app:errorEnabled="true">
 
@@ -111,15 +114,21 @@
                 android:id="@+id/btn_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:padding="15dp"
                 android:text="@string/sign_up"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                app:cornerRadius="12dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_go_to_sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:padding="15dp"
                 android:text="@string/back_to_auth"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                app:cornerRadius="12dp" />
 
         </LinearLayout>
 

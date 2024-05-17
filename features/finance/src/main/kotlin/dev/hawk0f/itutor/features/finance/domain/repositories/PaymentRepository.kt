@@ -1,11 +1,11 @@
 package dev.hawk0f.itutor.features.finance.domain.repositories
 
 import dev.hawk0f.itutor.core.domain.RemoteWrapper
-import dev.hawk0f.itutor.core.domain.models.Payment
+import dev.hawk0f.itutor.core.domain.models.LessonStudent
 
 interface PaymentRepository
 {
-    fun fetchPayments(userId: Int): RemoteWrapper<List<Payment>>
+    fun fetchLessonStudents(userId: Int): RemoteWrapper<List<LessonStudent>>
 
-    fun updatePayment(studentId: Int, lessonId: Int, hasPaid: Boolean): RemoteWrapper<Unit>
+    fun updateLessonStudentPaymentStatus(studentId: Int, lessonId: Int, hasPaid: Boolean): RemoteWrapper<Unit>
 }

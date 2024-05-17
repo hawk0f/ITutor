@@ -5,7 +5,7 @@ import dev.hawk0f.itutor.core.domain.CurrentUser
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.models.DatePaymentsUI
-import dev.hawk0f.itutor.core.presentation.models.PaymentUI
+import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
 import dev.hawk0f.itutor.core.presentation.models.toUi
 import dev.hawk0f.itutor.features.finance.domain.usecases.FetchPaymentsUseCase
 import dev.hawk0f.itutor.features.finance.domain.usecases.UpdatePaymentUseCase
@@ -32,7 +32,7 @@ class PaymentViewModel @Inject constructor(private val fetchPaymentsUseCase: Fet
             }
             else
             {
-                val newDateLessons = DatePaymentsUI(paymentUI.parsedDate, payments = ArrayList<PaymentUI>().apply {
+                val newDateLessons = DatePaymentsUI(paymentUI.parsedDate, payments = ArrayList<LessonStudentUI>().apply {
                         add(paymentUI)
                 })
                 datePaymentsList.add(newDateLessons)

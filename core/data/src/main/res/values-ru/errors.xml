@@ -14,7 +14,7 @@
     <string name="lesson_already_exist">Занятие с такими данными уже существует</string>
     <string name="error_get_lessons_data">Ошибка получения данных о занятиях</string>
     <string name="error_get_lesson_data">Ошибка получения данных о занятии</string>
-    <string name="error_get_lesson_students_data">Ошибка получения данных об учениках в занятии</string>
+    <string name="error_get_students_in_lessons">Ошибка получения данных об учениках в занятии</string>
     <string name="error_lesson_add">Ошибка при добавлении занятия</string>
     <string name="error_lesson_update">Ошибка при обновлении занятия</string>
     <string name="error_lesson_delete">Ошибка при удалении занятия</string>
@@ -35,9 +35,11 @@
     <string name="error_note_update">Ошибка при обновлении заметки</string>
     <string name="error_note_delete">Ошибка при удалении заметки</string>
 
-    //Payment
+    //LessonStudent
     <string name="error_get_payments_data">Ошибка получения данных о платежах</string>
-    <string name="error_payment_update">Ошибка при обновлении платежа</string>
+    <string name="error_update_payment_status">Ошибка при обновлении статуса платежа</string>
+    <string name="error_update_homework_status">Ошибка при обновлении статуса задания</string>
+    <string name="error_add_homework">Ошибка добавления задания</string>
 
     //Subject
     <string name="error_get_subjects">Ошибка получения предметов</string>

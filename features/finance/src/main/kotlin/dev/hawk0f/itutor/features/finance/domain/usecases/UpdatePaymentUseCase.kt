@@ -5,5 +5,5 @@ import javax.inject.Inject
 
 class UpdatePaymentUseCase @Inject constructor(private val repository: PaymentRepository)
 {
-    operator fun invoke(studentId: Int, lessonId: Int, hasPaid: Boolean) = repository.updatePayment(studentId, lessonId, hasPaid)
+    operator fun invoke(studentId: Int, lessonId: Int, hasPaid: Boolean) = repository.updateLessonStudentPaymentStatus(studentId, lessonId, hasPaid)
 }

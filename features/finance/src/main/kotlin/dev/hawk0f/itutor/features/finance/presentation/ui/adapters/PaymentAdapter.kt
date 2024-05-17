@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.hawk0f.itutor.core.presentation.base.BaseDiffUtilItemCallback
-import dev.hawk0f.itutor.core.presentation.models.PaymentUI
+import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
 import dev.hawk0f.itutor.features.finance.databinding.PaymentItemBinding
 import dev.hawk0f.itutor.features.finance.presentation.ui.adapters.PaymentAdapter.PaymentViewHolder
 
-class PaymentAdapter(private val onUpdateClick: (studentId: Int, lessonId: Int, hasPaid: Boolean) -> Unit) : ListAdapter<PaymentUI, PaymentViewHolder>(BaseDiffUtilItemCallback())
+class PaymentAdapter(private val onUpdateClick: (studentId: Int, lessonId: Int, hasPaid: Boolean) -> Unit) : ListAdapter<LessonStudentUI, PaymentViewHolder>(BaseDiffUtilItemCallback())
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentViewHolder = PaymentViewHolder.inflateFrom(parent)
 
@@ -20,7 +20,7 @@ class PaymentAdapter(private val onUpdateClick: (studentId: Int, lessonId: Int, 
 
     class PaymentViewHolder(private val binding: PaymentItemBinding) : RecyclerView.ViewHolder(binding.root)
     {
-        fun bind(paymentUi: PaymentUI, onUpdateClick: (studentId: Int, lessonId: Int, hasPaid: Boolean) -> Unit) = with(binding) {
+        fun bind(paymentUi: LessonStudentUI, onUpdateClick: (studentId: Int, lessonId: Int, hasPaid: Boolean) -> Unit) = with(binding) {
             payment = paymentUi
             customSwitch.setOnClickListener {
                 onUpdateClick(paymentUi.studentId, paymentUi.lessonId, customSwitch.isChecked)

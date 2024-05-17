@@ -1,7 +1,5 @@
 package dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.hawk0f.itutor.core.data.models.LessonDTO
 import dev.hawk0f.itutor.core.domain.CurrentUser
@@ -11,7 +9,7 @@ import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.extensions.parseToDate
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
 import dev.hawk0f.itutor.core.presentation.extensions.parseToTime
-import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
+import dev.hawk0f.itutor.core.presentation.models.StudentInLessonUI
 import dev.hawk0f.itutor.core.presentation.models.LessonUI
 import dev.hawk0f.itutor.core.presentation.models.SubjectUI
 import dev.hawk0f.itutor.core.presentation.models.toUI
@@ -40,7 +38,7 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
     private var studentsIds = ArrayList<Int>()
     private var userId = 0
 
-    var allStudents = ArrayList<LessonStudentUI>()
+    var allStudents = ArrayList<StudentInLessonUI>()
 
     private val _lessonState = MutableUIStateFlow<LessonUI>()
     val lessonState = _lessonState.asStateFlow()
@@ -51,7 +49,7 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
     private val _subjectState = MutableUIStateFlow<List<SubjectUI>>()
     val subjectState = _subjectState.asStateFlow()
 
-    private val _lessonStudentsState = MutableUIStateFlow<List<LessonStudentUI>>()
+    private val _lessonStudentsState = MutableUIStateFlow<List<StudentInLessonUI>>()
     val lessonStudentsState = _lessonStudentsState.asStateFlow()
 
     fun fetchSubjects() = fetchSubjectsUseCase().collectNetworkRequestWithMapping(_subjectState) { list ->

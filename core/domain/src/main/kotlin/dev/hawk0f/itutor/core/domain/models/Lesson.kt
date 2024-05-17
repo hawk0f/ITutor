@@ -9,7 +9,7 @@ class Lesson(
     val startTime: LocalTime,
     val endTime: LocalTime,
     val studentsIds: MutableList<Int>,
-    val students: MutableList<LessonStudent>,
+    val students: MutableList<StudentInLesson>,
     val subject: Subject,
     val userId: Int
 )

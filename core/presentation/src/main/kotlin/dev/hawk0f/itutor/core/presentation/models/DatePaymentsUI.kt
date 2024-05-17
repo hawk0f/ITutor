@@ -5,5 +5,5 @@ import dev.hawk0f.itutor.core.presentation.base.IBaseDiffModel
 data class DatePaymentsUI(
     val date: String,
     override val id: String = date,
-    val payments: MutableList<PaymentUI>
+    val payments: MutableList<LessonStudentUI>
 ) : IBaseDiffModel<String>

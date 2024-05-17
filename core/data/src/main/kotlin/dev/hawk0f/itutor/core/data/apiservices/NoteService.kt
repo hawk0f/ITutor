@@ -1,7 +1,5 @@
 package dev.hawk0f.itutor.core.data.apiservices
 
-import dev.hawk0f.itutor.core.data.models.LessonDTO
-import dev.hawk0f.itutor.core.data.models.LessonStudentDTO
 import dev.hawk0f.itutor.core.data.models.NoteDTO
 import retrofit2.Response
 import retrofit2.http.Body

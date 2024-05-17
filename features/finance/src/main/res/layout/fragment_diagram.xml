@@ -22,6 +22,8 @@
             style="@style/Widget.Material3.ChipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:selectionRequired="true"
+            app:checkedChip="@id/current_month"
             app:singleLine="true"
             app:singleSelection="true">
 
@@ -48,11 +50,10 @@
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
-    <com.github.mikephil.charting.charts.BarChart
+    <com.github.mikephil.charting.charts.HorizontalBarChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tag_group_scroll_view"
-        android:visibility="gone" />
+        android:layout_below="@id/tag_group_scroll_view"/>
 
 </RelativeLayout>

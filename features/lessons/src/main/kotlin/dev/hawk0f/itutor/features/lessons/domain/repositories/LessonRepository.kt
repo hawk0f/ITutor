@@ -1,16 +1,15 @@
 package dev.hawk0f.itutor.features.lessons.domain.repositories
 
-import androidx.navigation.NavDirections
 import dev.hawk0f.itutor.core.data.models.LessonDTO
 import dev.hawk0f.itutor.core.domain.RemoteWrapper
 import dev.hawk0f.itutor.core.domain.models.Lesson
-import dev.hawk0f.itutor.core.domain.models.LessonStudent
+import dev.hawk0f.itutor.core.domain.models.StudentInLesson
 
 interface LessonRepository
 {
     fun fetchLessons(userId: Int): RemoteWrapper<List<Lesson>>
 
-    fun fetchLessonStudents(userId: Int): RemoteWrapper<List<LessonStudent>>
+    fun fetchLessonStudents(userId: Int): RemoteWrapper<List<StudentInLesson>>
 
     fun getLessonById(lessonId: Int): RemoteWrapper<Lesson>
 

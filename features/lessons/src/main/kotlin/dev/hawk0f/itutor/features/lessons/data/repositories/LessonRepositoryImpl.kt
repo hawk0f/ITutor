@@ -5,7 +5,7 @@ import dev.hawk0f.itutor.core.data.base.BaseRepository
 import dev.hawk0f.itutor.core.data.models.LessonDTO
 import dev.hawk0f.itutor.core.domain.RemoteWrapper
 import dev.hawk0f.itutor.core.domain.models.Lesson
-import dev.hawk0f.itutor.core.domain.models.LessonStudent
+import dev.hawk0f.itutor.core.domain.models.StudentInLesson
 import dev.hawk0f.itutor.features.lessons.domain.repositories.LessonRepository
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ class LessonRepositoryImpl @Inject constructor(private val lessonService: Lesson
         lessonService.fetchLessons(userId)
     }
 
-    override fun fetchLessonStudents(userId: Int): RemoteWrapper<List<LessonStudent>> = doNetworkRequestForList {
+    override fun fetchLessonStudents(userId: Int): RemoteWrapper<List<StudentInLesson>> = doNetworkRequestForList {
         lessonService.getLessonStudents(userId)
     }
 

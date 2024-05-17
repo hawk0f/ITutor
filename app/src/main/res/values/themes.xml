@@ -1,8 +1,9 @@
 <resources>
 
     <style name="Theme.Itutor.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/Black</item>
+        <item name="windowSplashScreenBackground">@color/White</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="postSplashScreenTheme">@style/Theme.Itutor</item>
     </style>
+
 </resources>
