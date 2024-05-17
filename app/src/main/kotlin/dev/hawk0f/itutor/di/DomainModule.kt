@@ -9,7 +9,11 @@ import dev.hawk0f.itutor.features.auth.domain.repositories.UserAuthRepository
 import dev.hawk0f.itutor.features.auth.domain.usecases.AuthUserUseCase
 import dev.hawk0f.itutor.features.finance.domain.repositories.PaymentRepository
 import dev.hawk0f.itutor.features.finance.domain.usecases.FetchPaymentsUseCase
-import dev.hawk0f.itutor.features.finance.domain.usecases.UpdatePaymentUseCase
+import dev.hawk0f.itutor.features.finance.domain.usecases.UpdatePaymentStatusUseCase
+import dev.hawk0f.itutor.features.homework.domain.repositories.HomeworkRepository
+import dev.hawk0f.itutor.features.homework.domain.usecases.AddHomeworkUseCase
+import dev.hawk0f.itutor.features.homework.domain.usecases.FetchHomeworksUseCase
+import dev.hawk0f.itutor.features.homework.domain.usecases.UpdateHomeworkStatusUseCase
 import dev.hawk0f.itutor.features.lessons.domain.repositories.LessonRepository
 import dev.hawk0f.itutor.features.lessons.domain.repositories.SubjectRepository
 import dev.hawk0f.itutor.features.lessons.domain.usecases.AddLessonUseCase
@@ -92,7 +96,7 @@ object DomainModule
     fun provideFetchPaymentsUseCase(repository: PaymentRepository) = FetchPaymentsUseCase(repository)
 
     @Provides
-    fun provideUpdatePaymentUseCase(repository: PaymentRepository) = UpdatePaymentUseCase(repository)
+    fun provideUpdatePaymentUseCase(repository: PaymentRepository) = UpdatePaymentStatusUseCase(repository)
 
     //Notes
     @Provides
@@ -109,4 +113,14 @@ object DomainModule
 
     @Provides
     fun provideDeleteNoteUseCase(repository: NoteRepository) = DeleteNoteUseCase(repository)
+
+    //Homework
+    @Provides
+    fun provideUpdateHomeworkStatusUseCase(repository: HomeworkRepository) = UpdateHomeworkStatusUseCase(repository)
+
+    @Provides
+    fun provideAddHomeworkUseCase(repository: HomeworkRepository) = AddHomeworkUseCase(repository)
+
+    @Provides
+    fun provideFetchHomeworksUseCase(repository: HomeworkRepository) = FetchHomeworksUseCase(repository)
 }

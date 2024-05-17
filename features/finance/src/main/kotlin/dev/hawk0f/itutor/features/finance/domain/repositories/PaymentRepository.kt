@@ -7,5 +7,5 @@ interface PaymentRepository
 {
     fun fetchLessonStudents(userId: Int): RemoteWrapper<List<LessonStudent>>
 
-    fun updateLessonStudentPaymentStatus(studentId: Int, lessonId: Int, hasPaid: Boolean): RemoteWrapper<Unit>
+    fun updatePaymentStatus(studentId: Int, lessonId: Int, hasPaid: Boolean): RemoteWrapper<Unit>
 }

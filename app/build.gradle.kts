@@ -66,13 +66,9 @@ dependencies {
     implementation(project(":core:data"))
 
     //Features
-    implementation(project(":features:students"))
     implementation(project(":features:auth"))
     implementation(project(":features:register"))
     implementation(project(":features:mainContent"))
-    implementation(project(":features:lessons"))
-    implementation(project(":features:finance"))
-    implementation(project(":features:notes"))
 
     implementation(project(":navigation"))
 

@@ -8,20 +8,20 @@ import dev.hawk0f.itutor.core.presentation.models.DatePaymentsUI
 import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
 import dev.hawk0f.itutor.core.presentation.models.toUi
 import dev.hawk0f.itutor.features.finance.domain.usecases.FetchPaymentsUseCase
-import dev.hawk0f.itutor.features.finance.domain.usecases.UpdatePaymentUseCase
+import dev.hawk0f.itutor.features.finance.domain.usecases.UpdatePaymentStatusUseCase
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class PaymentViewModel @Inject constructor(private val fetchPaymentsUseCase: FetchPaymentsUseCase, private val updatePaymentUseCase: UpdatePaymentUseCase, private val currentUser: CurrentUser) : BaseViewModel()
+class PaymentViewModel @Inject constructor(private val fetchPaymentsUseCase: FetchPaymentsUseCase, private val updatePaymentUseCase: UpdatePaymentStatusUseCase, private val currentUser: CurrentUser) : BaseViewModel()
 {
-    private val _paymentState = MutableUIStateFlow<List<DatePaymentsUI>>()
-    val paymentState = _paymentState.asStateFlow()
+    private val _lessonStudentsState = MutableUIStateFlow<List<DatePaymentsUI>>()
+    val lessonStudentsState = _lessonStudentsState.asStateFlow()
 
     private val _updateState = MutableUIStateFlow<Unit>()
     val updateState = _updateState.asStateFlow()
 
-    fun fetchPayments() = fetchPaymentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_paymentState) { list ->
+    fun fetchPayments() = fetchPaymentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
         val datePaymentsList = ArrayList<DatePaymentsUI>()
         list.forEach { payment ->
             val paymentUI = payment.toUi()

@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":features:lessons"))
     implementation(project(":features:finance"))
     implementation(project(":features:notes"))
+    implementation(project(":features:homework"))
 
     //Hilt
     implementation(libs.hilt.android)

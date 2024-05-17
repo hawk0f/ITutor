@@ -15,6 +15,8 @@ import dev.hawk0f.itutor.features.auth.data.repositories.UserAuthRepositoryImpl
 import dev.hawk0f.itutor.features.auth.domain.repositories.UserAuthRepository
 import dev.hawk0f.itutor.features.finance.data.repositories.PaymentRepositoryImpl
 import dev.hawk0f.itutor.features.finance.domain.repositories.PaymentRepository
+import dev.hawk0f.itutor.features.homework.data.repositories.HomeworkRepositoryImpl
+import dev.hawk0f.itutor.features.homework.domain.repositories.HomeworkRepository
 import dev.hawk0f.itutor.features.lessons.data.repositories.LessonRepositoryImpl
 import dev.hawk0f.itutor.features.lessons.data.repositories.SubjectRepositoryImpl
 import dev.hawk0f.itutor.features.lessons.domain.repositories.LessonRepository
@@ -88,6 +90,11 @@ object DataModule
     @Singleton
     @Provides
     fun provideNoteRepository(service: NoteService): NoteRepository = NoteRepositoryImpl(service)
+
+    //Homework
+    @Singleton
+    @Provides
+    fun provideHomeworkRepository(service: LessonStudentService): HomeworkRepository = HomeworkRepositoryImpl(service)
     
     //Network Client
     @Singleton

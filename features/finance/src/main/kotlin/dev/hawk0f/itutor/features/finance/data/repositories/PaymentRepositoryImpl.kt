@@ -13,7 +13,7 @@ class PaymentRepositoryImpl @Inject constructor(private val lessonStudentService
         lessonStudentService.fetchLessonStudents(userId)
     }
 
-    override fun updateLessonStudentPaymentStatus(studentId: Int, lessonId: Int, hasPaid: Boolean): RemoteWrapper<Unit> = doNetworkRequestUnit {
-        lessonStudentService.updateLessonStudentPaymentStatus(studentId, lessonId, hasPaid)
+    override fun updatePaymentStatus(studentId: Int, lessonId: Int, hasPaid: Boolean): RemoteWrapper<Unit> = doNetworkRequestUnit {
+        lessonStudentService.updatePaymentStatus(studentId, lessonId, hasPaid)
     }
 }

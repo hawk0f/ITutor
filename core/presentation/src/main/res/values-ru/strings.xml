@@ -7,6 +7,7 @@
     <string name="sign_in">Войти</string>
     <string name="go_to_sign_up">Перейти к регистрации</string>
     <string name="add_student">Добавить ученика</string>
+    <string name="add_homework">Добавить задание</string>
     <string name="add_lesson">Добавить занятие</string>
     <string name="add_note">Добавить заметку</string>
     <string name="save_changes">Сохранить изменения</string>
@@ -45,5 +46,6 @@
     <string name="editing_note">Редактирование заметки</string>
     <string name="adding_note">Добавление заметки</string>
     <string name="finance">Финансы</string>
+    <string name="homework">Задания</string>
 
 </resources>

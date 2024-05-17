@@ -12,11 +12,11 @@ interface LessonStudentService
     suspend fun fetchLessonStudents(@Query("userId") userId: Int): Response<List<LessonStudentDTO>>
 
     @PUT("LessonStudent/updateLessonStudentPaymentStatus")
-    suspend fun updateLessonStudentPaymentStatus(@Query("studentId") studentId: Int, @Query("lessonId") lessonId: Int, @Query("hasPaid") hasPaid: Boolean): Response<Unit>
+    suspend fun updatePaymentStatus(@Query("studentId") studentId: Int, @Query("lessonId") lessonId: Int, @Query("hasPaid") hasPaid: Boolean): Response<Unit>
 
     @PUT("LessonStudent/updateLessonStudentHomeworkStatus")
-    suspend fun updateLessonStudentHomeworkStatus(@Query("studentId") studentId: Int, @Query("lessonId") lessonId: Int, @Query("isHomeworkDone") isHomeworkDone: Boolean): Response<Unit>
+    suspend fun updateHomeworkStatus(@Query("studentId") studentId: Int, @Query("lessonId") lessonId: Int, @Query("isHomeworkDone") isHomeworkDone: Boolean): Response<Unit>
 
     @PUT("LessonStudent/addLessonStudentHomework")
-    suspend fun addLessonStudentHomework(@Query("studentId") studentId: Int, @Query("lessonId") lessonId: Int, @Query("homework") homework: String): Response<Unit>
+    suspend fun addHomework(@Query("studentId") studentId: Int, @Query("lessonId") lessonId: Int, @Query("homework") homework: String): Response<Unit>
 }
