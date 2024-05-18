@@ -21,22 +21,28 @@ class HomeworkViewModel @Inject constructor(private val fetchLessonStudentsUseCa
     private val _updateState = MutableUIStateFlow<Unit>()
     val updateState = _updateState.asStateFlow()
 
+    private val allLessonStudents = ArrayList<LessonStudentUI>()
+
     fun fetchLessonStudents() = fetchLessonStudentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
+        allLessonStudents.clear()
+        allLessonStudents.addAll(list.map { it.toUi() })
+
         val studentHomeworksList = ArrayList<StudentHomeworksUI>()
-        list.forEach { lessonStudent ->
-            if (lessonStudent.homework.isNotEmpty())
+        allLessonStudents.forEach { lessonStudentUi ->
+            if (lessonStudentUi.homework.isNotEmpty())
             {
-                val lessonStudentUI = lessonStudent.toUi()
-                val currentStudentHomeworks = studentHomeworksList.firstOrNull { it.studentName == lessonStudentUI.studentName }
+                val currentStudentHomeworks =
+                    studentHomeworksList.firstOrNull { it.studentName == lessonStudentUi.studentName }
                 if (currentStudentHomeworks != null)
                 {
-                    currentStudentHomeworks.homeworks.add(lessonStudentUI)
+                    currentStudentHomeworks.homeworks.add(lessonStudentUi)
                 }
                 else
                 {
-                    val newStudentHomeworks = StudentHomeworksUI(lessonStudentUI.parsedDate, homeworks = ArrayList<LessonStudentUI>().apply {
-                        add(lessonStudentUI)
-                    })
+                    val newStudentHomeworks =
+                        StudentHomeworksUI(lessonStudentUi.studentName, homeworks = ArrayList<LessonStudentUI>().apply {
+                            add(lessonStudentUi)
+                        })
                     studentHomeworksList.add(newStudentHomeworks)
                 }
             }
@@ -45,4 +51,9 @@ class HomeworkViewModel @Inject constructor(private val fetchLessonStudentsUseCa
     }
 
     fun updateHomeworkStatus(studentId: Int, lessonId: Int, isHomeworkDone: Boolean) = updateHomeworkStatusUseCase(studentId, lessonId, isHomeworkDone).collectNetworkRequest(_updateState)
+
+    fun getAllStudents(): List<LessonStudentUI>
+    {
+        return allLessonStudents
+    }
 }

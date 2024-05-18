@@ -11,7 +11,7 @@
         android:title="@string/lessons" />
     <item
         android:id="@+id/homeworkNavGraph"
-        android:icon="@drawable/notes_icon"
+        android:icon="@drawable/homework_icon"
         android:title="@string/homework" />
     <item
         android:id="@+id/financeFragment"

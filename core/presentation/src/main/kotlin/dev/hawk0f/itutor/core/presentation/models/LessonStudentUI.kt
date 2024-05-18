@@ -3,6 +3,7 @@ package dev.hawk0f.itutor.core.presentation.models
 import dev.hawk0f.itutor.core.domain.models.LessonStudent
 import dev.hawk0f.itutor.core.presentation.base.IBaseDiffModel
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
+import java.io.Serializable
 import java.time.LocalDate
 
 data class LessonStudentUI(
@@ -18,6 +19,6 @@ data class LessonStudentUI(
     val hasPaid: Boolean,
     val homework: String,
     val isHomeworkDone: Boolean
-) : IBaseDiffModel<Int>
+) : IBaseDiffModel<Int>, Serializable
 
 fun LessonStudent.toUi() = LessonStudentUI("${studentId}${lessonId}".toInt(), studentId, lessonId, date.parseToFormat("dd MMMM, EEEE"), date, startTime.parseToFormat("HH:mm"), endTime.parseToFormat("HH:mm"), studentName, price, hasPaid, homework, isHomeworkDone)

@@ -1,14 +1,17 @@
 package dev.hawk0f.itutor.features.homework.presentation.ui.fragments
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.features.homework.R
 import dev.hawk0f.itutor.features.homework.databinding.FragmentHomeworkBinding
 import dev.hawk0f.itutor.features.homework.presentation.ui.viewmodels.HomeworkViewModel
 import dev.hawk0f.itutor.features.homework.presentation.ui.adapters.StudentHomeworksAdapter
+import dev.hawk0f.itutor.navigation.HomeworkFragmentDirections
 
 @AndroidEntryPoint
 class HomeworkFragment : BaseFragment<HomeworkViewModel, FragmentHomeworkBinding>(R.layout.fragment_homework)
@@ -72,7 +75,7 @@ class HomeworkFragment : BaseFragment<HomeworkViewModel, FragmentHomeworkBinding
     private fun setupAddButtonListener() = with(binding)
     {
         btnAddHomework.setOnClickListener {
-            //TODO navigate to AddHomeworkFragment
+            findNavController().navigateSafely(HomeworkFragmentDirections.actionHomeworkFragmentToAddHomeworkFragment())
         }
     }
 }
