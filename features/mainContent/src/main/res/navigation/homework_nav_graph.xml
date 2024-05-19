@@ -13,10 +13,27 @@
         <action
             android:id="@+id/action_homeworkFragment_to_addHomeworkFragment"
             app:destination="@id/addHomeworkFragment" />
+        <action
+            android:id="@+id/action_homeworkFragment_to_editHomeworkFragment"
+            app:destination="@id/editHomeworkFragment" />
     </fragment>
     <fragment
         android:id="@+id/addHomeworkFragment"
         android:name="dev.hawk0f.itutor.features.homework.presentation.ui.fragments.AddHomeworkFragment"
-        android:label="@string/add_homework"
+        android:label="@string/adding_homework"
         tools:layout="@layout/fragment_add_homework" />
+    <fragment
+        android:id="@+id/editHomeworkFragment"
+        android:name="dev.hawk0f.itutor.features.homework.presentation.ui.fragments.EditHomeworkFragment"
+        android:label="@string/editing_homework">
+        <argument
+            android:name="studentId"
+            app:argType="integer" />
+        <argument
+            android:name="lessonId"
+            app:argType="integer" />
+        <argument
+            android:name="homework"
+            app:argType="string" />
+    </fragment>
 </navigation>

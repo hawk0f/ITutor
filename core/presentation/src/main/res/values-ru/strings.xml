@@ -42,6 +42,8 @@
     <string name="lessons">Занятия</string>
     <string name="editing_lesson">Редактирование занятия</string>
     <string name="adding_lesson">Добавление занятия</string>
+    <string name="adding_homework">Добавление задания</string>
+    <string name="editing_homework">Редактирование занятия</string>
     <string name="notes">Заметки</string>
     <string name="editing_note">Редактирование заметки</string>
     <string name="adding_note">Добавление заметки</string>

@@ -9,5 +9,7 @@ interface HomeworkRepository
 
     fun addHomework(studentId: Int, lessonId: Int, homework: String): RemoteWrapper<Unit>
 
+    fun updateHomework(studentId: Int, lessonId: Int, homework: String) : RemoteWrapper<Unit>
+
     fun updateHomeworkStatus(studentId: Int, lessonId: Int, isHomeworkDone: Boolean): RemoteWrapper<Unit>
 }

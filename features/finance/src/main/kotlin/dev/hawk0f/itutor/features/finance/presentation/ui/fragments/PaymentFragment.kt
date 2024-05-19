@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
-import dev.hawk0f.itutor.core.presentation.extensions.parentLoader
 import dev.hawk0f.itutor.features.finance.R
 import dev.hawk0f.itutor.features.finance.databinding.FragmentPaymentBinding
 import dev.hawk0f.itutor.features.finance.presentation.ui.adapters.DatePaymentsAdapter
@@ -51,7 +50,7 @@ class PaymentFragment : BaseFragment<PaymentViewModel, FragmentPaymentBinding>(R
 
     private fun subscribeToPayments() = with(binding) {
         viewModel.lessonStudentsState.collectAsUIState(state = {
-            it.setupViewVisibilityLinear(group, parentLoader(R.id.loader))
+            it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = {
             datePaymentsAdapter.submitList(it)
         })

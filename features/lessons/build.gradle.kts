@@ -45,6 +45,8 @@ dependencies {
 
     implementation(project(":navigation"))
 
+    implementation(libs.shimmer)
+
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

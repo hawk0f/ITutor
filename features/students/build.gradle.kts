@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":navigation"))
 
     implementation(libs.decoro)
+    implementation(libs.shimmer)
 
     //Hilt
     implementation(libs.hilt.android)

@@ -19,4 +19,7 @@ interface LessonStudentService
 
     @PUT("LessonStudent/addLessonStudentHomework")
     suspend fun addHomework(@Query("studentId") studentId: Int, @Query("lessonId") lessonId: Int, @Query("homework") homework: String): Response<Unit>
+
+    @PUT("LessonStudent/updateLessonStudentHomework")
+    suspend fun updateHomework(@Query("studentId") studentId: Int, @Query("lessonId") lessonId: Int, @Query("homework") homework: String): Response<Unit>
 }

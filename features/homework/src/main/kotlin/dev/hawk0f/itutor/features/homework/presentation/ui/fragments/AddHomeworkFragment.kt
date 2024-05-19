@@ -1,5 +1,6 @@
 package dev.hawk0f.itutor.features.homework.presentation.ui.fragments
 
+import android.view.View
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -51,21 +52,41 @@ class AddHomeworkFragment : BaseFragment<AddHomeworkViewModel, FragmentAddHomewo
         viewModel.homeworksState.collectAsUIState(state = {
             it.setupViewVisibilityCircular(group, loader)
         }, onSuccess = {
-            val adapter =
-                ArrayAdapter(requireContext(), R.layout.dropdown_item, it.map { lessonStudent -> "Дата: " + lessonStudent.date.parseToFormat("d MMMM") + ". Время: " + lessonStudent.startTime + " - " + lessonStudent.endTime }.distinct())
-            lessonDropDown.setAdapter(adapter)
-            lessonDropDown.setOnItemClickListener { _, _, positionLesson, _ ->
-                val lessonId = it[positionLesson].lessonId
-                viewModel.setLessonId(lessonId)
-                val studentAdapter =
-                    ArrayAdapter(requireContext(), R.layout.dropdown_item, it.filter { list -> list.lessonId == lessonId }.map { lessonStudent -> lessonStudent.studentName })
-                studentDropDown.setAdapter(studentAdapter)
-                studentDropDown.setOnItemClickListener { _, _, positionStudent, _ ->
-                    val studentId = it[positionStudent].studentId
-                    viewModel.setStudentId(studentId)
+            val lessonsList = it.filter { lessonStudent -> lessonStudent.fullHomework.isEmpty() }
+            if (lessonsList.isEmpty())
+            {
+                noStudents.visibility = View.VISIBLE
+                fields.visibility = View.GONE
+            }
+            else
+            {
+                val lessonAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, lessonsList.map { lessonStudent -> "Дата: " + lessonStudent.date.parseToFormat("d MMMM") + ". Время: " + lessonStudent.startTime + " - " + lessonStudent.endTime }.distinct())
+                lessonDropDown.setAdapter(lessonAdapter)
+
+                if (lessonDropDown.fullText.isEmpty())
+                {
+                    studentDropDown.isEnabled = false
+                    studentLayout.isEnabled = false
                 }
-                studentDropDown.isEnabled = true
-                studentLayout.isEnabled = true
+
+                lessonDropDown.setOnItemClickListener { _, _, positionLesson, _ ->
+                    studentDropDown.isEnabled = true
+                    studentLayout.isEnabled = true
+                    studentDropDown.text.clear()
+                    viewModel.setStudentId(0)
+
+                    val lessonId = lessonsList[positionLesson].lessonId
+                    viewModel.setLessonId(lessonId)
+
+                    val studentsList = lessonsList.filter { lessonStudent -> lessonStudent.lessonId == lessonId }
+                    val studentAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, studentsList.map { student -> student.studentName })
+                    studentDropDown.setAdapter(studentAdapter)
+
+                    studentDropDown.setOnItemClickListener { _, _, positionStudent, _ ->
+                        val studentId = studentsList[positionStudent].studentId
+                        viewModel.setStudentId(studentId)
+                    }
+                }
             }
         })
     }

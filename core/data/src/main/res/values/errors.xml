@@ -36,10 +36,12 @@
     <string name="error_note_delete">Error deleting note</string>
 
     //LessonStudent
-    <string name="error_get_payments_data">Error receiving payments data</string>
+    <string name="error_get_lesson_students_data">Error receiving students and lessons data</string>
+    <string name="error_get_lesson_student_data">Error receiving student homework data</string>
     <string name="error_update_payment_status">Error updating payment status</string>
     <string name="error_update_homework_status">Error updating homework status</string>
     <string name="error_add_homework">Error adding homework</string>
+    <string name="error_update_homework">Error updating homework</string>
 
     //Subject
     <string name="error_get_subjects">Error receiving subjects</string>

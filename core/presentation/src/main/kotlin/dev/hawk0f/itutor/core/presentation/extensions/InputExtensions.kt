@@ -17,6 +17,11 @@ import dev.hawk0f.itutor.core.presentation.validation.Validator
 val EditText.fullText: String get() = this.text.toString().trim()
 
 /**
+ * Cut the text to the [limit] amount of symbols and add ... if the length is more than limit
+ */
+fun String.takeDot(limit: Int) = if (this.length <= limit) this else this.take(limit) + "..."
+
+/**
  * @receiver [ViewBinding]
  * @see [getChildInputLayouts]
  */

@@ -15,14 +15,13 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
-import dev.hawk0f.itutor.core.presentation.extensions.parentLoader
 import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
 import dev.hawk0f.itutor.features.finance.R
 import dev.hawk0f.itutor.features.finance.databinding.FragmentDiagramBinding
 import dev.hawk0f.itutor.features.finance.presentation.ui.custom.MyMarkerViewKt
 import dev.hawk0f.itutor.features.finance.presentation.ui.viewmodels.DiagramViewModel
 import java.time.LocalDate
-import java.time.format.TextStyle.SHORT
+import java.time.format.TextStyle.SHORT_STANDALONE
 import java.util.Locale
 import kotlin.math.ceil
 
@@ -108,7 +107,7 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
 
     private fun subscribeToPayments() = with(binding) {
         viewModel.paymentState.collectAsUIState(state = {
-            it.setupViewVisibilityLinear(group, parentLoader(R.id.loader))
+            it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = { payments ->
             viewModel.setPayments(payments)
 
@@ -388,7 +387,7 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
         while (i >= 0)
         {
             list.add(LocalDate.now()
-                .minusMonths(i.toLong()).month.getDisplayName(SHORT, Locale.getDefault()))
+                .minusMonths(i.toLong()).month.getDisplayName(SHORT_STANDALONE, Locale.getDefault()))
             i--
         }
         return list

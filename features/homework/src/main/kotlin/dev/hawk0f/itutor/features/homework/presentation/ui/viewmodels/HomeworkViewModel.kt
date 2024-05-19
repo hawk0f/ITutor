@@ -29,7 +29,7 @@ class HomeworkViewModel @Inject constructor(private val fetchLessonStudentsUseCa
 
         val studentHomeworksList = ArrayList<StudentHomeworksUI>()
         allLessonStudents.forEach { lessonStudentUi ->
-            if (lessonStudentUi.homework.isNotEmpty())
+            if (lessonStudentUi.fullHomework.isNotEmpty())
             {
                 val currentStudentHomeworks =
                     studentHomeworksList.firstOrNull { it.studentName == lessonStudentUi.studentName }

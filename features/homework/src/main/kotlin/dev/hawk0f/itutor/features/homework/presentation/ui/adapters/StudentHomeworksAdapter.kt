@@ -8,20 +8,20 @@ import dev.hawk0f.itutor.core.presentation.base.BaseDiffUtilItemCallback
 import dev.hawk0f.itutor.core.presentation.models.StudentHomeworksUI
 import dev.hawk0f.itutor.features.homework.databinding.StudentHomeworksItemBinding
 
-class StudentHomeworksAdapter(private val onUpdateClick: (studentId: Int, lessonId: Int, isHomeworkDone: Boolean) -> Unit) : ListAdapter<StudentHomeworksUI, StudentHomeworksAdapter.StudentHomeworksViewHolder>(BaseDiffUtilItemCallback())
+class StudentHomeworksAdapter(private val onHomeworkClick: (studentId: Int, lessonId: Int, homework: String) -> Unit, private val onUpdateClick: (studentId: Int, lessonId: Int, isHomeworkDone: Boolean) -> Unit) : ListAdapter<StudentHomeworksUI, StudentHomeworksAdapter.StudentHomeworksViewHolder>(BaseDiffUtilItemCallback())
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentHomeworksViewHolder = StudentHomeworksViewHolder.inflateFrom(parent)
 
     override fun onBindViewHolder(holder: StudentHomeworksViewHolder, position: Int)
     {
-        getItem(position)?.let { holder.bind(it, onUpdateClick) }
+        getItem(position)?.let { holder.bind(it, onHomeworkClick, onUpdateClick) }
     }
 
     class StudentHomeworksViewHolder(private val binding: StudentHomeworksItemBinding) : RecyclerView.ViewHolder(binding.root)
     {
-        fun bind(studentHomeworks: StudentHomeworksUI, onUpdateClick: (studentId: Int, lessonId: Int, isHomeworkDone: Boolean) -> Unit) = with(binding) {
+        fun bind(studentHomeworks: StudentHomeworksUI, onHomeworkClick: (studentId: Int, lessonId: Int, homework: String) -> Unit, onUpdateClick: (studentId: Int, lessonId: Int, isHomeworkDone: Boolean) -> Unit) = with(binding) {
             studentName.text = studentHomeworks.studentName
-            val homeworkAdapter = HomeworkAdapter(onUpdateClick)
+            val homeworkAdapter = HomeworkAdapter(onHomeworkClick, onUpdateClick)
             homeworkAdapter.submitList(studentHomeworks.homeworks)
             recyclerHomeworks.adapter = homeworkAdapter
         }

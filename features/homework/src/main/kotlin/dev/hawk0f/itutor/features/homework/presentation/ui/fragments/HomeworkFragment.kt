@@ -1,5 +1,6 @@
 package dev.hawk0f.itutor.features.homework.presentation.ui.fragments
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,8 +10,8 @@ import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.features.homework.R
 import dev.hawk0f.itutor.features.homework.databinding.FragmentHomeworkBinding
-import dev.hawk0f.itutor.features.homework.presentation.ui.viewmodels.HomeworkViewModel
 import dev.hawk0f.itutor.features.homework.presentation.ui.adapters.StudentHomeworksAdapter
+import dev.hawk0f.itutor.features.homework.presentation.ui.viewmodels.HomeworkViewModel
 import dev.hawk0f.itutor.navigation.HomeworkFragmentDirections
 
 @AndroidEntryPoint
@@ -19,19 +20,20 @@ class HomeworkFragment : BaseFragment<HomeworkViewModel, FragmentHomeworkBinding
     override val viewModel: HomeworkViewModel by viewModels()
     override val binding: FragmentHomeworkBinding by viewBinding(FragmentHomeworkBinding::bind)
 
-    private val studentHomeworksAdapter = StudentHomeworksAdapter { studentId, lessonId, isHomeworkDone ->
-        viewModel.updateHomeworkStatus(studentId, lessonId, isHomeworkDone)
-    }
+    private val studentHomeworksAdapter =
+        StudentHomeworksAdapter(onHomeworkClick = { studentId, lessonId, homework ->
+            findNavController().navigateSafely(HomeworkFragmentDirections.actionHomeworkFragmentToEditHomeworkFragment(studentId, lessonId, homework))
+        }, onUpdateClick = { studentId, lessonId, isHomeworkDone ->
+            viewModel.updateHomeworkStatus(studentId, lessonId, isHomeworkDone)
+        })
 
     override fun initialize()
     {
         setupRecycler()
     }
 
-    private fun setupRecycler() = with(binding)
-    {
-        with(recyclerStudentHomeworks)
-        {
+    private fun setupRecycler() = with(binding) {
+        with(recyclerStudentHomeworks) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = studentHomeworksAdapter
         }
@@ -53,18 +55,25 @@ class HomeworkFragment : BaseFragment<HomeworkViewModel, FragmentHomeworkBinding
         subscribeToUpdate()
     }
 
-    private fun subscribeToLessonStudents() = with(binding)
-    {
+    private fun subscribeToLessonStudents() = with(binding) {
         viewModel.lessonStudentsState.collectAsUIState(state = {
             it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = {
-            studentHomeworksAdapter.submitList(it)
+            if (it.isEmpty())
+            {
+                noHomeworks.visibility = View.VISIBLE
+                recyclerStudentHomeworks.visibility = View.GONE
+            }
+            else
+            {
+                studentHomeworksAdapter.submitList(it)
+            }
         })
     }
 
     private fun subscribeToUpdate()
     {
-        viewModel.updateState.collectAsUIState {  }
+        viewModel.updateState.collectAsUIState { }
     }
 
     override fun setupListeners()
@@ -72,8 +81,7 @@ class HomeworkFragment : BaseFragment<HomeworkViewModel, FragmentHomeworkBinding
         setupAddButtonListener()
     }
 
-    private fun setupAddButtonListener() = with(binding)
-    {
+    private fun setupAddButtonListener() = with(binding) {
         btnAddHomework.setOnClickListener {
             findNavController().navigateSafely(HomeworkFragmentDirections.actionHomeworkFragmentToAddHomeworkFragment())
         }

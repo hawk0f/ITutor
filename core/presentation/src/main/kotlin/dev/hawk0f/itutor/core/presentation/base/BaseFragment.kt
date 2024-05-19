@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.viewbinding.ViewBinding
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import dev.hawk0f.itutor.core.domain.NetworkError
@@ -128,6 +129,41 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewBinding>(@L
         {
             group.isVisible = !isVisible
             loader.isVisible = isVisible
+        }
+
+        when (this)
+        {
+            is UIState.Idle ->
+            {
+            }
+
+            is UIState.Loading -> showLoader(true)
+            is UIState.Error -> showLoader(false)
+            is UIState.Success -> showLoader(!showViewIfSuccess)
+        }
+    }
+
+    /**
+     * Setup views visibility depending on [UIState] states.
+     *
+     * @receiver [UIState]
+     *
+     * @param showViewIfSuccess whether to show views if the request is successful
+     */
+    protected fun <T> UIState<T>.setupViewVisibilityShimmer(group: Group, shimmerLayout: ShimmerFrameLayout, showViewIfSuccess: Boolean = true)
+    {
+        fun showLoader(isVisible: Boolean)
+        {
+            group.isVisible = !isVisible
+            if (isVisible)
+            {
+                shimmerLayout.startShimmer()
+            }
+            else
+            {
+                shimmerLayout.stopShimmer()
+            }
+            shimmerLayout.isVisible = isVisible
         }
 
         when (this)

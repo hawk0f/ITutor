@@ -5,7 +5,6 @@ import dev.hawk0f.itutor.core.domain.CurrentUser
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.models.NoteUI
-import dev.hawk0f.itutor.core.presentation.models.StudentUI
 import dev.hawk0f.itutor.core.presentation.models.toUi
 import dev.hawk0f.itutor.features.notes.domain.usecases.DeleteNoteUseCase
 import dev.hawk0f.itutor.features.notes.domain.usecases.FetchNotesUseCase

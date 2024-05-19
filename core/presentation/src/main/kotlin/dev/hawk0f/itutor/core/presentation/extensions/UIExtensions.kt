@@ -19,8 +19,6 @@ fun Fragment.showToastShort(text: String)
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 }
 
-fun Fragment.parentLoader(@IdRes loaderId: Int): LinearProgressIndicator = requireParentFragment().requireView().findViewById(loaderId)
-
 /**
  * Fast show [Toast]
  *

@@ -42,6 +42,8 @@
     <string name="lessons">Lessons</string>
     <string name="editing_lesson">Editing a lesson</string>
     <string name="adding_lesson">Adding a lesson</string>
+    <string name="adding_homework">Adding a homework</string>
+    <string name="editing_homework">Editing a homework</string>
     <string name="notes">Notes</string>
     <string name="editing_note">Editing a note</string>
     <string name="adding_note">Adding a note</string>

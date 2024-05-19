@@ -2,7 +2,6 @@ package dev.hawk0f.itutor.features.notes.presentation.ui.viewmodels
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.hawk0f.itutor.core.data.models.NoteDTO
-import dev.hawk0f.itutor.core.data.models.StudentDTO
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.models.NoteUI
@@ -30,8 +29,8 @@ class EditNoteViewModel @Inject constructor(private val updateNoteUseCase: Updat
     fun setNote(note: NoteUI)
     {
         id = note.id
-        header = note.header
-        text = note.text
+        header = note.fullHeader
+        text = note.fullText
         userId = note.userId
     }
 

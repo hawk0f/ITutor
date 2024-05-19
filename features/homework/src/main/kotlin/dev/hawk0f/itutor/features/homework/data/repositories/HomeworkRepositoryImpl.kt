@@ -17,6 +17,10 @@ class HomeworkRepositoryImpl @Inject constructor(private val lessonStudentServic
         lessonStudentService.addHomework(studentId, lessonId, homework)
     }
 
+    override fun updateHomework(studentId: Int, lessonId: Int, homework: String): RemoteWrapper<Unit> = doNetworkRequestUnit {
+        lessonStudentService.updateHomework(studentId, lessonId, homework)
+    }
+
     override fun updateHomeworkStatus(studentId: Int, lessonId: Int, isHomeworkDone: Boolean): RemoteWrapper<Unit> = doNetworkRequestUnit {
         lessonStudentService.updateHomeworkStatus(studentId, lessonId, isHomeworkDone)
     }

@@ -35,6 +35,7 @@
             android:background="@color/Transparent"
             android:hint="@string/note_header"
             android:inputType="text"
+            android:maxLength="30"
             android:text="@={viewmodel.header}"
             android:textAlignment="center"
             android:textSize="22sp"
@@ -48,7 +49,7 @@
             android:background="@color/Transparent"
             android:gravity="top|start"
             android:hint="@string/start_note_hear"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:maxLines="20"
             android:text="@={viewmodel.text}" />
 

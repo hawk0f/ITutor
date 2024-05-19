@@ -36,10 +36,12 @@
     <string name="error_note_delete">Ошибка при удалении заметки</string>
 
     //LessonStudent
-    <string name="error_get_payments_data">Ошибка получения данных о платежах</string>
+    <string name="error_get_lesson_students_data">Ошибка получения данных об учениках и занятиях</string>
+    <string name="error_get_lesson_student_data">Ошибка получения данных о задании ученика</string>
     <string name="error_update_payment_status">Ошибка при обновлении статуса платежа</string>
     <string name="error_update_homework_status">Ошибка при обновлении статуса задания</string>
-    <string name="error_add_homework">Ошибка добавления задания</string>
+    <string name="error_add_homework">Ошибка при добавлении задания</string>
+    <string name="error_update_homework">Ошибка при обновлении задания</string>
 
     //Subject
     <string name="error_get_subjects">Ошибка получения предметов</string>

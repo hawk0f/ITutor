@@ -14,6 +14,7 @@ import dev.hawk0f.itutor.features.homework.domain.repositories.HomeworkRepositor
 import dev.hawk0f.itutor.features.homework.domain.usecases.AddHomeworkUseCase
 import dev.hawk0f.itutor.features.homework.domain.usecases.FetchHomeworksUseCase
 import dev.hawk0f.itutor.features.homework.domain.usecases.UpdateHomeworkStatusUseCase
+import dev.hawk0f.itutor.features.homework.domain.usecases.UpdateHomeworkUseCase
 import dev.hawk0f.itutor.features.lessons.domain.repositories.LessonRepository
 import dev.hawk0f.itutor.features.lessons.domain.repositories.SubjectRepository
 import dev.hawk0f.itutor.features.lessons.domain.usecases.AddLessonUseCase
@@ -120,6 +121,9 @@ object DomainModule
 
     @Provides
     fun provideAddHomeworkUseCase(repository: HomeworkRepository) = AddHomeworkUseCase(repository)
+
+    @Provides
+    fun provideUpdateHomeworkUseCase(repository: HomeworkRepository) = UpdateHomeworkUseCase(repository)
 
     @Provides
     fun provideFetchHomeworksUseCase(repository: HomeworkRepository) = FetchHomeworksUseCase(repository)
