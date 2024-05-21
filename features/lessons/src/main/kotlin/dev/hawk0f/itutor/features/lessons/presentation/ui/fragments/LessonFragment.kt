@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.features.lessons.R
 import dev.hawk0f.itutor.features.lessons.databinding.FragmentLessonBinding
 import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.DateLessonsAdapter
 import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.LessonViewModel
 import dev.hawk0f.itutor.navigation.LessonFragmentDirections
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 @AndroidEntryPoint
 class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.layout.fragment_lesson)
@@ -34,6 +37,11 @@ class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.la
         with(recyclerDateLessons) {
             layoutManager = LinearLayoutManager(context)
             adapter = dateLessonsAdapter
+
+            itemAnimator = FadeInAnimator()
+
+            addItemDecoration(BaseHorizontalDividerItemDecoration(40))
+            addItemDecoration(BaseVerticalDividerItemDecoration(30, 10))
         }
     }
 

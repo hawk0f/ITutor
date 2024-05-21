@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import dev.hawk0f.itutor.core.presentation.R
 import dev.hawk0f.itutor.core.presentation.extensions.flowNavController
 
 /**

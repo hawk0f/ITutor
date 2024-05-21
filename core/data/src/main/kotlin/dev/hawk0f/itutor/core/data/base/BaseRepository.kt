@@ -100,23 +100,11 @@ abstract class BaseRepository
                 val message = exception.localizedMessage
                 if (BuildConfig.DEBUG)
                 {
-                    Log.d(this@BaseRepository.javaClass.simpleName, message ?: "Error occured!")
+                    Log.d(this@BaseRepository.javaClass.simpleName, message ?: "Error")
                 }
                 emit(Either.Left(NetworkError.Unexpected))
             }
         }
-    }
-
-    /**
-     * Converts the response body to a specific API error type.
-     *
-     * @receiver [ResponseBody] The response body.
-     * @return The API error object.
-     * @throws NullPointerException if the response body cannot be converted.
-     */
-    private inline fun <reified T> ResponseBody?.toApiError(): T
-    {
-        return this?.let { jsonClient.decodeFromString<T>(it.string()) } ?: throw NullPointerException("JsonUtil cannot convert from Json this class: ${T::class.java.simpleName}")
     }
 
     /**

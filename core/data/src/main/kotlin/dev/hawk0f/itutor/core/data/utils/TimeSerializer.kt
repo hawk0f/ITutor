@@ -14,7 +14,7 @@ object TimeSerializer : KSerializer<LocalTime>
 
     override val descriptor = PrimitiveSerialDescriptor("Time", PrimitiveKind.STRING)
 
-    override fun deserialize(decoder: Decoder) = LocalTime.parse(decoder.decodeString(), timeFormat)
+    override fun deserialize(decoder: Decoder): LocalTime = LocalTime.parse(decoder.decodeString(), timeFormat)
 
     override fun serialize(encoder: Encoder, value: LocalTime) = encoder.encodeString(value.format(timeFormat))
 }

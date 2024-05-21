@@ -1,5 +1,5 @@
 [versions]
-agp = "8.4.0"
+agp = "8.4.1"
 kotlin = "2.0.0-RC2"
 kotlinx-serialization = "1.6.3"
 coroutines = "1.8.1"
@@ -20,10 +20,8 @@ dagger = "2.51.1"
 mp-android-chart = "3.1.0"
 annotationJvm = "1.8.0"
 shimmer = "0.5.0"
-junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-appcompat = "1.6.1"
+recycler-view-animators = "4.0.2"
+security = "1.1.0-alpha06"
 
 [libraries]
 # Kotlin
@@ -50,6 +48,9 @@ androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "
 
 # Chart Libraries
 mp-android-chart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mp-android-chart" }
+
+# RecyclerView Animations
+recycler-view-animators = { module = "jp.wasabeef:recyclerview-animators", version.ref = "recycler-view-animators" }
 
 # Lifecycle
 androidx-lifecycle-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
@@ -84,10 +85,9 @@ androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jv
 
 # Shimmer
 shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmer" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+# Security
+androidx-security-crypto = { module = "androidx.security:security-crypto-ktx", version.ref = "security" }
 
 [plugins]
 # AGP - Android Gradle Plugin

@@ -14,6 +14,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.*
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
 import dev.hawk0f.itutor.features.finance.R
@@ -171,16 +172,13 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
     }
 
     private fun buildMpChartForPreviousThreeMonths(payments: List<List<LessonStudentUI>>) = with(binding) {
-        val firstMonthProfit =
-            payments[0].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
+        val firstMonthProfit = payments[0].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
         val firstMonthPotentialProfit = payments[0].sumOf { it.price.toInt() }.toFloat()
 
-        val secondMonthProfit =
-            payments[1].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
+        val secondMonthProfit = payments[1].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
         val secondMonthPotentialProfit = payments[1].sumOf { it.price.toInt() }.toFloat()
 
-        val thirdMonthProfit =
-            payments[2].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
+        val thirdMonthProfit = payments[2].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
         val thirdMonthPotentialProfit = payments[2].sumOf { it.price.toInt() }.toFloat()
 
         val entriesGroup1: ArrayList<BarEntry> = ArrayList()
@@ -242,28 +240,22 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
     }
 
     private fun buildMpChartForPreviousSixMonths(payments: List<List<LessonStudentUI>>) = with(binding) {
-        val firstMonthProfit =
-            payments[0].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
-        val firstMonthPotentialProfit = payments[3].sumOf { it.price.toInt() }.toFloat()
+        val firstMonthProfit = payments[0].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
+        val firstMonthPotentialProfit = payments[0].sumOf { it.price.toInt() }.toFloat()
 
-        val secondMonthProfit =
-            payments[1].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
-        val secondMonthPotentialProfit = payments[4].sumOf { it.price.toInt() }.toFloat()
+        val secondMonthProfit = payments[1].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
+        val secondMonthPotentialProfit = payments[1].sumOf { it.price.toInt() }.toFloat()
 
-        val thirdMonthProfit =
-            payments[2].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
-        val thirdMonthPotentialProfit = payments[5].sumOf { it.price.toInt() }.toFloat()
+        val thirdMonthProfit = payments[2].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
+        val thirdMonthPotentialProfit = payments[2].sumOf { it.price.toInt() }.toFloat()
 
-        val fourthPrevMonthProfit =
-            payments[3].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
+        val fourthPrevMonthProfit = payments[3].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
         val fourthMonthPotentialProfit = payments[3].sumOf { it.price.toInt() }.toFloat()
 
-        val fifthMonthProfit =
-            payments[4].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
+        val fifthMonthProfit = payments[4].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
         val fifthMonthPotentialProfit = payments[4].sumOf { it.price.toInt() }.toFloat()
 
-        val sixthMonthProfit =
-            payments[5].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
+        val sixthMonthProfit = payments[5].filter { it.hasPaid }.sumOf { it.price.toInt() }.toFloat()
         val sixthMonthPotentialProfit = payments[5].sumOf { it.price.toInt() }.toFloat()
 
         val entriesGroup1: ArrayList<BarEntry> = ArrayList<BarEntry>().apply {
@@ -368,9 +360,9 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
         }
         else
         {
-            set1 = BarDataSet(entriesGroup1, "Фактический доход")
+            set1 = BarDataSet(entriesGroup1, getString(string.actual_revenue))
             set1.setColor(Color.rgb(104, 241, 175))
-            set2 = BarDataSet(entriesGroup2, "Ожидаемый доход")
+            set2 = BarDataSet(entriesGroup2, getString(string.expected_revenue))
             set2.setColor(Color.rgb(164, 228, 251))
 
             val data = BarData(set1, set2)
@@ -386,8 +378,7 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
         val list = ArrayList<String>()
         while (i >= 0)
         {
-            list.add(LocalDate.now()
-                .minusMonths(i.toLong()).month.getDisplayName(SHORT_STANDALONE, Locale.getDefault()))
+            list.add(LocalDate.now().minusMonths(i.toLong()).month.getDisplayName(SHORT_STANDALONE, Locale.getDefault()))
             i--
         }
         return list

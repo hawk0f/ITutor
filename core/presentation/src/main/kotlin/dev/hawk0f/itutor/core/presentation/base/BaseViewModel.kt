@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import dev.hawk0f.itutor.core.domain.Either
 import dev.hawk0f.itutor.core.domain.NetworkError
 import dev.hawk0f.itutor.core.presentation.UIState
-import dev.hawk0f.itutor.core.presentation.reset
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

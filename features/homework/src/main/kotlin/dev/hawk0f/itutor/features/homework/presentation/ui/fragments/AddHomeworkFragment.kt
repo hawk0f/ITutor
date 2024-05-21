@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.*
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.fullText
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
@@ -60,7 +61,7 @@ class AddHomeworkFragment : BaseFragment<AddHomeworkViewModel, FragmentAddHomewo
             }
             else
             {
-                val lessonAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, lessonsList.map { lessonStudent -> "Дата: " + lessonStudent.date.parseToFormat("d MMMM") + ". Время: " + lessonStudent.startTime + " - " + lessonStudent.endTime }.distinct())
+                val lessonAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, lessonsList.map { lessonStudent -> getString(string.date_custom_input) + lessonStudent.date.parseToFormat("d MMMM") + getString(string.time_custom_input) + lessonStudent.startTime + " - " + lessonStudent.endTime }.distinct())
                 lessonDropDown.setAdapter(lessonAdapter)
 
                 if (lessonDropDown.fullText.isEmpty())
@@ -113,7 +114,7 @@ class AddHomeworkFragment : BaseFragment<AddHomeworkViewModel, FragmentAddHomewo
                 }
                 else
                 {
-                    showToastLong("Введите домашнее задание")
+                    showToastLong(string.fill_homework_text)
                 }
             }
         }

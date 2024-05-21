@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.features.students.R
 import dev.hawk0f.itutor.features.students.databinding.FragmentStudentBinding
 import dev.hawk0f.itutor.features.students.presentation.ui.adapters.StudentAdapter
 import dev.hawk0f.itutor.features.students.presentation.ui.viewmodels.StudentsViewModel
 import dev.hawk0f.itutor.navigation.StudentFragmentDirections
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 @AndroidEntryPoint
 class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(R.layout.fragment_student)
@@ -34,6 +37,11 @@ class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(
         with(recyclerStudents) {
             layoutManager = LinearLayoutManager(context)
             adapter = studentAdapter
+
+            itemAnimator = FadeInAnimator()
+
+            addItemDecoration(BaseHorizontalDividerItemDecoration(40))
+            addItemDecoration(BaseVerticalDividerItemDecoration(30, 10))
         }
     }
 

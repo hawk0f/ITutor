@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.*
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.setupIsEmptyValidator
 import dev.hawk0f.itutor.core.presentation.extensions.setupNameValidator
@@ -88,7 +89,7 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
         viewModel.updateState.collectAsUIState(state = {
             it.setupViewVisibilityCircular(group, loader,false)
         }, onSuccess = {
-            showToastLong("Успешно обновлено")
+            showToastLong(string.success_student_updated)
             findNavController().popBackStack()
         })
     }
@@ -110,7 +111,14 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
                 Pair(viewModel.validateIsEmpty, singlePriceLayout),
                 Pair(viewModel.validateIsEmpty, groupPriceLayout)
             ) {
-                viewModel.updateStudent()
+                if (viewModel.isUpdateNeeded())
+                {
+                    viewModel.updateStudent()
+                }
+                else
+                {
+                    findNavController().popBackStack()
+                }
             }
         }
     }

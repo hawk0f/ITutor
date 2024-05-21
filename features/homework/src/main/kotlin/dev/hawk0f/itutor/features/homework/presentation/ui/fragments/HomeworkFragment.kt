@@ -7,12 +7,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.features.homework.R
 import dev.hawk0f.itutor.features.homework.databinding.FragmentHomeworkBinding
 import dev.hawk0f.itutor.features.homework.presentation.ui.adapters.StudentHomeworksAdapter
 import dev.hawk0f.itutor.features.homework.presentation.ui.viewmodels.HomeworkViewModel
 import dev.hawk0f.itutor.navigation.HomeworkFragmentDirections
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 @AndroidEntryPoint
 class HomeworkFragment : BaseFragment<HomeworkViewModel, FragmentHomeworkBinding>(R.layout.fragment_homework)
@@ -36,6 +39,11 @@ class HomeworkFragment : BaseFragment<HomeworkViewModel, FragmentHomeworkBinding
         with(recyclerStudentHomeworks) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = studentHomeworksAdapter
+
+            itemAnimator = FadeInAnimator()
+
+            addItemDecoration(BaseHorizontalDividerItemDecoration(40))
+            addItemDecoration(BaseVerticalDividerItemDecoration(30, 10))
         }
     }
 

@@ -87,7 +87,7 @@
                 android:background="@color/Transparent"
                 android:gravity="top|start"
                 android:text="@={viewmodel.homework}"
-                android:hint="Введите домашнее задание"
+                android:hint="@string/enter_homework_hear"
                 android:inputType="textMultiLine"
                 android:maxLines="20" />
 

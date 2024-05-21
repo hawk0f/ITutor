@@ -112,7 +112,7 @@ fun Fragment.overrideOnBackPressed(onBackPressed: OnBackPressedCallback.() -> Un
 }
 
 /**
- * Get parent fragment if parent fragment is [FlowFragment][dev.hawk0f.core.presentation.base.BaseFlowFragment].
+ * Get parent fragment if parent fragment is [FlowFragment][dev.hawk0f.itutor.core.presentation.base.BaseFlowFragment].
  *
  * &nbsp
  *

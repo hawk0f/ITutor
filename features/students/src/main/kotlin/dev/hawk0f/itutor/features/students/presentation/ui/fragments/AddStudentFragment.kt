@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.*
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.setupIsEmptyValidator
 import dev.hawk0f.itutor.core.presentation.extensions.setupNameValidator
@@ -13,7 +14,6 @@ import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
 import dev.hawk0f.itutor.features.students.R
 import dev.hawk0f.itutor.features.students.databinding.FragmentAddStudentBinding
 import dev.hawk0f.itutor.features.students.presentation.ui.viewmodels.AddStudentViewModel
-import ru.tinkoff.decoro.FormattedTextChangeListener
 import ru.tinkoff.decoro.MaskImpl
 import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
 import ru.tinkoff.decoro.watchers.FormatWatcher
@@ -61,7 +61,7 @@ class AddStudentFragment : BaseFragment<AddStudentViewModel, FragmentAddStudentB
         viewModel.addState.collectAsUIState(state = {
             it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
-            showToastLong("Успешное добавление")
+            showToastLong(string.success_student_added)
             findNavController().popBackStack()
         })
     }

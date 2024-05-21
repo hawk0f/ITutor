@@ -13,6 +13,7 @@
     <string name="save_changes">Сохранить изменения</string>
     <string name="note_header">Заголовок</string>
     <string name="start_note_hear">Начните писать свою заметку здесь</string>
+    <string name="enter_homework_hear">Введите домашнее задание здесь</string>
     <string name="name">Имя</string>
     <string name="date">Дата</string>
     <string name="startTime">Время начала</string>
@@ -49,5 +50,18 @@
     <string name="adding_note">Добавление заметки</string>
     <string name="finance">Финансы</string>
     <string name="homework">Задания</string>
+
+    <string name="choose_lesson">Выберите занятие</string>
+    <string name="choose_student">Выберите ученика</string>
+
+    <string name="date_custom_input">Дата: </string>
+    <string name="time_custom_input">. Время: </string>
+
+    <string name="all_students_have_homework">У всех учеников есть домашние задания</string>
+
+    <string name="no_homeworks">Вы не добавляли ни одного домашнего задания</string>
+
+    <string name="actual_revenue">Фактический доход</string>
+    <string name="expected_revenue">Ожидаемый доход</string>
 
 </resources>

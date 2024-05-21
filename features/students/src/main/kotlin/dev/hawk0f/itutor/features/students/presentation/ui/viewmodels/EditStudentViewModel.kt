@@ -17,6 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class EditStudentViewModel @Inject constructor(private val getStudentByIdUseCase: GetStudentByIdUseCase, val validateName: ValidateName, val validateIsEmpty: ValidateIsEmpty, val validatePhone: ValidatePhone, private val updateStudentUseCase: UpdateStudentUseCase) : BaseViewModel()
 {
+    private var oldName = ""
+    private var oldSurname = ""
+    private var oldAge = ""
+    private var oldPhoneNumber = ""
+    private var oldSinglePrice = ""
+    private var oldGroupPrice = ""
+    private var oldNote = ""
     private var id = 0
     var name = ""
     var surname = ""
@@ -44,11 +51,20 @@ class EditStudentViewModel @Inject constructor(private val getStudentByIdUseCase
         groupPrice = student.groupPrice.toInt().toString()
         note = student.note
         userId = student.userId
+        oldName = name
+        oldSurname = surname
+        oldAge = age
+        oldPhoneNumber = phoneNumber
+        oldSinglePrice = singlePrice
+        oldGroupPrice = groupPrice
+        oldNote = note
     }
 
     fun getStudentById(studentId: Int) = getStudentByIdUseCase(studentId).collectNetworkRequestWithMapping(_studentState) {
         it.toUi()
     }
+
+    fun isUpdateNeeded() = oldName != name || oldSurname != surname || oldAge != age || oldPhoneNumber != phoneNumber || oldSinglePrice != singlePrice || oldGroupPrice != groupPrice || oldNote != note
 
     fun updateStudent() = updateStudentUseCase(
         StudentDTO(

@@ -5,9 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.hawk0f.itutor.core.presentation.base.BaseDiffUtilItemCallback
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.core.presentation.models.DatePaymentsUI
 import dev.hawk0f.itutor.features.finance.databinding.DatePaymentsItemBinding
 import dev.hawk0f.itutor.features.finance.presentation.ui.adapters.DatePaymentsAdapter.DatePaymentsViewHolder
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 class DatePaymentsAdapter(private val onUpdateClick: (studentId: Int, lessonId: Int, hasPaid: Boolean) -> Unit) : ListAdapter<DatePaymentsUI, DatePaymentsViewHolder>(BaseDiffUtilItemCallback())
 {
@@ -24,7 +27,16 @@ class DatePaymentsAdapter(private val onUpdateClick: (studentId: Int, lessonId: 
             date.text = datePayments.date
             val lessonAdapter = PaymentAdapter(onUpdateClick)
             lessonAdapter.submitList(datePayments.payments)
-            recyclerPayments.adapter = lessonAdapter
+
+            with(recyclerPayments)
+            {
+                adapter = lessonAdapter
+
+                itemAnimator = FadeInAnimator()
+
+                addItemDecoration(BaseHorizontalDividerItemDecoration(0))
+                addItemDecoration(BaseVerticalDividerItemDecoration(20, 10))
+            }
         }
 
         companion object

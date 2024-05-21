@@ -14,6 +14,7 @@ plugins {
 
 android {
     namespace = "dev.hawk0f.itutor.core.presentation"
+
     compileSdk = 34
 
     defaultConfig {
@@ -53,6 +54,8 @@ dependencies {
 
     // Shimmer
     api(libs.shimmer)
+
+    api(libs.recycler.view.animators)
 
     // LiveData
     api(libs.androidx.lifecycle.livedata)

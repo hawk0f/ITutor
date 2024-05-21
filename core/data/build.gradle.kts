@@ -10,6 +10,7 @@ plugins {
 
 android {
     namespace = "dev.hawk0f.itutor.core.data"
+
     compileSdk = 34
 
     defaultConfig {
@@ -17,11 +18,11 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             buildConfigField("String", "BASE_URL", "\"http://212.113.120.163:5110/api/\"")
         }
 
-        getByName("debug") {
+        debug {
             buildConfigField("String", "BASE_URL", "\"http://212.113.120.163:5110/api/\"")
         }
     }
@@ -45,6 +46,8 @@ dependencies {
 
     // Kotlin
     api(libs.kotlinx.serialization)
+
+    implementation(libs.androidx.security.crypto)
 
     // Retrofit
     api(libs.retrofit)

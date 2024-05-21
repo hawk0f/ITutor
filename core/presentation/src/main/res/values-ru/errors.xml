@@ -10,11 +10,14 @@
 
     <string name="complete_your_phone_number">Допишите номер телефона до конца</string>
 
-    <string name="password_do_not_match">Пароли не совпадают</string>
     <string name="password_must_not_be_less_than_6_characters">Пароль не должен быть меньше 6 символов</string>
 
     <string name="server_connection_error">Ошибка соединения с сервером</string>
 
-    <string name="fill_note_text">Текст заметки должен быть введён</string>
+    <string name="fill_note_text">Введите текст для заметки</string>
+
+    <string name="choose_students">Выберите учеников для занятия</string>
+
+    <string name="fill_homework_text">Введите домашнее задание</string>
 
 </resources>

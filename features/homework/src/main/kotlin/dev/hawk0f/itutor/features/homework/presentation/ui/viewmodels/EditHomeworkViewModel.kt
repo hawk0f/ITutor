@@ -6,15 +6,15 @@ import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
 import dev.hawk0f.itutor.core.presentation.models.toUi
-import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateIsEmpty
 import dev.hawk0f.itutor.features.homework.domain.usecases.FetchHomeworksUseCase
 import dev.hawk0f.itutor.features.homework.domain.usecases.UpdateHomeworkUseCase
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class EditHomeworkViewModel @Inject constructor(private val updateHomeworkUseCase: UpdateHomeworkUseCase, private val fetchHomeworksUseCase: FetchHomeworksUseCase, private val currentUser: CurrentUser, val validateIsEmpty: ValidateIsEmpty) : BaseViewModel()
+class EditHomeworkViewModel @Inject constructor(private val updateHomeworkUseCase: UpdateHomeworkUseCase, private val fetchHomeworksUseCase: FetchHomeworksUseCase, private val currentUser: CurrentUser) : BaseViewModel()
 {
+    private var oldHomework = ""
     var homework = ""
     private var lessonId = 0
     private var studentId = 0
@@ -30,6 +30,8 @@ class EditHomeworkViewModel @Inject constructor(private val updateHomeworkUseCas
     }
 
     fun updateHomework() = updateHomeworkUseCase(studentId, lessonId, homework).collectNetworkRequest(_updateState)
+
+    fun isUpdateNeeded() = oldHomework != homework
 
     fun setLessonId(lessonId: Int)
     {
@@ -49,5 +51,10 @@ class EditHomeworkViewModel @Inject constructor(private val updateHomeworkUseCas
     fun getLessonId() : Int
     {
         return lessonId
+    }
+
+    fun setOldHomework(homework: String)
+    {
+        oldHomework = homework
     }
 }

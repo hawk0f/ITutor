@@ -15,6 +15,7 @@ plugins {
 
 android {
     namespace = "dev.hawk0f.itutor.features.maincontent"
+
     compileSdk = 34
 
     defaultConfig {
@@ -28,6 +29,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21

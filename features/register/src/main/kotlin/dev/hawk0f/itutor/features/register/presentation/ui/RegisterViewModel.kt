@@ -1,6 +1,7 @@
 package dev.hawk0f.itutor.features.register.presentation.ui
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.hawk0f.itutor.core.data.local.UserDataPreferences
 import dev.hawk0f.itutor.core.data.models.UserDTO
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val registerUserUseCase: RegisterUserUseCase, val validateName: ValidateName, val validateEmail: ValidateEmail, val validatePassword: ValidatePassword) : BaseViewModel()
+class RegisterViewModel @Inject constructor(val userDataPreferences: UserDataPreferences, private val registerUserUseCase: RegisterUserUseCase, val validateName: ValidateName, val validateEmail: ValidateEmail, val validatePassword: ValidatePassword) : BaseViewModel()
 {
     var name = ""
     var surname = ""

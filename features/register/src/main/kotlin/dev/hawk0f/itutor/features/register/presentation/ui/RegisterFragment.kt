@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.data.local.UserDataPreferences
 import dev.hawk0f.itutor.core.domain.CurrentUser
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.hideKeyboard
@@ -16,6 +17,7 @@ import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
 import dev.hawk0f.itutor.features.register.R
 import dev.hawk0f.itutor.features.register.databinding.FragmentRegisterBinding
 import dev.hawk0f.itutor.navigation.RegisterFragmentDirections
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding>(R.layout.fragment_register)
@@ -29,8 +31,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
         setupViewModel()
     }
 
-    private fun setupFields() = with(binding)
-    {
+    private fun setupFields() = with(binding) {
         viewModel.clearFields()
         nameLayout.setupNameValidator()
         surnameLayout.setupNameValidator()
@@ -55,15 +56,9 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
         }
     }
 
-    private fun setupRegButtonListener() = with(binding)
-    {
-        btnSignUp.setOnClickListener{
-            validateInputs(
-                Pair(viewModel.validateName, nameLayout),
-                Pair(viewModel.validateName, surnameLayout),
-                Pair(viewModel.validateEmail, emailLayout),
-                Pair(viewModel.validatePassword, passwordLayout)
-            ) {
+    private fun setupRegButtonListener() = with(binding) {
+        btnSignUp.setOnClickListener {
+            validateInputs(Pair(viewModel.validateName, nameLayout), Pair(viewModel.validateName, surnameLayout), Pair(viewModel.validateEmail, emailLayout), Pair(viewModel.validatePassword, passwordLayout)) {
                 viewModel.registerUser()
             }
         }
@@ -79,8 +74,8 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
             hideKeyboard()
             it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
+            viewModel.userDataPreferences.userId = it.id
             CurrentUser.setUserId(it.id)
-            showToastLong("Добро пожаловать, ${it.name}")
             findNavController().navigateSafely(RegisterFragmentDirections.actionRegisterFragmentToMainContentFragment())
         })
     }

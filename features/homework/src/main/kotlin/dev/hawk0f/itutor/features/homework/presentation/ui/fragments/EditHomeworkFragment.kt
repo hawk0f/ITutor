@@ -1,15 +1,14 @@
 package dev.hawk0f.itutor.features.homework.presentation.ui.fragments
 
-import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.string
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.fullText
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
-import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
 import dev.hawk0f.itutor.features.homework.R
 import dev.hawk0f.itutor.features.homework.databinding.FragmentEditHomeworkBinding
 import dev.hawk0f.itutor.features.homework.presentation.ui.viewmodels.EditHomeworkViewModel
@@ -32,6 +31,7 @@ class EditHomeworkFragment : BaseFragment<EditHomeworkViewModel, FragmentEditHom
         viewModel.setLessonId(args.lessonId)
         viewModel.setStudentId(args.studentId)
         viewModel.homework = args.homework
+        viewModel.setOldHomework(args.homework)
     }
 
     private fun setupViewModel() = with(binding) {
@@ -61,7 +61,8 @@ class EditHomeworkFragment : BaseFragment<EditHomeworkViewModel, FragmentEditHom
         }, onSuccess = {
             val indexOfCurrentLesson =
                 it.indexOfFirst { lessonStudent -> lessonStudent.lessonId == viewModel.getLessonId() }
-            lessonEditText.setText("Дата: " + it[indexOfCurrentLesson].date.parseToFormat("d MMMM") + "\nВремя: " + it[indexOfCurrentLesson].startTime + " - " + it[indexOfCurrentLesson].endTime)
+            val lessonText = getString(string.date_custom_input) + it[indexOfCurrentLesson].date.parseToFormat("d MMMM") + getString(string.time_custom_input) + it[indexOfCurrentLesson].startTime + " - " + it[indexOfCurrentLesson].endTime
+            lessonEditText.setText(lessonText)
 
             val currentStudent =
                 it.first { lessonStudent -> lessonStudent.studentId == viewModel.getStudentId() }
@@ -88,11 +89,18 @@ class EditHomeworkFragment : BaseFragment<EditHomeworkViewModel, FragmentEditHom
         btnUpdateHomework.setOnClickListener {
             if (homeworkEditText.fullText.isNotEmpty())
             {
-                viewModel.updateHomework()
+                if (viewModel.isUpdateNeeded())
+                {
+                    viewModel.updateHomework()
+                }
+                else
+                {
+                    findNavController().popBackStack()
+                }
             }
             else
             {
-                showToastLong("Введите домашнее задание")
+                showToastLong(string.fill_homework_text)
             }
         }
     }

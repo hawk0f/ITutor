@@ -6,7 +6,6 @@ import dev.hawk0f.itutor.core.presentation.base.IBaseDiffModel
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
 import java.io.Serializable
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 data class LessonUI(
     override val id: Int,

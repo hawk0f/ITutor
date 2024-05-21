@@ -11,7 +11,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.string
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.core.presentation.extensions.parseToDate
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
@@ -19,14 +22,15 @@ import dev.hawk0f.itutor.core.presentation.extensions.parseToTime
 import dev.hawk0f.itutor.core.presentation.extensions.setupIsEmptyValidator
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
-import dev.hawk0f.itutor.core.presentation.models.StudentInLessonUI
 import dev.hawk0f.itutor.core.presentation.models.LessonUI
+import dev.hawk0f.itutor.core.presentation.models.StudentInLessonUI
 import dev.hawk0f.itutor.features.lessons.R
 import dev.hawk0f.itutor.features.lessons.databinding.FragmentEditLessonBinding
 import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.LessonStudentsAdapter
 import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.EditLessonViewModel
 import dev.hawk0f.itutor.navigation.EditLessonFragmentArgs
 import dev.hawk0f.itutor.navigation.EditLessonFragmentDirections
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
@@ -81,6 +85,11 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
         with(recyclerStudents) {
             layoutManager = LinearLayoutManager(context)
             adapter = lessonStudentsAdapter
+
+            itemAnimator = FadeInAnimator()
+
+            addItemDecoration(BaseHorizontalDividerItemDecoration(0))
+            addItemDecoration(BaseVerticalDividerItemDecoration(30, 15))
         }
     }
 
@@ -141,7 +150,7 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
         viewModel.updateState.collectAsUIState(state = {
             it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
-            showToastLong("Обновлён")
+            showToastLong(string.success_lesson_updated)
             findNavController().popBackStack()
         })
     }
@@ -158,7 +167,7 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
 
     private fun updateAdapterList()
     {
-        val list = ArrayList<StudentInLessonUI>()
+        val list = mutableListOf<StudentInLessonUI>()
         viewModel.allStudents.forEach {
             if (viewModel.getStudentsIds().contains(it.id))
             {
@@ -182,11 +191,15 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
             validateInputs(Pair(viewModel.validateIsEmpty, subjectLayout)) {
                 if (lessonStudentsAdapter.currentList.isEmpty())
                 {
-                    showToastLong("Выберите учеников")
+                    showToastLong(string.choose_students)
+                }
+                else if (viewModel.isUpdateNeeded())
+                {
+                    viewModel.updateLesson()
                 }
                 else
                 {
-                    viewModel.updateLesson()
+                    findNavController().popBackStack()
                 }
             }
         }
@@ -218,7 +231,7 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
 
         builderDate.addOnPositiveButtonClickListener {
             val calendar: Calendar = Calendar.getInstance()
-            calendar.setTimeInMillis(it)
+            calendar.timeInMillis = it
             viewModel.date = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
             viewModel.parsedDate = viewModel.date.parseToFormat("dd.MM.yyyy")
 

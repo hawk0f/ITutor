@@ -1,8 +1,10 @@
 package dev.hawk0f.itutor.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.hawk0f.itutor.core.data.apiservices.LessonService
 import dev.hawk0f.itutor.core.data.apiservices.NoteService
@@ -10,6 +12,8 @@ import dev.hawk0f.itutor.core.data.apiservices.LessonStudentService
 import dev.hawk0f.itutor.core.data.apiservices.StudentService
 import dev.hawk0f.itutor.core.data.apiservices.SubjectService
 import dev.hawk0f.itutor.core.data.apiservices.UserService
+import dev.hawk0f.itutor.core.data.local.PreferencesClient
+import dev.hawk0f.itutor.core.data.local.UserDataPreferences
 import dev.hawk0f.itutor.core.data.remote.NetworkClient
 import dev.hawk0f.itutor.features.auth.data.repositories.UserAuthRepositoryImpl
 import dev.hawk0f.itutor.features.auth.domain.repositories.UserAuthRepository
@@ -100,4 +104,13 @@ object DataModule
     @Singleton
     @Provides
     fun provideNetworkClient(): NetworkClient = NetworkClient()
+
+    // Shared Preferences
+    @Singleton
+    @Provides
+    fun providePreferencesClient(@ApplicationContext context: Context): PreferencesClient = PreferencesClient(context)
+
+    @Singleton
+    @Provides
+    fun provideUserDataPreferences(preferencesClient: PreferencesClient): UserDataPreferences = UserDataPreferences(preferencesClient)
 }

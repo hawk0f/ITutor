@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.serialization)
-    
+
     // Navigation Safe Args
     alias(libs.plugins.androidx.navigation.safeArgs)
 
@@ -18,6 +18,7 @@ plugins {
 
 android {
     namespace = "dev.hawk0f.itutor.features.register"
+
     compileSdk = 34
 
     defaultConfig {
@@ -32,6 +33,7 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21

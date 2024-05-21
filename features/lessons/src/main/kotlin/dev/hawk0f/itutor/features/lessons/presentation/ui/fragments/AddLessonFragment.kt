@@ -11,7 +11,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.string
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.core.presentation.extensions.parseToDate
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
@@ -26,6 +29,7 @@ import dev.hawk0f.itutor.features.lessons.presentation.ui.adapters.LessonStudent
 import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.AddLessonViewModel
 import dev.hawk0f.itutor.navigation.AddLessonFragmentArgs
 import dev.hawk0f.itutor.navigation.AddLessonFragmentDirections
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
@@ -65,6 +69,11 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         with(recyclerStudents) {
             layoutManager = LinearLayoutManager(context)
             adapter = lessonStudentsAdapter
+
+            itemAnimator = FadeInAnimator()
+
+            addItemDecoration(BaseHorizontalDividerItemDecoration(20))
+            addItemDecoration(BaseVerticalDividerItemDecoration(20, 10))
         }
     }
 
@@ -97,8 +106,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     private fun subscribeToSubjects() = with(binding) {
         viewModel.subjectState.collectAsUIState {
-            val adapter =
-                ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
+            val adapter = ArrayAdapter(requireContext(), R.layout.subject_item, it.map { subject -> subject.subjectName })
             subjectDropDown.setAdapter(adapter)
             subjectDropDown.setOnItemClickListener { _, _, position, _ ->
                 viewModel.setSubjectId(it[position].id)
@@ -110,25 +118,24 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         viewModel.addState.collectAsUIState(state = {
             it.setupViewVisibilityCircular(group, loader, false)
         }, onSuccess = {
-            showToastLong("Добавлен")
+            showToastLong(string.success_lesson_added)
             findNavController().popBackStack()
         })
     }
 
-    private fun subscribeToLessonStudents() = with(binding) {
-        viewModel.lessonStudentsState.collectAsUIState(state = {
-            it.setupViewVisibilityCircular(group, loader)
-        }, onSuccess = { list ->
+    private fun subscribeToLessonStudents()
+    {
+        viewModel.lessonStudentsState.collectAsUIState { list ->
             viewModel.allStudents.clear()
             viewModel.allStudents.addAll(list)
 
             updateAdapterList()
-        })
+        }
     }
 
     private fun updateAdapterList()
     {
-        val list = ArrayList<StudentInLessonUI>()
+        val list = mutableListOf<StudentInLessonUI>()
         viewModel.allStudents.forEach {
             if (viewModel.getStudentsIds().contains(it.id))
             {
@@ -152,7 +159,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
             validateInputs(Pair(viewModel.validateIsEmpty, subjectLayout)) {
                 if (lessonStudentsAdapter.currentList.isEmpty())
                 {
-                    showToastLong("Выберите учеников")
+                    showToastLong(string.choose_students)
                 }
                 else
                 {
@@ -170,9 +177,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
     private fun setupDatePicker() = with(binding) {
         dateTv.inputType = InputType.TYPE_NULL
-        val selectedDateInMilliseconds =
-            viewModel.parsedDate.parseToDate("dd.MM.yyyy").atStartOfDay(ZoneId.systemDefault())
-                .toInstant().toEpochMilli()
+        val selectedDateInMilliseconds = viewModel.parsedDate.parseToDate("dd.MM.yyyy").atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
         val builderDate = Builder.datePicker().setSelection(selectedDateInMilliseconds).build()
 
@@ -188,9 +193,8 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
 
         builderDate.addOnPositiveButtonClickListener {
             val calendar: Calendar = Calendar.getInstance()
-            calendar.setTimeInMillis(it)
-            val date =
-                LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
+            calendar.timeInMillis = it
+            val date = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
             viewModel.parsedDate = date.parseToFormat("dd.MM.yyyy")
             viewModel.date = date
 
@@ -204,8 +208,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         val builderTime = provideTimePicker(selectedTime, startTimeTv, "StartTime")
 
         builderTime.addOnPositiveButtonClickListener {
-            viewModel.startTime =
-                LocalTime.of(builderTime.hour, builderTime.minute).parseToFormat("HH:mm")
+            viewModel.startTime = LocalTime.of(builderTime.hour, builderTime.minute).parseToFormat("HH:mm")
             startTimeTv.setText(viewModel.startTime)
         }
     }
@@ -216,8 +219,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
         val builderTime = provideTimePicker(selectedTime, endTimeTv, "EndTime")
 
         builderTime.addOnPositiveButtonClickListener {
-            viewModel.endTime =
-                LocalTime.of(builderTime.hour, builderTime.minute).parseToFormat("HH:mm")
+            viewModel.endTime = LocalTime.of(builderTime.hour, builderTime.minute).parseToFormat("HH:mm")
             endTimeTv.setText(viewModel.endTime)
         }
     }
@@ -226,9 +228,7 @@ class AddLessonFragment : BaseFragment<AddLessonViewModel, FragmentAddLessonBind
     {
         timeTv.inputType = InputType.TYPE_NULL
 
-        val builderTime = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H)
-            .setHour(selectedTime.hour).setMinute(selectedTime.minute)
-            .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK).build()
+        val builderTime = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).setHour(selectedTime.hour).setMinute(selectedTime.minute).setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK).build()
 
         timeTv.setOnClickListener {
             builderTime.show(childFragmentManager, tag)

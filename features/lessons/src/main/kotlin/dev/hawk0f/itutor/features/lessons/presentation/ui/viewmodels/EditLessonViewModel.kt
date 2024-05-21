@@ -28,6 +28,11 @@ import javax.inject.Inject
 @HiltViewModel
 class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val getLessonByIdUseCase: GetLessonByIdUseCase, private val updateLessonUseCase: UpdateLessonUseCase, private val currentUser: CurrentUser, val validateIsEmpty: ValidateIsEmpty) : BaseViewModel()
 {
+    private var oldParserDate = ""
+    private var oldStartTime = ""
+    private var oldEndTime = ""
+    private var oldStudentsIds = listOf<Int>()
+    private var oldSubjectId = 0
     private var id = 0
     var parsedDate: String = LocalDate.now().parseToFormat("dd.MM.yyyy")
     var date: LocalDate = LocalDate.now()
@@ -35,7 +40,7 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
     var endTime: String = LocalTime.now().plusHours(1).parseToFormat("HH:mm")
     var subject = ""
     private var subjectId = 0
-    private var studentsIds = ArrayList<Int>()
+    private var studentsIds = mutableListOf<Int>()
     private var userId = 0
 
     var allStudents = ArrayList<StudentInLessonUI>()
@@ -69,7 +74,7 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
 
     fun updateLesson() = updateLessonUseCase(LessonDTO(id = id, date = parsedDate.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = userId)).collectNetworkRequest(_updateState)
 
-    fun getStudentsIds(): ArrayList<Int>
+    fun getStudentsIds(): List<Int>
     {
         return studentsIds
     }
@@ -78,6 +83,8 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
     {
         studentsIds.remove(id)
     }
+
+    fun isUpdateNeeded() = oldParserDate != parsedDate || oldStartTime != startTime || oldEndTime != endTime || oldSubjectId != subjectId || oldStudentsIds != studentsIds
 
     fun setSubjectId(id: Int)
     {
@@ -101,5 +108,10 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
         subjectId = lesson.subject.id
         subject = lesson.subject.subjectName
         userId = lesson.userId
+        oldParserDate = parsedDate
+        oldStartTime = startTime
+        oldEndTime = endTime
+        oldSubjectId = subjectId
+        oldStudentsIds = studentsIds
     }
 }

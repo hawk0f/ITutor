@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.features.notes.R
 import dev.hawk0f.itutor.features.notes.databinding.FragmentNoteBinding
 import dev.hawk0f.itutor.features.notes.presentation.ui.adapters.NoteAdapter
 import dev.hawk0f.itutor.features.notes.presentation.ui.viewmodels.NoteViewModel
 import dev.hawk0f.itutor.navigation.NoteFragmentDirections
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 @AndroidEntryPoint
 class NoteFragment : BaseFragment<NoteViewModel, FragmentNoteBinding>(R.layout.fragment_note)
@@ -34,6 +37,11 @@ class NoteFragment : BaseFragment<NoteViewModel, FragmentNoteBinding>(R.layout.f
         with(recyclerNotes) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = noteAdapter
+
+            itemAnimator = FadeInAnimator()
+
+            addItemDecoration(BaseHorizontalDividerItemDecoration(40))
+            addItemDecoration(BaseVerticalDividerItemDecoration(30, 10))
         }
     }
 

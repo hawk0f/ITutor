@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="success_data_updated">Data successfully updated</string>
+    <string name="success_data_updated" >Data successfully updated</string>
 
-    <string name="success_lesson_added">Lesson successfully added</string>
-    <string name="success_lesson_updated">Lesson successfully updated</string>
-    <string name="success_lesson_deleted">Lesson successfully deleted</string>
+    <string name="success_lesson_added" >Lesson successfully added</string>
+    <string name="success_lesson_updated" >Lesson successfully updated</string>
+    <string name="success_lesson_deleted" >Lesson successfully deleted</string>
 
-    <string name="success_student_added">Student successfully added</string>
-    <string name="success_student_updated">Student successfully updated</string>
-    <string name="success_student_deleted">Student successfully deleted</string>
+    <string name="success_student_added" >Student successfully added</string>
+    <string name="success_student_updated" >Student successfully updated</string>
+    <string name="success_student_deleted" >Student successfully deleted</string>
 
-    <string name="success_note_added">Note successfully added</string>
-    <string name="success_note_updated">Note successfully updated</string>
-    <string name="success_note_deleted">Note successfully deleted</string>
+    <string name="success_note_added" >Note successfully added</string>
+    <string name="success_note_updated" >Note successfully updated</string>
+    <string name="success_note_deleted" >Note successfully deleted</string>
 
-    <string name="success_transaction_updated">Transaction successfully updated</string>
+    <string name="success_transaction_updated" >Transaction successfully updated</string>
 
 </resources>

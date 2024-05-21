@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="10dp">
+    android:layout_height="match_parent">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/loader"
@@ -32,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/add_lesson"
         app:icon="@android:drawable/ic_input_add"

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="У всех учеников есть домашние задания!"
+        android:text="@string/all_students_have_homework"
         android:textColor="@color/Black"
         android:textSize="18sp"
         android:visibility="gone"
@@ -52,9 +52,10 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Выберите занятие">
+            android:hint="@string/choose_lesson">
 
             <AutoCompleteTextView
+                android:labelFor="@id/lesson_layout"
                 android:id="@+id/lesson_drop_down"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,9 +71,10 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Выберите ученика">
+            android:hint="@string/choose_student">
 
             <AutoCompleteTextView
+                android:labelFor="@id/student_layout"
                 android:id="@+id/student_drop_down"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,7 +92,7 @@
             android:layout_weight="1"
             android:background="@color/Transparent"
             android:gravity="top|start"
-            android:hint="Введите домашнее задание"
+            android:hint="@string/enter_homework_hear"
             android:inputType="text"
             android:maxLines="20" />
 

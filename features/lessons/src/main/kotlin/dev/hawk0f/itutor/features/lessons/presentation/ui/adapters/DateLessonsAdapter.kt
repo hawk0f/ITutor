@@ -1,15 +1,15 @@
 package dev.hawk0f.itutor.features.lessons.presentation.ui.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.hawk0f.itutor.core.presentation.base.BaseDiffUtilItemCallback
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.core.presentation.models.DateLessonsUI
 import dev.hawk0f.itutor.features.lessons.databinding.DateLessonsItemBinding
-import javax.inject.Inject
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 class DateLessonsAdapter(private val onLessonClick: (lessonId: Int) -> Unit, private val onDeleteClick: (lessonId: Int) -> Unit) : ListAdapter<DateLessonsUI, DateLessonsAdapter.DateLessonsViewHolder>(BaseDiffUtilItemCallback())
 {
@@ -26,7 +26,15 @@ class DateLessonsAdapter(private val onLessonClick: (lessonId: Int) -> Unit, pri
             date.text = dateLessonsUI.date
             val lessonAdapter = LessonAdapter(onLessonClick, onDeleteClick)
             lessonAdapter.submitList(dateLessonsUI.lessons)
-            recyclerLessons.adapter = lessonAdapter
+            with(recyclerLessons)
+            {
+                adapter = lessonAdapter
+
+                itemAnimator = FadeInAnimator()
+
+                addItemDecoration(BaseHorizontalDividerItemDecoration(0))
+                addItemDecoration(BaseVerticalDividerItemDecoration(20, 10))
+            }
         }
 
         companion object

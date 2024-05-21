@@ -89,7 +89,14 @@ class EditNoteFragment : BaseFragment<EditNoteViewModel, FragmentEditNoteBinding
             }
             else
             {
-                viewModel.updateNote()
+                if (viewModel.isUpdateNeeded())
+                {
+                    viewModel.updateNote()
+                }
+                else
+                {
+                    findNavController().popBackStack()
+                }
             }
         }
     }

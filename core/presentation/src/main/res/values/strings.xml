@@ -13,6 +13,7 @@
     <string name="save_changes">Save changes</string>
     <string name="note_header">Header</string>
     <string name="start_note_hear">Start writing your note hear</string>
+    <string name="enter_homework_hear">Enter the homework hear</string>
     <string name="name">Name</string>
     <string name="date">Date</string>
     <string name="startTime">Start time</string>
@@ -50,5 +51,17 @@
     <string name="finance">Finance</string>
     <string name="homework">Homework</string>
 
+    <string name="choose_lesson">Choose lesson</string>
+    <string name="choose_student">Choose student</string>
+
+    <string name="date_custom_input">Date: </string>
+    <string name="time_custom_input">. Time: </string>
+
+    <string name="all_students_have_homework">All students have homework</string>
+
+    <string name="no_homeworks">You didn\'t add any homework</string>
+
+    <string name="actual_revenue">Actual revenue</string>
+    <string name="expected_revenue">Expected revenue</string>
 
 </resources>

@@ -5,7 +5,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.hawk0f.itutor.core.presentation.R.*
 import dev.hawk0f.itutor.core.presentation.base.BaseBottomSheet
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.core.presentation.models.LessonUI
@@ -16,6 +19,7 @@ import dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels.StudentBott
 import dev.hawk0f.itutor.navigation.R.id.editLessonFragment
 import dev.hawk0f.itutor.navigation.StudentBottomSheetFragmentArgs
 import dev.hawk0f.itutor.navigation.StudentBottomSheetFragmentDirections
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 @AndroidEntryPoint
 class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, FragmentStudentBottomSheetBinding>(R.layout.fragment_student_bottom_sheet)
@@ -55,6 +59,11 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
         with(recyclerStudents) {
             layoutManager = LinearLayoutManager(context)
             adapter = chooseStudentsAdapter
+
+            itemAnimator = FadeInAnimator()
+
+            addItemDecoration(BaseHorizontalDividerItemDecoration(0))
+            addItemDecoration(BaseVerticalDividerItemDecoration(15, 5))
         }
     }
 
@@ -81,7 +90,7 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
             }
             else
             {
-                showToastLong("Выберите учеников")
+                showToastLong(string.choose_students)
             }
         }
     }

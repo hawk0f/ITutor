@@ -1,6 +1,7 @@
 package dev.hawk0f.itutor.features.auth.presentation.ui
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.hawk0f.itutor.core.data.local.UserDataPreferences
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.models.UserUI
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val authUserUseCase: AuthUserUseCase, val validateEmail: ValidateEmail, val validatePassword: ValidatePassword) : BaseViewModel()
+class AuthViewModel @Inject constructor(val userDataPreferences: UserDataPreferences, private val authUserUseCase: AuthUserUseCase, val validateEmail: ValidateEmail, val validatePassword: ValidatePassword) : BaseViewModel()
 {
     var email = ""
     var password = ""

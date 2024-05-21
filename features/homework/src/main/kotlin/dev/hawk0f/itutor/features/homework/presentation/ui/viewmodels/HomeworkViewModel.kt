@@ -51,9 +51,4 @@ class HomeworkViewModel @Inject constructor(private val fetchLessonStudentsUseCa
     }
 
     fun updateHomeworkStatus(studentId: Int, lessonId: Int, isHomeworkDone: Boolean) = updateHomeworkStatusUseCase(studentId, lessonId, isHomeworkDone).collectNetworkRequest(_updateState)
-
-    fun getAllStudents(): List<LessonStudentUI>
-    {
-        return allLessonStudents
-    }
 }

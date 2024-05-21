@@ -5,10 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.base.BaseHorizontalDividerItemDecoration
+import dev.hawk0f.itutor.core.presentation.base.BaseVerticalDividerItemDecoration
 import dev.hawk0f.itutor.features.finance.R
 import dev.hawk0f.itutor.features.finance.databinding.FragmentPaymentBinding
 import dev.hawk0f.itutor.features.finance.presentation.ui.adapters.DatePaymentsAdapter
 import dev.hawk0f.itutor.features.finance.presentation.ui.viewmodels.PaymentViewModel
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 @AndroidEntryPoint
 class PaymentFragment : BaseFragment<PaymentViewModel, FragmentPaymentBinding>(R.layout.fragment_payment)
@@ -29,6 +32,11 @@ class PaymentFragment : BaseFragment<PaymentViewModel, FragmentPaymentBinding>(R
         with(recyclerDateTransactions) {
             layoutManager = LinearLayoutManager(context)
             adapter = datePaymentsAdapter
+
+            itemAnimator = FadeInAnimator()
+
+            addItemDecoration(BaseHorizontalDividerItemDecoration(40))
+            addItemDecoration(BaseVerticalDividerItemDecoration(30, 10))
         }
     }
 
