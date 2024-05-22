@@ -9,9 +9,6 @@ plugins {
     // Hilt
     alias(libs.plugins.hilt.android)
 
-    // Kapt
-    alias(libs.plugins.kapt)
-
     // KSP
     alias(libs.plugins.ksp)
 }
@@ -74,6 +71,7 @@ dependencies {
     implementation(project(":features:finance"))
     implementation(project(":features:notes"))
     implementation(project(":features:homework"))
+    implementation(project(":features:profile"))
 
     implementation(project(":navigation"))
 
@@ -103,7 +101,6 @@ tasks.whenTaskAdded {
                         lines.removeAt(0)
                         lines.add(0, "package dev.hawk0f.itutor.navigation")
                         lines.remove("import dev.hawk0f.itutor.R")
-                        lines.add(2, "import dev.hawk0f.itutor.navigation.R")
                         file.writeText(lines.joinToString("\n"))
                     }
                 }

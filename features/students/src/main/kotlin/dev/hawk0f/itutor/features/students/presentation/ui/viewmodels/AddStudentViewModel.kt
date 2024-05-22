@@ -2,7 +2,7 @@ package dev.hawk0f.itutor.features.students.presentation.ui.viewmodels
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.hawk0f.itutor.core.data.models.StudentDTO
-import dev.hawk0f.itutor.core.domain.CurrentUser
+import dev.hawk0f.itutor.core.presentation.CurrentUser
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateIsEmpty
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class AddStudentViewModel @Inject constructor(private val addStudentUseCase: AddStudentUseCase, val validateName: ValidateName, val validateIsEmpty: ValidateIsEmpty, val validatePhone: ValidatePhone, private val currentUser: CurrentUser) : BaseViewModel()
+class AddStudentViewModel @Inject constructor(private val addStudentUseCase: AddStudentUseCase, val validateName: ValidateName, val validateIsEmpty: ValidateIsEmpty, val validatePhone: ValidatePhone) : BaseViewModel()
 {
     var name = ""
     var surname = ""
@@ -35,7 +35,7 @@ class AddStudentViewModel @Inject constructor(private val addStudentUseCase: Add
             singlePrice = singlePrice.trim().toDouble(),
             groupPrice = groupPrice.trim().toDouble(),
             note = note.trim(),
-            userId = currentUser.getUserId()
+            userId = CurrentUser.getUserId()
         )).collectNetworkRequest(_addState)
 
     fun clearFields()

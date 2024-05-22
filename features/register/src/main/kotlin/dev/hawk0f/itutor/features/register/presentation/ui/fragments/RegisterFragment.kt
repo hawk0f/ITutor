@@ -1,23 +1,18 @@
-package dev.hawk0f.itutor.features.register.presentation.ui
+package dev.hawk0f.itutor.features.register.presentation.ui.fragments
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dev.hawk0f.itutor.core.data.local.UserDataPreferences
-import dev.hawk0f.itutor.core.domain.CurrentUser
+import dev.hawk0f.itutor.core.presentation.CurrentUser
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.hideKeyboard
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
-import dev.hawk0f.itutor.core.presentation.extensions.setupEmailValidator
-import dev.hawk0f.itutor.core.presentation.extensions.setupNameValidator
-import dev.hawk0f.itutor.core.presentation.extensions.setupPasswordValidator
-import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
 import dev.hawk0f.itutor.features.register.R
 import dev.hawk0f.itutor.features.register.databinding.FragmentRegisterBinding
+import dev.hawk0f.itutor.features.register.presentation.ui.viewmodels.RegisterViewModel
 import dev.hawk0f.itutor.navigation.RegisterFragmentDirections
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding>(R.layout.fragment_register)
@@ -33,10 +28,10 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
 
     private fun setupFields() = with(binding) {
         viewModel.clearFields()
-        nameLayout.setupNameValidator()
-        surnameLayout.setupNameValidator()
-        emailLayout.setupEmailValidator()
-        passwordLayout.setupPasswordValidator()
+//        nameLayout.setupNameValidator()
+//        surnameLayout.setupNameValidator()
+//        emailLayout.setupEmailValidator()
+//        passwordLayout.setupPasswordValidator()
     }
 
     private fun setupViewModel() = with(binding) {

@@ -12,10 +12,18 @@
         tools:layout="@layout/fragment_homework">
         <action
             android:id="@+id/action_homeworkFragment_to_addHomeworkFragment"
-            app:destination="@id/addHomeworkFragment" />
+            app:destination="@id/addHomeworkFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
         <action
             android:id="@+id/action_homeworkFragment_to_editHomeworkFragment"
-            app:destination="@id/editHomeworkFragment" />
+            app:destination="@id/editHomeworkFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/addHomeworkFragment"

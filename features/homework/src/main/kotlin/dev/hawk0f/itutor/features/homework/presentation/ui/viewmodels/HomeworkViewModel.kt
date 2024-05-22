@@ -1,7 +1,7 @@
 package dev.hawk0f.itutor.features.homework.presentation.ui.viewmodels
 
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.hawk0f.itutor.core.domain.CurrentUser
+import dev.hawk0f.itutor.core.presentation.CurrentUser
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeworkViewModel @Inject constructor(private val fetchLessonStudentsUseCase: FetchHomeworksUseCase, private val updateHomeworkStatusUseCase: UpdateHomeworkStatusUseCase, private val currentUser: CurrentUser) : BaseViewModel()
+class HomeworkViewModel @Inject constructor(private val fetchLessonStudentsUseCase: FetchHomeworksUseCase, private val updateHomeworkStatusUseCase: UpdateHomeworkStatusUseCase) : BaseViewModel()
 {
     private val _lessonStudentsState = MutableUIStateFlow<List<StudentHomeworksUI>>()
     val lessonStudentsState = _lessonStudentsState.asStateFlow()
@@ -23,7 +23,7 @@ class HomeworkViewModel @Inject constructor(private val fetchLessonStudentsUseCa
 
     private val allLessonStudents = ArrayList<LessonStudentUI>()
 
-    fun fetchLessonStudents() = fetchLessonStudentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
+    fun fetchLessonStudents() = fetchLessonStudentsUseCase(CurrentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
         allLessonStudents.clear()
         allLessonStudents.addAll(list.map { it.toUi() })
 

@@ -9,9 +9,6 @@ plugins {
     // Hilt
     alias(libs.plugins.hilt.android)
 
-    // Kapt
-    alias(libs.plugins.kapt)
-
     // KSP
     alias(libs.plugins.ksp)
 }
@@ -47,8 +44,6 @@ dependencies {
     implementation(project(":core:presentation"))
 
     implementation(project(":navigation"))
-
-    implementation(libs.shimmer)
 
     //Hilt
     implementation(libs.hilt.android)

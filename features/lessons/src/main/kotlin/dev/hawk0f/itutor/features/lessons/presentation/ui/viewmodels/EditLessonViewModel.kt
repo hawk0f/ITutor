@@ -2,7 +2,7 @@ package dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.hawk0f.itutor.core.data.models.LessonDTO
-import dev.hawk0f.itutor.core.domain.CurrentUser
+import dev.hawk0f.itutor.core.presentation.CurrentUser
 import dev.hawk0f.itutor.core.domain.models.Subject
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
@@ -26,7 +26,7 @@ import java.time.temporal.ChronoUnit.MINUTES
 import javax.inject.Inject
 
 @HiltViewModel
-class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val getLessonByIdUseCase: GetLessonByIdUseCase, private val updateLessonUseCase: UpdateLessonUseCase, private val currentUser: CurrentUser, val validateIsEmpty: ValidateIsEmpty) : BaseViewModel()
+class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val getLessonByIdUseCase: GetLessonByIdUseCase, private val updateLessonUseCase: UpdateLessonUseCase, val validateIsEmpty: ValidateIsEmpty) : BaseViewModel()
 {
     private var oldParserDate = ""
     private var oldStartTime = ""
@@ -63,7 +63,7 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
 
     fun fetchLessonStudents()
     {
-        fetchLessonStudentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
+        fetchLessonStudentsUseCase(CurrentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
             list.map { it.toUI(studentsIds.size) }
         }
     }
@@ -93,7 +93,7 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
 
     fun getCurrentLesson(): LessonUI
     {
-        return LessonUI(id, parsedDate, date, startTime, endTime, studentsIds, "", Subject(subjectId, subject), currentUser.getUserId())
+        return LessonUI(id, parsedDate, date, startTime, endTime, studentsIds, "", Subject(subjectId, subject), CurrentUser.getUserId())
     }
 
     fun setLesson(lesson: LessonUI)

@@ -2,7 +2,7 @@ package dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.hawk0f.itutor.core.data.models.LessonDTO
-import dev.hawk0f.itutor.core.domain.CurrentUser
+import dev.hawk0f.itutor.core.presentation.CurrentUser
 import dev.hawk0f.itutor.core.domain.models.Subject
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
@@ -25,7 +25,7 @@ import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 
 @HiltViewModel
-class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLessonUseCase, private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, private val currentUser: CurrentUser, val validateIsEmpty: ValidateIsEmpty) : BaseViewModel()
+class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLessonUseCase, private val fetchSubjectsUseCase: FetchSubjectsUseCase, private val fetchLessonStudentsUseCase: FetchLessonStudentsUseCase, val validateIsEmpty: ValidateIsEmpty) : BaseViewModel()
 {
     var parsedDate: String = LocalDate.now().parseToFormat("dd.MM.yyyy")
     var date: LocalDate = LocalDate.now()
@@ -52,12 +52,12 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
 
     fun fetchLessonStudents()
     {
-        fetchLessonStudentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
+        fetchLessonStudentsUseCase(CurrentUser.getUserId()).collectNetworkRequestWithMapping(_lessonStudentsState) { list ->
             list.map { it.toUI(studentsIds.size) }
         }
     }
 
-    fun addLesson() = addLessonUseCase(LessonDTO(id = 0, date = parsedDate.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = ChronoUnit.MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = currentUser.getUserId())).collectNetworkRequest(_addState)
+    fun addLesson() = addLessonUseCase(LessonDTO(id = 0, date = parsedDate.parseToDate("dd.MM.yyyy"), startTime = startTime.parseToTime("HH:mm"), durationInMinutes = ChronoUnit.MINUTES.between(startTime.parseToTime("HH:mm"), endTime.parseToTime("HH:mm")), studentsIds = studentsIds, subjectId = subjectId, userId = CurrentUser.getUserId())).collectNetworkRequest(_addState)
 
     fun getStudentsIds(): MutableList<Int>
     {
@@ -76,7 +76,7 @@ class AddLessonViewModel @Inject constructor(private val addLessonUseCase: AddLe
 
     fun getCurrentLesson(): LessonUI
     {
-        return LessonUI(0, parsedDate, date, startTime, endTime, studentsIds, "", Subject(subjectId, subject), currentUser.getUserId())
+        return LessonUI(0, parsedDate, date, startTime, endTime, studentsIds, "", Subject(subjectId, subject), CurrentUser.getUserId())
     }
 
     fun setupFields(lessonUI: LessonUI?)

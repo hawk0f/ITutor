@@ -50,6 +50,7 @@
     <string name="adding_note">Добавление заметки</string>
     <string name="finance">Финансы</string>
     <string name="homework">Задания</string>
+    <string name="profile">Профиль</string>
 
     <string name="choose_lesson">Выберите занятие</string>
     <string name="choose_student">Выберите ученика</string>
@@ -63,5 +64,9 @@
 
     <string name="actual_revenue">Фактический доход</string>
     <string name="expected_revenue">Ожидаемый доход</string>
+
+    <string name="log_out">Выйти из аккаунта</string>
+
+    <string name="itutor_logo">ITutor логотип</string>
 
 </resources>

@@ -50,6 +50,8 @@
     <string name="adding_note">Adding a note</string>
     <string name="finance">Finance</string>
     <string name="homework">Homework</string>
+    <string name="profile">Profile</string>
+
 
     <string name="choose_lesson">Choose lesson</string>
     <string name="choose_student">Choose student</string>
@@ -63,5 +65,9 @@
 
     <string name="actual_revenue">Actual revenue</string>
     <string name="expected_revenue">Expected revenue</string>
+
+    <string name="log_out">Log out of your account</string>
+
+    <string name="itutor_logo">ITutor logo</string>
 
 </resources>

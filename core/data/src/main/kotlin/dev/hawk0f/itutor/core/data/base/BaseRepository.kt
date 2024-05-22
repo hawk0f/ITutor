@@ -4,7 +4,6 @@ import android.util.Log
 import dev.hawk0f.itutor.core.data.BuildConfig
 import dev.hawk0f.itutor.core.data.R
 import dev.hawk0f.itutor.core.data.utils.DataMapper
-import dev.hawk0f.itutor.core.data.utils.jsonClient
 import dev.hawk0f.itutor.core.domain.Either
 import dev.hawk0f.itutor.core.domain.NetworkError
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import okhttp3.ResponseBody
 import retrofit2.Response
 import java.io.InterruptedIOException
 
@@ -83,7 +81,8 @@ abstract class BaseRepository
 
                 else ->
                 {
-                    emit(Either.Left(NetworkError.Api(R.string::class.java.getDeclaredField(it.errorBody()!!.string()).getInt(null))))
+                    val errorResource = R.string::class.java.getDeclaredField(it.errorBody()!!.string()).getInt(null)
+                    emit(Either.Left(NetworkError.Api(errorResource)))
                 }
             }
         }

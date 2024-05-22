@@ -15,7 +15,7 @@ sealed class NetworkError {
     /**
      * State for default errors from server side
      */
-    class Api(@StringRes val stringRes: Int) : NetworkError()
+    class Api(@StringRes val resName: Int) : NetworkError()
 
     /**
      * State for unexpected exceptions, for example «HTTP code - 500» or exceptions when mapping models

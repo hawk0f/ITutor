@@ -1,4 +1,4 @@
-package dev.hawk0f.itutor.features.auth.presentation.ui
+package dev.hawk0f.itutor.features.auth.presentation.ui.viewmodels
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.hawk0f.itutor.core.data.local.UserDataPreferences

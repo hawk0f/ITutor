@@ -181,7 +181,7 @@ abstract class BaseBottomSheet<ViewModel : BaseViewModel, Binding : ViewBinding>
     {
         is NetworkError.Api ->
         {
-            showToastLong(stringRes)
+            showToastLong(resName)
         }
 
         else ->

@@ -4,7 +4,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import dev.hawk0f.itutor.core.domain.CurrentUser
 import dev.hawk0f.itutor.features.auth.domain.repositories.UserAuthRepository
 import dev.hawk0f.itutor.features.auth.domain.usecases.AuthUserUseCase
 import dev.hawk0f.itutor.features.finance.domain.repositories.PaymentRepository
@@ -30,8 +29,11 @@ import dev.hawk0f.itutor.features.notes.domain.usecases.DeleteNoteUseCase
 import dev.hawk0f.itutor.features.notes.domain.usecases.FetchNotesUseCase
 import dev.hawk0f.itutor.features.notes.domain.usecases.GetNoteByIdUseCase
 import dev.hawk0f.itutor.features.notes.domain.usecases.UpdateNoteUseCase
-import dev.hawk0f.itutor.features.register.domain.usecases.RegisterUserUseCase
+import dev.hawk0f.itutor.features.profile.domain.usecases.GetUserByIdUseCase
+import dev.hawk0f.itutor.features.profile.domain.repositories.ProfileRepository
+import dev.hawk0f.itutor.features.profile.domain.usecases.UpdateUserUseCase
 import dev.hawk0f.itutor.features.register.domain.repositories.UserRegisterRepository
+import dev.hawk0f.itutor.features.register.domain.usecases.RegisterUserUseCase
 import dev.hawk0f.itutor.features.students.domain.repositories.StudentsRepository
 import dev.hawk0f.itutor.features.students.domain.usecases.AddStudentUseCase
 import dev.hawk0f.itutor.features.students.domain.usecases.DeleteStudentUseCase
@@ -45,13 +47,16 @@ object DomainModule
 {
     //User
     @Provides
-    fun provideCurrentUser() = CurrentUser
-
-    @Provides
     fun provideAuthUserUseCase(repository: UserAuthRepository) = AuthUserUseCase(repository)
 
     @Provides
     fun provideRegisterUserUseCase(repository: UserRegisterRepository) = RegisterUserUseCase(repository)
+
+    @Provides
+    fun provideUpdateUserUseCase(repository: ProfileRepository) = UpdateUserUseCase(repository)
+
+    @Provides
+    fun provideGetUserByIdUseCase(repository: ProfileRepository) = GetUserByIdUseCase(repository)
 
     //Students
     @Provides

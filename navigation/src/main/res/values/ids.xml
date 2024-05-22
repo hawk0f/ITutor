@@ -16,5 +16,7 @@
     <item name="action_noteFragment_to_editNoteFragment" type="id" />
     <item name="action_homeworkFragment_to_addHomeworkFragment" type="id" />
     <item name="action_homeworkFragment_to_editHomeworkFragment" type="id" />
+    <item name="action_mainContentFragment_to_profileFragment" type="id" />
+    <item name="action_profileFragment_to_authFragment" type="id" />
     <item name="editLessonFragment" type="id" />
 </resources>

@@ -1,7 +1,7 @@
 package dev.hawk0f.itutor.features.lessons.presentation.ui.viewmodels
 
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.hawk0f.itutor.core.domain.CurrentUser
+import dev.hawk0f.itutor.core.presentation.CurrentUser
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.models.DateLessonsUI
@@ -14,7 +14,7 @@ import java.util.ArrayList
 import javax.inject.Inject
 
 @HiltViewModel
-class LessonViewModel @Inject constructor(private val fetchLessonsUseCase: FetchLessonsUseCase, private val deleteLessonUseCase: DeleteLessonUseCase, private val currentUser: CurrentUser) : BaseViewModel()
+class LessonViewModel @Inject constructor(private val fetchLessonsUseCase: FetchLessonsUseCase, private val deleteLessonUseCase: DeleteLessonUseCase) : BaseViewModel()
 {
     private val _lessonState = MutableUIStateFlow<List<DateLessonsUI>>()
     val lessonState = _lessonState.asStateFlow()
@@ -22,7 +22,7 @@ class LessonViewModel @Inject constructor(private val fetchLessonsUseCase: Fetch
     private val _deleteState = MutableUIStateFlow<Unit>()
     val deleteState = _deleteState.asStateFlow()
 
-    fun fetchLessons() = fetchLessonsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_lessonState) { list ->
+    fun fetchLessons() = fetchLessonsUseCase(CurrentUser.getUserId()).collectNetworkRequestWithMapping(_lessonState) { list ->
         val dateLessonsList = ArrayList<DateLessonsUI>()
         list.forEach { lesson ->
             val lessonUI = lesson.toUi()

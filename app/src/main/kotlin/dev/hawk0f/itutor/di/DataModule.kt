@@ -27,6 +27,8 @@ import dev.hawk0f.itutor.features.lessons.domain.repositories.LessonRepository
 import dev.hawk0f.itutor.features.lessons.domain.repositories.SubjectRepository
 import dev.hawk0f.itutor.features.notes.domain.repositories.NoteRepository
 import dev.hawk0f.itutor.features.notes.data.repositories.NoteRepositoryImpl
+import dev.hawk0f.itutor.features.profile.domain.repositories.ProfileRepository
+import dev.hawk0f.itutor.features.profile.data.repositories.ProfileRepositoryImpl
 import dev.hawk0f.itutor.features.register.data.repositories.UserRegisterRepositoryImpl
 import dev.hawk0f.itutor.features.register.domain.repositories.UserRegisterRepository
 import dev.hawk0f.itutor.features.students.data.repositories.StudentsRepositoryImpl
@@ -50,6 +52,10 @@ object DataModule
     @Provides
     fun provideRegisterUserRepository(service: UserService): UserRegisterRepository = UserRegisterRepositoryImpl(service)
 
+    @Singleton
+    @Provides
+    fun provideProfileRepository(service: UserService): ProfileRepository = ProfileRepositoryImpl(service)
+    
     //Students
     @Singleton
     @Provides

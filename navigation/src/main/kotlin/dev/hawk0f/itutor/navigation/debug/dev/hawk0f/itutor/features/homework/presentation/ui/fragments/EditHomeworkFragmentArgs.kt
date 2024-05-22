@@ -1,6 +1,5 @@
 package dev.hawk0f.itutor.navigation
 
-import dev.hawk0f.itutor.navigation.R
 import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavArgs

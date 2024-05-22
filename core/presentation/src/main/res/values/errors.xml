@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="field_must_be_filled" >Field must be filled</string>
+    <string name="field_must_be_filled">Field must be filled</string>
 
-    <string name="invalid_email" >Invalid email address</string>
+    <string name="invalid_email">Invalid email address</string>
 
-    <string name="incorrect_name" >Incorrect name</string>
-    <string name="name_must_contain_at_least_2_characters" >Name must contain at least 2 characters</string>
+    <string name="incorrect_name">Incorrect name</string>
+    <string name="name_must_contain_at_least_2_characters">Name must contain at least 2 characters</string>
 
-    <string name="complete_your_phone_number" >Complete your phone number</string>
+    <string name="complete_your_phone_number">Complete your phone number</string>
 
-    <string name="password_must_not_be_less_than_6_characters" >Password must be at least 6 characters long</string>
+    <string name="complete_your_phone_number_or_delete">Complete your phone number or remove it</string>
 
-    <string name="server_connection_error" >Server connection error</string>
+    <string name="password_must_not_be_less_than_6_characters">Password must be at least 6 characters long</string>
 
-    <string name="fill_note_text" >Note text must be filled</string>
+    <string name="server_connection_error">Server connection error</string>
 
-    <string name="choose_students" >Choose students for the lesson</string>
+    <string name="fill_note_text">Note text must be filled</string>
 
-    <string name="fill_homework_text" >Homework text must be filled</string>
+    <string name="choose_students">Choose students for the lesson</string>
+
+    <string name="fill_homework_text">Homework text must be filled</string>
 
 </resources>

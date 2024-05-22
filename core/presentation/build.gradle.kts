@@ -2,9 +2,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
 
-    // Kapt
-    alias(libs.plugins.kapt)
-
     // Hilt
     alias(libs.plugins.hilt.android)
 
@@ -52,13 +49,8 @@ dependencies {
     api(libs.androidx.core)
     api(libs.androidx.core.splashscreen)
 
-    // Shimmer
-    api(libs.shimmer)
-
+    // Animators
     api(libs.recycler.view.animators)
-
-    // LiveData
-    api(libs.androidx.lifecycle.livedata)
 
     // Activity
     api(libs.androidx.activity)

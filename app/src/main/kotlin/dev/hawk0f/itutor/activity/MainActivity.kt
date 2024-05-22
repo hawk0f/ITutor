@@ -10,13 +10,11 @@ import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.R.*
 import dev.hawk0f.itutor.R.navigation.nav_graph
-import dev.hawk0f.itutor.core.data.local.UserDataPreferences
-import dev.hawk0f.itutor.core.domain.CurrentUser
+import dev.hawk0f.itutor.core.presentation.CurrentUser
 import dev.hawk0f.itutor.core.presentation.R.id.nav_host_fragment
 import dev.hawk0f.itutor.core.presentation.R.layout.activity_main
 import dev.hawk0f.itutor.core.presentation.extensions.initNavController
 import dev.hawk0f.itutor.core.presentation.R
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity()
@@ -40,16 +38,16 @@ class MainActivity : AppCompatActivity()
 
         val userId = viewModel.userDataPreferences.userId
 
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+
         if (userId != 0)
         {
-            viewModel.currentUser.setUserId(userId)
+            CurrentUser.setUserId(userId)
             navGraph.setStartDestination(id.mainContentFragment)
         }
 
+        val appBarConfiguration = AppBarConfiguration.Builder(setOf(id.authFragment, id.registerFragment, id.mainContentFragment)).build()
         navController.graph = navGraph
-
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        val appBarConfiguration = AppBarConfiguration.Builder(id.authFragment, id.registerFragment, id.mainContentFragment).build()
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
         setSupportActionBar(toolbar)

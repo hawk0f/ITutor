@@ -28,6 +28,8 @@ abstract class BaseFlowFragment(@LayoutRes layoutId: Int, @IdRes private val nav
     {
         super.onViewCreated(view, savedInstanceState)
 
+        setHasOptionsMenu(true)
+
         val bottomNavigationView = view.findViewById<BottomNavigationView>(bnvId)
         val navHostFragment = childFragmentManager.findFragmentById(navHostFragmentId) as NavHostFragment
         val navController = navHostFragment.navController

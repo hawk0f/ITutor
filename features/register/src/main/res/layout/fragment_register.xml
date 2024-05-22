@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="dev.hawk0f.itutor.features.register.presentation.ui.RegisterViewModel" />
+            type="dev.hawk0f.itutor.features.register.presentation.ui.viewmodels.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -122,6 +122,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_go_to_sign_in"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"

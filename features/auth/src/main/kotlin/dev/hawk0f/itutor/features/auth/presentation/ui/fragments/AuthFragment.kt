@@ -1,22 +1,18 @@
-package dev.hawk0f.itutor.features.auth.presentation.ui
+package dev.hawk0f.itutor.features.auth.presentation.ui.fragments
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dev.hawk0f.itutor.core.data.local.UserDataPreferences
-import dev.hawk0f.itutor.core.domain.CurrentUser
+import dev.hawk0f.itutor.core.presentation.CurrentUser
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.hideKeyboard
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
-import dev.hawk0f.itutor.core.presentation.extensions.setupEmailValidator
-import dev.hawk0f.itutor.core.presentation.extensions.setupPasswordValidator
-import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
 import dev.hawk0f.itutor.features.auth.R
 import dev.hawk0f.itutor.features.auth.databinding.FragmentAuthBinding
+import dev.hawk0f.itutor.features.auth.presentation.ui.viewmodels.AuthViewModel
 import dev.hawk0f.itutor.navigation.AuthFragmentDirections
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.fragment_auth)
@@ -30,11 +26,10 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         setupViewModel()
     }
 
-    private fun setupFields() = with(binding)
-    {
+    private fun setupFields() = with(binding) {
         viewModel.clearFields()
-        emailLayout.setupEmailValidator()
-        passwordLayout.setupPasswordValidator()
+//        emailLayout.setupEmailValidator()
+//        passwordLayout.setupPasswordValidator()
     }
 
     private fun setupViewModel() = with(binding) {
@@ -54,13 +49,9 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         }
     }
 
-    private fun setupAuthButtonListener() = with(binding)
-    {
+    private fun setupAuthButtonListener() = with(binding) {
         btnSignIn.setOnClickListener {
-            validateInputs(
-                Pair(viewModel.validateEmail, emailLayout),
-                Pair(viewModel.validatePassword, passwordLayout)
-            ) {
+            validateInputs(Pair(viewModel.validateEmail, emailLayout), Pair(viewModel.validatePassword, passwordLayout)) {
                 viewModel.authUser()
             }
         }

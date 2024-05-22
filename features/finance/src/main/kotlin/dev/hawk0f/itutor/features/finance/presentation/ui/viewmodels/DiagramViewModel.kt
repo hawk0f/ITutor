@@ -1,7 +1,7 @@
 package dev.hawk0f.itutor.features.finance.presentation.ui.viewmodels
 
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.hawk0f.itutor.core.domain.CurrentUser
+import dev.hawk0f.itutor.core.presentation.CurrentUser
 import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
 import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
 import dev.hawk0f.itutor.core.presentation.models.LessonStudentUI
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class DiagramViewModel @Inject constructor(private val fetchPaymentsUseCase: FetchPaymentsUseCase, private val currentUser: CurrentUser) : BaseViewModel()
+class DiagramViewModel @Inject constructor(private val fetchPaymentsUseCase: FetchPaymentsUseCase) : BaseViewModel()
 {
     private val _paymentState = MutableUIStateFlow<List<LessonStudentUI>>()
     val paymentState = _paymentState.asStateFlow()
@@ -29,7 +29,7 @@ class DiagramViewModel @Inject constructor(private val fetchPaymentsUseCase: Fet
         return payments
     }
 
-    fun fetchPayments() = fetchPaymentsUseCase(currentUser.getUserId()).collectNetworkRequestWithMapping(_paymentState) { list ->
+    fun fetchPayments() = fetchPaymentsUseCase(CurrentUser.getUserId()).collectNetworkRequestWithMapping(_paymentState) { list ->
         list.map { it.toUi() }
     }
 }

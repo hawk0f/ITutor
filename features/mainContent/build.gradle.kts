@@ -51,8 +51,6 @@ dependencies {
 
     //Hilt
     implementation(libs.hilt.android)
-    implementation(libs.androidx.navigation.fragment)
-    implementation(libs.androidx.navigation.ui)
     ksp(libs.hilt.compiler)
 }
 
@@ -74,7 +72,6 @@ tasks.whenTaskAdded {
                     lines.removeAt(0)
                     lines.add(0, "package dev.hawk0f.itutor.navigation")
                     lines.remove("import dev.hawk0f.itutor.features.maincontent.R")
-                    lines.add(2, "import dev.hawk0f.itutor.navigation.R")
                     file.writeText(lines.joinToString("\n"))
                 }
             }
