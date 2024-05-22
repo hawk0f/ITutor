@@ -31,8 +31,6 @@ class MainContentFragment : BaseFlowFragment(R.layout.fragment_main_content, R.i
 
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        
         bottomNavigationView.setupWithNavController(navController)
     }
 

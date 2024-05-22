@@ -11,14 +11,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.R.*
 import dev.hawk0f.itutor.R.navigation.nav_graph
 import dev.hawk0f.itutor.core.presentation.CurrentUser
-import dev.hawk0f.itutor.core.presentation.NavSetupper
 import dev.hawk0f.itutor.core.presentation.R.id.nav_host_fragment
 import dev.hawk0f.itutor.core.presentation.R.layout.activity_main
 import dev.hawk0f.itutor.core.presentation.extensions.initNavController
 import dev.hawk0f.itutor.core.presentation.R
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), NavSetupper
+class MainActivity : AppCompatActivity()
 {
     private val navController by lazy { initNavController(nav_host_fragment) }
 
@@ -47,15 +46,10 @@ class MainActivity : AppCompatActivity(), NavSetupper
         }
 
         navController.graph = navGraph
-        
-        setupOuterNavGraph()
-        setSupportActionBar(toolbar)
-    }
 
-    override fun setupOuterNavGraph()
-    {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        val appBarConfiguration = AppBarConfiguration.Builder(setOf(id.authFragment, id.registerFragment, id.mainContentFragment)).build()
+        val appBarConfiguration = AppBarConfiguration.Builder(setOf(id.authFragment, id.registerFragment, id.mainContentFragment, id.profileFragment)).build()
         toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        setSupportActionBar(toolbar)
     }
 }
