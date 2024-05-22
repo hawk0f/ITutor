@@ -21,7 +21,7 @@ class StudentsViewModel @Inject constructor(private val fetchStudentsUseCase: Fe
     val deleteState = _deleteState.asStateFlow()
 
     fun fetchStudents() = fetchStudentsUseCase(CurrentUser.getUserId()).collectNetworkRequestWithMapping(_studentState) { list ->
-        list.map { it.toUi() }
+        list.map { it.toUi((list.indexOf(it) + 1).toString()) }
     }
 
     fun deleteStudent(studentId: Int) = deleteStudentUseCase(studentId).collectNetworkRequest(_deleteState)

@@ -11,6 +11,7 @@ data class StudentUI(
     val singlePrice: Double,
     val groupPrice: Double,
     val note: String,
-    val userId: Int) : IBaseDiffModel<Int>
+    val userId: Int,
+    val studentNumber: String) : IBaseDiffModel<Int>
 
-fun Student.toUi() = StudentUI(id, "$name $surname", age, phoneNumber, singlePrice, groupPrice, note, userId)
+fun Student.toUi(studentNumber: String = "") = StudentUI(id, "$name $surname", age, phoneNumber, singlePrice, groupPrice, note, userId, studentNumber)
