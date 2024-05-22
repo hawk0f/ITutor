@@ -45,7 +45,6 @@
     <fragment
         android:id="@+id/mainContentFragment"
         android:name="dev.hawk0f.itutor.features.maincontent.MainContentFragment"
-        android:label="@string/students"
         tools:layout="@layout/fragment_main_content">
         <action
             android:id="@+id/action_mainContentFragment_to_profileFragment"
@@ -53,7 +52,8 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/mainContentFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

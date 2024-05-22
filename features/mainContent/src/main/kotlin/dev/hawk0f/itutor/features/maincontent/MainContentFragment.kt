@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,6 +31,8 @@ class MainContentFragment : BaseFlowFragment(R.layout.fragment_main_content, R.i
 
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
+        
         bottomNavigationView.setupWithNavController(navController)
     }
 

@@ -24,7 +24,7 @@
     <string name="email">Почта</string>
     <string name="password">Пароль</string>
     <string name="phoneNumber">Номер телефона</string>
-    <string name="singlePrice">Цена за одиночное занятие</string>
+    <string name="singlePrice">Цена за индивидуальное занятие</string>
     <string name="groupPrice">Цена за групповое занятие</string>
     <string name="subject">Предмет</string>
     <string name="students">Ученики</string>

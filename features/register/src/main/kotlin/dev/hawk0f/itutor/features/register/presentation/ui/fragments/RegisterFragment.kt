@@ -26,12 +26,9 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
         setupViewModel()
     }
 
-    private fun setupFields() = with(binding) {
+    private fun setupFields()
+    {
         viewModel.clearFields()
-//        nameLayout.setupNameValidator()
-//        surnameLayout.setupNameValidator()
-//        emailLayout.setupEmailValidator()
-//        passwordLayout.setupPasswordValidator()
     }
 
     private fun setupViewModel() = with(binding) {

@@ -11,13 +11,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.R.*
 import dev.hawk0f.itutor.R.navigation.nav_graph
 import dev.hawk0f.itutor.core.presentation.CurrentUser
+import dev.hawk0f.itutor.core.presentation.NavSetupper
 import dev.hawk0f.itutor.core.presentation.R.id.nav_host_fragment
 import dev.hawk0f.itutor.core.presentation.R.layout.activity_main
 import dev.hawk0f.itutor.core.presentation.extensions.initNavController
 import dev.hawk0f.itutor.core.presentation.R
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity()
+class MainActivity : AppCompatActivity(), NavSetupper
 {
     private val navController by lazy { initNavController(nav_host_fragment) }
 
@@ -35,10 +36,9 @@ class MainActivity : AppCompatActivity()
     private fun setupNavigation()
     {
         val navGraph = navController.navInflater.inflate(nav_graph)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
 
         val userId = viewModel.userDataPreferences.userId
-
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
 
         if (userId != 0)
         {
@@ -46,10 +46,16 @@ class MainActivity : AppCompatActivity()
             navGraph.setStartDestination(id.mainContentFragment)
         }
 
-        val appBarConfiguration = AppBarConfiguration.Builder(setOf(id.authFragment, id.registerFragment, id.mainContentFragment)).build()
         navController.graph = navGraph
-        toolbar.setupWithNavController(navController, appBarConfiguration)
-
+        
+        setupOuterNavGraph()
         setSupportActionBar(toolbar)
+    }
+
+    override fun setupOuterNavGraph()
+    {
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        val appBarConfiguration = AppBarConfiguration.Builder(setOf(id.authFragment, id.registerFragment, id.mainContentFragment)).build()
+        toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 }

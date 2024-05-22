@@ -26,10 +26,9 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         setupViewModel()
     }
 
-    private fun setupFields() = with(binding) {
+    private fun setupFields()
+    {
         viewModel.clearFields()
-//        emailLayout.setupEmailValidator()
-//        passwordLayout.setupPasswordValidator()
     }
 
     private fun setupViewModel() = with(binding) {

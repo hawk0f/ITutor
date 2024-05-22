@@ -6,10 +6,13 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.CurrentUser
+import dev.hawk0f.itutor.core.presentation.NavSetupper
 import dev.hawk0f.itutor.core.presentation.R.string
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.extensions.activityToolbar
 import dev.hawk0f.itutor.core.presentation.extensions.fullText
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
+import dev.hawk0f.itutor.core.presentation.extensions.overrideOnBackPressed
 import dev.hawk0f.itutor.core.presentation.extensions.setupEmailValidator
 import dev.hawk0f.itutor.core.presentation.extensions.setupNameValidator
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
@@ -31,6 +34,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(R
     override val binding: FragmentProfileBinding by viewBinding(FragmentProfileBinding::bind)
 
     override fun initialize() = with(binding) {
+        setupNavigateUpButton()
         nameLayout.setupNameValidator()
         surnameLayout.setupNameValidator()
         emailLayout.setupEmailValidator()
@@ -39,6 +43,11 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(R
     private fun setupViewModel() = with(binding) {
         viewmodel = viewModel
         lifecycleOwner = viewLifecycleOwner
+    }
+
+    private fun setupNavigateUpButton()
+    {
+        (requireActivity() as NavSetupper).setupOuterNavGraph()
     }
 
     override fun setupRequests()
