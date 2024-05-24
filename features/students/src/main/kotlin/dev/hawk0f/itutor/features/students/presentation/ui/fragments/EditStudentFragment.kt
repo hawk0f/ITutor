@@ -6,9 +6,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.R.*
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
+import dev.hawk0f.itutor.core.presentation.extensions.setupAgeValidator
 import dev.hawk0f.itutor.core.presentation.extensions.setupIsEmptyValidator
 import dev.hawk0f.itutor.core.presentation.extensions.setupNameValidator
 import dev.hawk0f.itutor.core.presentation.extensions.setupPhoneValidator
+import dev.hawk0f.itutor.core.presentation.extensions.setupPriceValidator
 import dev.hawk0f.itutor.core.presentation.extensions.showToastLong
 import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
 import dev.hawk0f.itutor.features.students.R
@@ -39,10 +41,10 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
     {
         nameLayout.setupNameValidator()
         surnameLayout.setupNameValidator()
-        ageLayout.setupIsEmptyValidator()
+        ageLayout.setupAgeValidator()
         phoneNumberLayout.setupPhoneValidator()
-        singlePriceLayout.setupIsEmptyValidator()
-        groupPriceLayout.setupIsEmptyValidator()
+        singlePriceLayout.setupPriceValidator()
+        groupPriceLayout.setupPriceValidator()
     }
 
     private fun setupArguments()
@@ -106,10 +108,10 @@ class EditStudentFragment : BaseFragment<EditStudentViewModel, FragmentEditStude
             validateInputs(
                 Pair(viewModel.validateName, nameLayout),
                 Pair(viewModel.validateName, surnameLayout),
-                Pair(viewModel.validateIsEmpty, ageLayout),
+                Pair(viewModel.validateAge, ageLayout),
                 Pair(viewModel.validatePhone, phoneNumberLayout),
-                Pair(viewModel.validateIsEmpty, singlePriceLayout),
-                Pair(viewModel.validateIsEmpty, groupPriceLayout)
+                Pair(viewModel.validatePrice, singlePriceLayout),
+                Pair(viewModel.validatePrice, groupPriceLayout)
             ) {
                 if (viewModel.isUpdateNeeded())
                 {

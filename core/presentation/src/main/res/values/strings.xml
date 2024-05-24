@@ -56,13 +56,14 @@
     <string name="choose_lesson">Choose lesson</string>
     <string name="choose_student">Choose student</string>
 
-    <string name="date_custom_input">Date: </string>
-    <string name="time_custom_input">. Time: </string>
+    <string name="homework_lesson_info_input">Date: %s. Time: %s</string>
 
     <string name="all_students_have_homework">All students have homework</string>
 
     <string name="no_homeworks">You didn\'t add any homework</string>
-
+    <string name="no_lessons">You didn\'t add any lesson</string>
+    <string name="no_students">You didn\'t add any student</string>
+    <string name="no_notes">You didn\'t add any note</string>
     <string name="actual_revenue">Actual revenue</string>
     <string name="expected_revenue">Expected revenue</string>
 

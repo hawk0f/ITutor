@@ -9,12 +9,14 @@ import java.io.Serializable
 import java.lang.IllegalArgumentException
 import java.lang.UnsupportedOperationException
 import kotlin.Int
+import kotlin.IntArray
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 public data class EditLessonFragmentArgs(
   public val lessonId: Int = 0,
   public val lesson: LessonUI? = null,
+  public val studentIds: IntArray? = null,
 ) : NavArgs {
   @Suppress("CAST_NEVER_SUCCEEDS")
   public fun toBundle(): Bundle {
@@ -25,6 +27,7 @@ public data class EditLessonFragmentArgs(
     } else if (Serializable::class.java.isAssignableFrom(LessonUI::class.java)) {
       result.putSerializable("lesson", this.lesson as Serializable?)
     }
+    result.putIntArray("studentIds", this.studentIds)
     return result
   }
 
@@ -37,6 +40,7 @@ public data class EditLessonFragmentArgs(
     } else if (Serializable::class.java.isAssignableFrom(LessonUI::class.java)) {
       result.set("lesson", this.lesson as Serializable?)
     }
+    result.set("studentIds", this.studentIds)
     return result
   }
 
@@ -63,7 +67,13 @@ public data class EditLessonFragmentArgs(
       } else {
         __lesson = null
       }
-      return EditLessonFragmentArgs(__lessonId, __lesson)
+      val __studentIds : IntArray?
+      if (bundle.containsKey("studentIds")) {
+        __studentIds = bundle.getIntArray("studentIds")
+      } else {
+        __studentIds = null
+      }
+      return EditLessonFragmentArgs(__lessonId, __lesson, __studentIds)
     }
 
     @JvmStatic
@@ -89,7 +99,13 @@ public data class EditLessonFragmentArgs(
       } else {
         __lesson = null
       }
-      return EditLessonFragmentArgs(__lessonId, __lesson)
+      val __studentIds : IntArray?
+      if (savedStateHandle.contains("studentIds")) {
+        __studentIds = savedStateHandle["studentIds"]
+      } else {
+        __studentIds = null
+      }
+      return EditLessonFragmentArgs(__lessonId, __lesson, __studentIds)
     }
   }
 }

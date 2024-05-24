@@ -22,16 +22,6 @@ fun Fragment.showToastShort(text: String)
  *
  * @receiver [Fragment]
  */
-fun Fragment.showToastShort(@StringRes textFromRes: Int)
-{
-    Toast.makeText(context, textFromRes, Toast.LENGTH_SHORT).show()
-}
-
-/**
- * Fast show [Toast]
- *
- * @receiver [Fragment]
- */
 fun Fragment.showToastLong(text: String)
 {
     Toast.makeText(context, text, Toast.LENGTH_LONG).show()
@@ -45,20 +35,6 @@ fun Fragment.showToastLong(text: String)
 fun Fragment.showToastLong(@StringRes textFromRes: Int)
 {
     Toast.makeText(context, textFromRes, Toast.LENGTH_LONG).show()
-}
-
-/**
- * Show keyboard extension function
- *
- * @receiver [View]
- */
-fun View.showKeyboard()
-{
-    if (this.requestFocus())
-    {
-        val imm = this.context.getSystemService(InputMethodManager::class.java)
-        imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-    }
 }
 
 /**

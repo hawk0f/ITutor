@@ -5,6 +5,8 @@
 
     <string name="invalid_email">Некорректный адрес электронной почты</string>
 
+    <string name="invalid_age">Возраст должен быть больше 4 и меньше 100</string>
+    <string name="invalid_price">Цена должна быть целым положительным числом</string>
     <string name="incorrect_name">Некорректное имя</string>
     <string name="name_must_contain_at_least_2_characters">Имя должно содержать минимум 2 символа</string>
 

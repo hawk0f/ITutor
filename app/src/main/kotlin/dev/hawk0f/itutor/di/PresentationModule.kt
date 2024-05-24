@@ -6,11 +6,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateAge
 import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateEmail
 import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateIsEmpty
 import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidateName
 import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidatePassword
 import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidatePhone
+import dev.hawk0f.itutor.core.presentation.validation.usecases.ValidatePrice
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -31,4 +33,10 @@ object PresentationModule
 
     @Provides
     fun provideValidatePhoneUseCase(@ApplicationContext context: Context) = ValidatePhone(context)
+
+    @Provides
+    fun provideValidateAgeUseCase(@ApplicationContext context: Context) = ValidateAge(context)
+
+    @Provides
+    fun provideValidatePriceUseCase(@ApplicationContext context: Context) = ValidatePrice(context)
 }

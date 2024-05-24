@@ -1,5 +1,6 @@
 package dev.hawk0f.itutor.features.lessons.presentation.ui.fragments
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -76,7 +77,15 @@ class LessonFragment : BaseFragment<LessonViewModel, FragmentLessonBinding>(R.la
         viewModel.lessonState.collectAsUIState(state = {
             it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = { list ->
-            dateLessonsAdapter.submitList(list)
+            if (list.isEmpty())
+            {
+                noLessons.isVisible = true
+                recyclerDateLessons.isVisible = false
+            }
+            else
+            {
+                dateLessonsAdapter.submitList(list)
+            }
         })
     }
 

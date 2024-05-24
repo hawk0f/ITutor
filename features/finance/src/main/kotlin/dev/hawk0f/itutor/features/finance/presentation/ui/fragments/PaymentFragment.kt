@@ -1,5 +1,6 @@
 package dev.hawk0f.itutor.features.finance.presentation.ui.fragments
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -60,7 +61,15 @@ class PaymentFragment : BaseFragment<PaymentViewModel, FragmentPaymentBinding>(R
         viewModel.lessonStudentsState.collectAsUIState(state = {
             it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = {
-            datePaymentsAdapter.submitList(it)
+            if (it.isEmpty())
+            {
+                noLessons.isVisible = true
+                recyclerDateTransactions.isVisible = false
+            }
+            else
+            {
+                datePaymentsAdapter.submitList(it)
+            }
         })
     }
 

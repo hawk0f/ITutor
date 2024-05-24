@@ -141,6 +141,56 @@ fun TextInputLayout.setupIsEmptyValidator() = with(editText as EditText) {
     }
 }
 
+fun TextInputLayout.setupAgeValidator() = with(editText as EditText) {
+    setOnFocusChangeListener { _, hasFocus ->
+        when
+        {
+            !hasFocus && fullText.isEmpty() ->
+            {
+                this@setupAgeValidator.error = context.getString(R.string.field_must_be_filled)
+            }
+
+            !hasFocus && fullText.toIntOrNull() != null ->
+            {
+                if (fullText.toInt() <= 4 || fullText.toInt() >= 100)
+                {
+                    this@setupAgeValidator.error = context.getString(R.string.invalid_age)
+                }
+            }
+
+            else ->
+            {
+                this@setupAgeValidator.error = null
+            }
+        }
+    }
+}
+
+fun TextInputLayout.setupPriceValidator() = with(editText as EditText) {
+    setOnFocusChangeListener { _, hasFocus ->
+        when
+        {
+            !hasFocus && fullText.isEmpty() ->
+            {
+                this@setupPriceValidator.error = context.getString(R.string.field_must_be_filled)
+            }
+
+            !hasFocus && fullText.toIntOrNull() != null ->
+            {
+                if (fullText.toInt() == 0)
+                {
+                    this@setupPriceValidator.error = context.getString(R.string.invalid_price)
+                }
+            }
+
+            else ->
+            {
+                this@setupPriceValidator.error = null
+            }
+        }
+    }
+}
+
 fun TextInputLayout.setupEmailValidator() = with(editText as TextInputEditText) {
     setOnFocusChangeListener { _, hasFocus ->
         when
@@ -205,41 +255,9 @@ fun TextInputLayout.setupPhoneValidator() = with(editText as TextInputEditText) 
                 this@setupPhoneValidator.error = context.getString(R.string.complete_your_phone_number)
             }
 
-            hasFocus ->
-            {
-                this@setupPhoneValidator.error = null
-            }
-
             else ->
             {
                 this@setupPhoneValidator.error = null
-            }
-        }
-    }
-}
-
-fun TextInputLayout.setupPasswordValidator() = with(editText as TextInputEditText) {
-    setOnFocusChangeListener { _, hasFocus ->
-        when
-        {
-            !hasFocus && fullText.isEmpty() ->
-            {
-                this@setupPasswordValidator.error = context.getString(R.string.field_must_be_filled)
-            }
-
-            !hasFocus && fullText.length < 6 ->
-            {
-                this@setupPasswordValidator.error = context.getString(R.string.password_must_not_be_less_than_6_characters)
-            }
-
-            hasFocus ->
-            {
-                this@setupPasswordValidator.error = null
-            }
-
-            else ->
-            {
-                this@setupPasswordValidator.error = null
             }
         }
     }

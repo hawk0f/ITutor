@@ -64,9 +64,12 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
         lessonId = args.lessonId
         lesson = args.lesson
 
+        val oldStudentIds = args.studentIds
+
         if (lesson != null)
         {
             viewModel.setLesson(lesson!!)
+            viewModel.setOldStudentIds(oldStudentIds!!.toCollection(ArrayList()))
             setupViewModel()
             fetchLessonStudents()
         }
@@ -131,6 +134,7 @@ class EditLessonFragment : BaseFragment<EditLessonViewModel, FragmentEditLessonB
             it.setupViewVisibilityCircular(group, loader)
         }, onSuccess = { lesson ->
             viewModel.setLesson(lesson)
+            viewModel.setOldStudentIds(lesson.studentsIds)
             setupViewModel()
             fetchLessonStudents()
         })

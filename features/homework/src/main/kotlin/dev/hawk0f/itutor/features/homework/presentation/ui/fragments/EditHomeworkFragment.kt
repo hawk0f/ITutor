@@ -61,7 +61,7 @@ class EditHomeworkFragment : BaseFragment<EditHomeworkViewModel, FragmentEditHom
         }, onSuccess = {
             val indexOfCurrentLesson =
                 it.indexOfFirst { lessonStudent -> lessonStudent.lessonId == viewModel.getLessonId() }
-            val lessonText = getString(string.date_custom_input) + it[indexOfCurrentLesson].date.parseToFormat("d MMMM") + getString(string.time_custom_input) + it[indexOfCurrentLesson].startTime + " - " + it[indexOfCurrentLesson].endTime
+            val lessonText = getString(string.homework_lesson_info_input, it[indexOfCurrentLesson].date.parseToFormat("d MMMM"), it[indexOfCurrentLesson].startTime + " - " + it[indexOfCurrentLesson].endTime)
             lessonEditText.setText(lessonText)
 
             val currentStudent =

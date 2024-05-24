@@ -6,6 +6,7 @@ import androidx.navigation.NavDirections
 import dev.hawk0f.itutor.core.presentation.models.LessonUI
 import java.io.Serializable
 import kotlin.Int
+import kotlin.IntArray
 import kotlin.Suppress
 
 public class LessonFragmentDirections private constructor() {
@@ -30,6 +31,7 @@ public class LessonFragmentDirections private constructor() {
   private data class ActionLessonFragmentToEditLessonFragment(
     public val lessonId: Int = 0,
     public val lesson: LessonUI? = null,
+    public val studentIds: IntArray? = null,
   ) : NavDirections {
     public override val actionId: Int = R.id.action_lessonFragment_to_editLessonFragment
 
@@ -43,6 +45,7 @@ public class LessonFragmentDirections private constructor() {
         } else if (Serializable::class.java.isAssignableFrom(LessonUI::class.java)) {
           result.putSerializable("lesson", this.lesson as Serializable?)
         }
+        result.putIntArray("studentIds", this.studentIds)
         return result
       }
   }
@@ -51,7 +54,10 @@ public class LessonFragmentDirections private constructor() {
     public fun actionLessonFragmentToAddLessonFragment(lesson: LessonUI? = null): NavDirections =
         ActionLessonFragmentToAddLessonFragment(lesson)
 
-    public fun actionLessonFragmentToEditLessonFragment(lessonId: Int = 0, lesson: LessonUI? =
-        null): NavDirections = ActionLessonFragmentToEditLessonFragment(lessonId, lesson)
+    public fun actionLessonFragmentToEditLessonFragment(
+      lessonId: Int = 0,
+      lesson: LessonUI? = null,
+      studentIds: IntArray? = null,
+    ): NavDirections = ActionLessonFragmentToEditLessonFragment(lessonId, lesson, studentIds)
   }
 }

@@ -1,13 +1,9 @@
 package dev.hawk0f.itutor.features.maincontent
 
-import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,7 +12,6 @@ import dev.hawk0f.itutor.core.presentation.base.BaseFlowFragment
 import dev.hawk0f.itutor.core.presentation.extensions.activityNavController
 import dev.hawk0f.itutor.core.presentation.extensions.activityToolbar
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
-import dev.hawk0f.itutor.core.presentation.extensions.parentFragmentInNavHost
 import dev.hawk0f.itutor.navigation.MainContentFragmentDirections
 
 class MainContentFragment : BaseFlowFragment(R.layout.fragment_main_content, R.id.fragment_container, R.id.bottom_navigation_view)

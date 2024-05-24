@@ -1,5 +1,6 @@
 package dev.hawk0f.itutor.features.students.presentation.ui.fragments
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -76,7 +77,15 @@ class StudentFragment : BaseFragment<StudentsViewModel, FragmentStudentBinding>(
         viewModel.studentState.collectAsUIState(state = {
             it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = {
-            studentAdapter.submitList(it)
+            if (it.isEmpty())
+            {
+                noStudents.isVisible = true
+                recyclerStudents.isVisible = false
+            }
+            else
+            {
+                studentAdapter.submitList(it)
+            }
         })
     }
 

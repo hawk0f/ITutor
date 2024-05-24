@@ -55,13 +55,14 @@
     <string name="choose_lesson">Выберите занятие</string>
     <string name="choose_student">Выберите ученика</string>
 
-    <string name="date_custom_input">Дата: </string>
-    <string name="time_custom_input">. Время: </string>
+    <string name="homework_lesson_info_input">Дата: %s. Время: %s</string>
 
     <string name="all_students_have_homework">У всех учеников есть домашние задания</string>
 
-    <string name="no_homeworks">Вы не добавляли ни одного домашнего задания</string>
-
+    <string name="no_homeworks">Вы пока не добавили ни одного домашнего задания</string>
+    <string name="no_lessons">Вы пока не добавили ни одного занятия</string>
+    <string name="no_students">Вы пока не добавили ни одного ученика</string>
+    <string name="no_notes">Вы пока не добавили ни одной заметки</string>
     <string name="actual_revenue">Фактический доход</string>
     <string name="expected_revenue">Ожидаемый доход</string>
 

@@ -15,19 +15,19 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:padding="10dp">
 
             <LinearLayout
                 android:id="@+id/fields_start"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_weight="0.5"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -41,25 +41,22 @@
             </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/homework_tv"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(lessonStudent.shortHomework)}"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
                 android:ellipsize="end"
                 android:singleLine="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="@{String.valueOf(lessonStudent.shortHomework)}" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/customSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="@{lessonStudent.homeworkDone}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:checked="@{lessonStudent.homeworkDone}" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

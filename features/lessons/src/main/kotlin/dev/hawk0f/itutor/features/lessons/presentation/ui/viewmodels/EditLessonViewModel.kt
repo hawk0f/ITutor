@@ -84,7 +84,9 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
         studentsIds.remove(id)
     }
 
-    fun isUpdateNeeded() = oldParserDate != parsedDate || oldStartTime != startTime || oldEndTime != endTime || oldSubjectId != subjectId || oldStudentsIds != studentsIds
+    fun isUpdateNeeded() : Boolean {
+        return oldParserDate != parsedDate || oldStartTime != startTime || oldEndTime != endTime || oldSubjectId != subjectId || oldStudentsIds != studentsIds
+    }
 
     fun setSubjectId(id: Int)
     {
@@ -112,6 +114,10 @@ class EditLessonViewModel @Inject constructor(private val fetchSubjectsUseCase: 
         oldStartTime = startTime
         oldEndTime = endTime
         oldSubjectId = subjectId
-        oldStudentsIds = studentsIds
+    }
+
+    fun setOldStudentIds(list: List<Int>)
+    {
+        oldStudentsIds = list
     }
 }

@@ -1,6 +1,7 @@
 package dev.hawk0f.itutor.features.finance.presentation.ui.fragments
 
 import android.graphics.Color
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.mikephil.charting.components.Legend
@@ -110,23 +111,32 @@ class DiagramFragment : BaseFragment<DiagramViewModel, FragmentDiagramBinding>(R
         viewModel.paymentState.collectAsUIState(state = {
             it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = { payments ->
-            viewModel.setPayments(payments)
-
-            when (chipGroup.checkedChipId)
+            if (payments.isEmpty())
             {
-                R.id.previous_three_months ->
-                {
-                    buildMpChartForPreviousThreeMonths(filterPreviousThreeMonthsPayments(payments))
-                }
+                noLessons.isVisible = true
+            }
+            else
+            {
+                tagGroupScrollView.isVisible = true
+                chart.isVisible = true
+                viewModel.setPayments(payments)
 
-                R.id.previous_six_months ->
+                when (chipGroup.checkedChipId)
                 {
-                    buildMpChartForPreviousSixMonths(filterPreviousSixMonthsPayments(payments))
-                }
+                    R.id.previous_three_months ->
+                    {
+                        buildMpChartForPreviousThreeMonths(filterPreviousThreeMonthsPayments(payments))
+                    }
 
-                else ->
-                {
-                    buildMpChartForCurrentMonth(filterCurrentMonthPayments(payments))
+                    R.id.previous_six_months ->
+                    {
+                        buildMpChartForPreviousSixMonths(filterPreviousSixMonthsPayments(payments))
+                    }
+
+                    else ->
+                    {
+                        buildMpChartForCurrentMonth(filterCurrentMonthPayments(payments))
+                    }
                 }
             }
         })

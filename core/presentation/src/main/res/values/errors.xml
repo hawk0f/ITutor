@@ -5,6 +5,8 @@
 
     <string name="invalid_email">Invalid email address</string>
 
+    <string name="invalid_age">The age must be more than 4 and less than 100</string>
+    <string name="invalid_price">The price must be a positive integer</string>
     <string name="incorrect_name">Incorrect name</string>
     <string name="name_must_contain_at_least_2_characters">Name must contain at least 2 characters</string>
 

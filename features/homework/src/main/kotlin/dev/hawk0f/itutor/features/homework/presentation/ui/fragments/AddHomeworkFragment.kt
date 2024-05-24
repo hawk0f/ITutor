@@ -61,7 +61,7 @@ class AddHomeworkFragment : BaseFragment<AddHomeworkViewModel, FragmentAddHomewo
             }
             else
             {
-                val lessonAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, lessonsList.map { lessonStudent -> getString(string.date_custom_input) + lessonStudent.date.parseToFormat("d MMMM") + getString(string.time_custom_input) + lessonStudent.startTime + " - " + lessonStudent.endTime }.distinct())
+                val lessonAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, lessonsList.map { lessonStudent -> getString(string.homework_lesson_info_input, lessonStudent.date.parseToFormat("d MMMM"), lessonStudent.startTime + " - " + lessonStudent.endTime) }.distinct())
                 lessonDropDown.setAdapter(lessonAdapter)
 
                 if (lessonDropDown.fullText.isEmpty())

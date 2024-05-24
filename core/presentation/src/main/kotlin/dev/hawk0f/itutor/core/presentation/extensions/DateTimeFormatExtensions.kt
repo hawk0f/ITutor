@@ -28,10 +28,3 @@ fun String.parseToTime(parserPattern: String): LocalTime
     val parser = DateTimeFormatter.ofPattern(parserPattern, Locale.getDefault())
     return LocalTime.parse(this, parser)
 }
-
-fun String.parseToFormat(parserPattern: String, formatterPattern: String): String
-{
-    val parser = DateTimeFormatter.ofPattern(parserPattern, Locale.getDefault())
-    val formatter = DateTimeFormatter.ofPattern(formatterPattern, Locale.getDefault())
-    return formatter.format(parser.parse(this)!!)
-}

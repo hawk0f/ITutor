@@ -1,5 +1,6 @@
 package dev.hawk0f.itutor.features.notes.presentation.ui.fragments
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,7 +66,15 @@ class NoteFragment : BaseFragment<NoteViewModel, FragmentNoteBinding>(R.layout.f
         viewModel.noteState.collectAsUIState(state = {
             it.setupViewVisibilityLinear(group, loader)
         }, onSuccess = {
-            noteAdapter.submitList(it)
+            if (it.isEmpty())
+            {
+                noNotes.isVisible = true
+                recyclerNotes.isVisible = false
+            }
+            else
+            {
+                noteAdapter.submitList(it)
+            }
         })
     }
 

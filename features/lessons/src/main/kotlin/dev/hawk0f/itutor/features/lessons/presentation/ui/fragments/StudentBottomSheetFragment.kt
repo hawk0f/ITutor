@@ -77,11 +77,12 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
         btnSave.setOnClickListener {
             if (studentIds.isNotEmpty())
             {
+                val oldStudentIds = ArrayList(lesson.studentsIds)
                 lesson.studentsIds.clear()
                 lesson.studentsIds.addAll(studentIds)
                 if (findNavController().previousBackStackEntry?.destination?.id == editLessonFragment)
                 {
-                    findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToEditLessonFragment(lesson = lesson))
+                    findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToEditLessonFragment(lesson = lesson, studentIds = oldStudentIds.toIntArray()))
                 }
                 else
                 {
@@ -99,7 +100,7 @@ class StudentBottomSheetFragment : BaseBottomSheet<StudentBottomSheetViewModel, 
         btnCancel.setOnClickListener {
             if (findNavController().previousBackStackEntry?.destination?.id == editLessonFragment)
             {
-                findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToEditLessonFragment(lesson = lesson))
+                findNavController().navigateSafely(StudentBottomSheetFragmentDirections.actionStudentBottomSheetFragmentToEditLessonFragment(lesson = lesson, studentIds = studentIds.toIntArray()))
             }
             else
             {

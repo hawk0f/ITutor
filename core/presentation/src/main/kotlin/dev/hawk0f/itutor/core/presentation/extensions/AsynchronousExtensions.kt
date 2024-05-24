@@ -45,10 +45,3 @@ inline fun LifecycleOwner.launchWithRepeatOnLifecycle(state: Lifecycle.State, cr
 inline fun <T> Flow<T>.launchAndCollectIn(viewLifecycleOwner: LifecycleOwner, state: Lifecycle.State = Lifecycle.State.STARTED, crossinline collector: suspend CoroutineScope.(T) -> Unit) = viewLifecycleOwner.launchWithRepeatOnLifecycle(state) {
     collect { collector(it) }
 }
-
-/**
- * [collectLatest] flow safely with [launchWithRepeatOnLifecycle]
- */
-inline fun <T> Flow<T>.launchAndCollectLatestIn(viewLifecycleOwner: LifecycleOwner, state: Lifecycle.State = Lifecycle.State.STARTED, crossinline collector: suspend CoroutineScope.(T) -> Unit) = viewLifecycleOwner.launchWithRepeatOnLifecycle(state) {
-    collectLatest { collector(it) }
-}

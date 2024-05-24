@@ -20,7 +20,7 @@ data class LessonStudentUI(
     val hasPaid: Boolean,
     val fullHomework: String,
     val isHomeworkDone: Boolean,
-    val shortHomework: String = fullHomework.takeDot(5)
+    val shortHomework: String = fullHomework.takeDot(10)
 ) : IBaseDiffModel<Int>, Serializable
 
 fun LessonStudent.toUi() = LessonStudentUI("${studentId}${lessonId}".toInt(), studentId, lessonId, date.parseToFormat("dd MMMM, EEEE"), date, startTime.parseToFormat("HH:mm"), endTime.parseToFormat("HH:mm"), studentName, price, hasPaid, homework, isHomeworkDone)
