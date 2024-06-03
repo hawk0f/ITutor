@@ -19,9 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
+ 
 # Rules for DataMapper
 -keep class * implements dev.hawk0f.itutor.core.data.utils.DataMapper
 
-# Rules for Navigation Component Safe Args, Parcelable
--keep class * implements android.os.Parcelable
+# Rules for Navigation Component Safe Args, Serializable
+-keep class * implements java.io.Serializable
+-keepnames class * extends java.io.Serializable
