@@ -76,7 +76,7 @@ class AddHomeworkFragment : BaseFragment<AddHomeworkViewModel, FragmentAddHomewo
                     studentDropDown.text.clear()
                     viewModel.setStudentId(0)
 
-                    val lessonId = lessonsList[positionLesson].lessonId
+                    val lessonId = lessonsList.first { lesson -> getString(string.homework_lesson_info_input, lesson.date.parseToFormat("d MMMM"), lesson.startTime + " - " + lesson.endTime) == lessonAdapter.getItem(positionLesson) }.lessonId
                     viewModel.setLessonId(lessonId)
 
                     val studentsList = lessonsList.filter { lessonStudent -> lessonStudent.lessonId == lessonId }
