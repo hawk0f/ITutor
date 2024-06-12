@@ -7,7 +7,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.hawk0f.itutor.core.presentation.R.*
 import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.setupAgeValidator
-import dev.hawk0f.itutor.core.presentation.extensions.setupIsEmptyValidator
 import dev.hawk0f.itutor.core.presentation.extensions.setupNameValidator
 import dev.hawk0f.itutor.core.presentation.extensions.setupPhoneValidator
 import dev.hawk0f.itutor.core.presentation.extensions.setupPriceValidator

@@ -14,6 +14,10 @@ android {
     namespace = "dev.hawk0f.itutor.navigation"
     compileSdk = 34
 
+    defaultConfig {
+        minSdk = 30
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
