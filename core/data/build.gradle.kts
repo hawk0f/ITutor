@@ -19,11 +19,11 @@ android {
 
     buildTypes {
         release {
-            buildConfigField("String", "BASE_URL", "\"http://212.113.120.163:5110/api/\"")
+            buildConfigField("String", "BASE_URL","\"${project.properties["ITutorApiBaseUrl"]}\"")
         }
 
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://212.113.120.163:5110/api/\"")
+            buildConfigField("String", "BASE_URL", "\"${project.properties["ITutorApiBaseUrl"]}\"")
         }
     }
 
@@ -32,12 +32,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "21"
+        jvmTarget = "17"
     }
 }
 
