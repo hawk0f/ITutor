@@ -1,0 +1,28 @@
+package dev.hawk0f.itutor.note.presentation.ui.viewmodels
+
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.hawk0f.itutor.core.presentation.CurrentUser
+import dev.hawk0f.itutor.core.presentation.MutableUIStateFlow
+import dev.hawk0f.itutor.core.presentation.base.BaseViewModel
+import dev.hawk0f.itutor.note.domain.usecases.DeleteNoteUseCase
+import dev.hawk0f.itutor.note.domain.usecases.FetchNotesUseCase
+import dev.hawk0f.itutor.note.presentation.models.NoteUI
+import dev.hawk0f.itutor.note.presentation.models.toUi
+import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
+
+@HiltViewModel
+class NoteViewModel @Inject constructor(private val fetchNotesUseCase: FetchNotesUseCase, private val deleteNoteUseCase: DeleteNoteUseCase) : BaseViewModel()
+{
+    private val _noteState = MutableUIStateFlow<List<NoteUI>>()
+    val noteState = _noteState.asStateFlow()
+
+    private val _deleteState = MutableUIStateFlow<Unit>()
+    val deleteState = _deleteState.asStateFlow()
+
+    fun fetchNotes() = fetchNotesUseCase(CurrentUser.getUserId()).collectNetworkRequestWithMapping(_noteState) { list ->
+        list.map { it.toUi() }
+    }
+
+    fun deleteNote(noteId: Int) = deleteNoteUseCase(noteId).collectNetworkRequest(_deleteState)
+}
