@@ -53,10 +53,13 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        compose = true
     }
 }
 
 dependencies {
+    implementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(platform(libs.androidx.compose.bom))
 
     //Core
     implementation(project(":core:domain"))

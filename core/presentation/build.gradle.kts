@@ -30,11 +30,21 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        compose = true
     }
 }
 
 dependencies {
     implementation(project(":core:domain"))
+
+    // Compose
+    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.foundation)
+    implementation(libs.androidx.foundation.layout)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.ui.tooling)
 
     // Kotlin
     api(libs.kotlinx.coroutines.android)
