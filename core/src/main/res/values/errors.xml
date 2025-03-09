@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="field_must_be_filled">Field must be filled</string>
+
+    <string name="invalid_email">Invalid email address</string>
+
+    <string name="invalid_age">The age must be more than 4 and less than 100</string>
+    <string name="invalid_price">The price must be a positive integer</string>
+    <string name="incorrect_name">Incorrect name</string>
+    <string name="name_must_contain_at_least_2_characters">Name must contain at least 2 characters</string>
+
+    <string name="complete_your_phone_number">Complete your phone number</string>
+
+    <string name="complete_your_phone_number_or_delete">Complete your phone number or remove it</string>
+
+    <string name="password_must_not_be_less_than_6_characters">Password must be at least 6 characters long</string>
+
+    <string name="server_connection_error">Server connection error</string>
+
+    <string name="fill_note_text">Note text must be filled</string>
+
+    <string name="choose_students">Choose students for the lesson</string>
+
+    <string name="fill_homework_text">Homework text must be filled</string>
+
+    //User
+    <string name="no_user_with_this_email_and_password">No user exists with this email and password</string>
+    <string name="user_with_this_email_already_exist">User with this email is already exist</string>
+    <string name="error_get_user_data">Error receiving user data</string>
+    <string name="error_user_auth">Error auth user</string>
+    <string name="error_user_register">Error register user</string>
+    <string name="error_user_update">Error updating user</string>
+    <string name="error_user_delete">Error deleting user</string>
+
+    //Lesson
+    <string name="lesson_already_exist">Lesson with this data is already exist</string>
+    <string name="error_get_lessons_data">Error receiving lessons data</string>
+    <string name="error_get_lesson_data">Error receiving lesson data</string>
+    <string name="error_get_students_in_lessons">Error receiving students in lesson data</string>
+    <string name="error_lesson_add">Error adding session</string>
+    <string name="error_lesson_update">Error updating session</string>
+    <string name="error_lesson_delete">Error deleting session</string>
+
+    //Student
+    <string name="student_already_exist">Student with this data is already exist</string>
+    <string name="error_get_students_data">Error receiving students data</string>
+    <string name="error_get_student_data">Error receiving student data</string>
+    <string name="error_student_add">Error adding student</string>
+    <string name="error_student_update">Error updating student</string>
+    <string name="error_student_delete">Error deleting student</string>
+
+    //Note
+    <string name="note_already_exist">Note with this data is already exist</string>
+    <string name="error_get_notes_data">Error receiving notes data</string>
+    <string name="error_get_note_data">Error receiving note data</string>
+    <string name="error_note_add">Error adding note</string>
+    <string name="error_note_update">Error updating note</string>
+    <string name="error_note_delete">Error deleting note</string>
+
+    //LessonStudent
+    <string name="error_get_lesson_students_data">Error receiving students and lessons data</string>
+    <string name="error_get_lesson_student_data">Error receiving student homework data</string>
+    <string name="error_update_payment_status">Error updating payment status</string>
+    <string name="error_update_homework_status">Error updating homework status</string>
+    <string name="error_add_homework">Error adding homework</string>
+    <string name="error_update_homework">Error updating homework</string>
+
+    //Subject
+    <string name="error_get_subjects">Error receiving subjects</string>
+
+</resources>

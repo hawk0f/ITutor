@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lessonsNavGraph"
+    app:startDestination="@id/lessonFragment">
+
+    <fragment
+        android:id="@+id/lessonFragment"
+        android:name="dev.hawk0f.itutor.lesson.presentation.ui.fragments.LessonFragment"
+        android:label="@string/lessons"
+        tools:layout="@layout/fragment_lesson">
+        <action
+            android:id="@+id/action_lessonFragment_to_addLessonFragment"
+            app:destination="@id/addLessonFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_lessonFragment_to_editLessonFragment"
+            app:destination="@id/editLessonFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLessonFragment"
+        android:name="dev.hawk0f.itutor.lesson.presentation.ui.fragments.AddLessonFragment"
+        android:label="@string/adding_lesson"
+        tools:layout="@layout/fragment_add_lesson">
+        <action
+            android:id="@+id/action_addLessonFragment_to_studentBottomSheetFragment"
+            app:destination="@id/studentBottomSheetFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="lesson"
+            android:defaultValue="@null"
+            app:argType="dev.hawk0f.itutor.lesson.presentation.models.LessonUI"
+            app:nullable="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/studentBottomSheetFragment"
+        android:name="dev.hawk0f.itutor.lesson.presentation.ui.fragments.StudentBottomSheetFragment"
+        android:label="Выбор учеников"
+        tools:layout="@layout/fragment_student_bottom_sheet">
+        <action
+            android:id="@+id/action_studentBottomSheetFragment_to_addLessonFragment"
+            app:destination="@id/addLessonFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/lessonFragment" />
+        <action
+            android:id="@+id/action_studentBottomSheetFragment_to_editLessonFragment"
+            app:destination="@id/editLessonFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/lessonFragment" />
+        <argument
+            android:name="lesson"
+            app:argType="dev.hawk0f.itutor.lesson.presentation.models.LessonUI" />
+    </dialog>
+    <fragment
+        android:id="@+id/editLessonFragment"
+        android:name="dev.hawk0f.itutor.lesson.presentation.ui.fragments.EditLessonFragment"
+        android:label="@string/editing_lesson"
+        tools:layout="@layout/fragment_edit_lesson">
+        <argument
+            android:name="lessonId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_editLessonFragment_to_studentBottomSheetFragment"
+            app:destination="@id/studentBottomSheetFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="lesson"
+            android:defaultValue="@null"
+            app:argType="dev.hawk0f.itutor.lesson.presentation.models.LessonUI"
+            app:nullable="true" />
+        <argument
+            android:name="studentIds"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+</navigation>

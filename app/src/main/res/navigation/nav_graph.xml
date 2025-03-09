@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authFragment"
-        android:name="dev.hawk0f.itutor.features.auth.presentation.ui.fragments.AuthFragment"
+        android:name="dev.hawk0f.itutor.auth.presentation.ui.fragments.AuthFragment"
         android:label="@string/auth"
         tools:layout="@layout/fragment_auth">
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="dev.hawk0f.itutor.features.register.presentation.ui.fragments.RegisterFragment"
+        android:name="dev.hawk0f.itutor.register.presentation.ui.fragments.RegisterFragment"
         android:label="@string/reg"
         tools:layout="@layout/fragment_register">
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainContentFragment"
-        android:name="dev.hawk0f.itutor.features.maincontent.MainContentFragment"
+        android:name="dev.hawk0f.itutor.mainContent.ui.MainContentFragment"
         android:label="@string/students"
         tools:layout="@layout/fragment_main_content">
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="dev.hawk0f.itutor.features.profile.presentation.ui.fragments.ProfileFragment"
+        android:name="dev.hawk0f.itutor.profile.presentation.ui.fragments.ProfileFragment"
         android:label="@string/profile">
         <action
             android:id="@+id/action_profileFragment_to_authFragment"

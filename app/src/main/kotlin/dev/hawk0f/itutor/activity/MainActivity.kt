@@ -7,49 +7,45 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
-import dev.hawk0f.itutor.R.id
-import dev.hawk0f.itutor.R.navigation.nav_graph
+import dev.hawk0f.itutor.R
 import dev.hawk0f.itutor.core.data.local.UserDataPreferences
 import dev.hawk0f.itutor.core.presentation.CurrentUser
-import dev.hawk0f.itutor.core.presentation.R
-import dev.hawk0f.itutor.core.presentation.R.id.nav_host_fragment
-import dev.hawk0f.itutor.core.presentation.R.layout.activity_main
 import dev.hawk0f.itutor.core.presentation.extensions.initNavController
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity()
 {
-    private val navController by lazy { initNavController(nav_host_fragment) }
+    private val navController by lazy { initNavController(dev.hawk0f.itutor.core.R.id.nav_host_fragment) }
 
     @Inject
-    private lateinit var userDataPreferences: UserDataPreferences
+    lateinit var userDataPreferences: UserDataPreferences
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        setContentView(activity_main)
+        setContentView(dev.hawk0f.itutor.core.R.layout.activity_main)
 
         setupNavigation()
     }
 
     private fun setupNavigation()
     {
-        val navGraph = navController.navInflater.inflate(nav_graph)
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+        val toolbar = findViewById<MaterialToolbar>(dev.hawk0f.itutor.core.R.id.toolbar)
 
         val userId = userDataPreferences.userId
 
         if (userId != 0)
         {
             CurrentUser.setUserId(userId)
-            navGraph.setStartDestination(id.mainContentFragment)
+            navGraph.setStartDestination(R.id.mainContentFragment)
         }
 
         navController.graph = navGraph
 
-        val appBarConfiguration = AppBarConfiguration.Builder(setOf(id.authFragment, id.registerFragment, id.mainContentFragment, id.profileFragment)).build()
+        val appBarConfiguration = AppBarConfiguration.Builder(setOf(R.id.authFragment, R.id.registerFragment, R.id.mainContentFragment, R.id.profileFragment)).build()
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
         setSupportActionBar(toolbar)
