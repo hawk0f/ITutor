@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="dev.hawk0f.itutor.auth.presentation.ui.viewmodels.AuthViewModel" />
+            type="dev.hawk0f.itutor.auth.presentation.ui.AuthViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

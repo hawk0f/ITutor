@@ -10,7 +10,7 @@ import dev.hawk0f.itutor.core.presentation.base.BaseFragment
 import dev.hawk0f.itutor.core.presentation.extensions.hideKeyboard
 import dev.hawk0f.itutor.core.presentation.extensions.navigateSafely
 import dev.hawk0f.itutor.core.presentation.extensions.validateInputs
-import dev.hawk0f.itutor.auth.presentation.ui.viewmodels.AuthViewModel
+import dev.hawk0f.itutor.auth.presentation.ui.AuthViewModel
 import dev.hawk0f.itutor.databinding.FragmentAuthBinding
 
 @AndroidEntryPoint
