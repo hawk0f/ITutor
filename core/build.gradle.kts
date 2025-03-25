@@ -61,6 +61,7 @@ dependencies {
     api(libs.androidx.foundation)
     api(libs.androidx.foundation.layout)
     api(libs.androidx.material3)
+    api(libs.androidx.material.icons.extended)
     api(libs.androidx.runtime.livedata)
     api(libs.androidx.ui.tooling)
     api(libs.androidx.lifecycle.viewmodel.compose)
