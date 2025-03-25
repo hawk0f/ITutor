@@ -16,6 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ITutor"
 include(":app")
-include(":core:data")
-include(":core:presentation")
-include(":core:domain")
+include(":core")

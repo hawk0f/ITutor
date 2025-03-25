@@ -63,9 +63,11 @@ dependencies {
     api(libs.androidx.material3)
     api(libs.androidx.runtime.livedata)
     api(libs.androidx.ui.tooling)
+    api(libs.androidx.lifecycle.viewmodel.compose)
 
     // Kotlin
     api(libs.kotlinx.coroutines.android)
+    api(libs.kotlinx.coroutines.core)
 
     // UI Components
     api(libs.android.material)
