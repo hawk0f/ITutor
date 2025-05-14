@@ -3,9 +3,6 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.serialization)
 
-    // Navigation Safe Args
-    alias(libs.plugins.androidx.navigation.safeArgs)
-
     // Hilt
     alias(libs.plugins.hilt.android)
 
@@ -23,7 +20,7 @@ android {
     defaultConfig {
         applicationId = "dev.hawk0f.itutor"
         minSdk = 29
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -56,8 +53,6 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
-        dataBinding = true
         compose = true
     }
 }
@@ -69,10 +64,9 @@ dependencies {
     //Charts
     implementation(libs.mp.android.chart)
 
-    //Masked TextView
-    implementation(libs.decoro)
-
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.hilt.work)
     ksp(libs.hilt.compiler)
 }

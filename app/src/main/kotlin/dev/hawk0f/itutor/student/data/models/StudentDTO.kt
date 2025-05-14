@@ -10,22 +10,22 @@ class StudentDTO(
     @SerialName("id")
     val id: Int = 0,
     @SerialName("name")
-    val name: String,
+    val name: String = "",
     @SerialName("surname")
-    val surname: String,
+    val surname: String = "",
     @SerialName("age")
-    val age: Int,
+    val age: Int = 0,
     @SerialName("phoneNumber")
-    val phoneNumber: String,
+    val phoneNumber: String? = null,
     @SerialName("singlePrice")
-    val singlePrice: Double,
+    val singlePrice: Double = 0.0,
     @SerialName("groupPrice")
-    val groupPrice: Double,
+    val groupPrice: Double = 0.0,
     @SerialName("note")
-    val note: String,
+    val note: String? = null,
     @SerialName("userId")
     val userId: Int
-) : DataMapper<Student>
-{
-    override fun toDomain(): Student = Student(id, name, surname, age, phoneNumber, singlePrice, groupPrice, note, userId)
+) : DataMapper<Student> {
+    override fun toDomain(): Student =
+        Student(id, name, surname, age, phoneNumber, singlePrice, groupPrice, note, userId)
 }

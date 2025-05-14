@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="dev.hawk0f.itutor.register.presentation.ui.viewmodels.RegisterViewModel" />
+            type="dev.hawk0f.itutor.register.presentation.ui.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,7 +1,6 @@
 package dev.hawk0f.itutor.finance.presentation.models
 
 import dev.hawk0f.itutor.core.data.utils.DateSerializer
-import dev.hawk0f.itutor.core.presentation.base.IBaseDiffModel
 import dev.hawk0f.itutor.core.presentation.extensions.parseToFormat
 import dev.hawk0f.itutor.core.presentation.extensions.takeDot
 import dev.hawk0f.itutor.finance.domain.models.LessonStudent
@@ -10,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LessonStudentUI(
-    override val id: Int,
+    val id: Int,
     val studentId: Int,
     val lessonId: Int,
     val parsedDate: String,
@@ -24,7 +23,7 @@ data class LessonStudentUI(
     val fullHomework: String,
     val isHomeworkDone: Boolean,
     val shortHomework: String = fullHomework.takeDot(10)
-) : IBaseDiffModel<Int>
+)
 
 fun LessonStudent.toUi() = LessonStudentUI(
         "${studentId}${lessonId}".toInt(),

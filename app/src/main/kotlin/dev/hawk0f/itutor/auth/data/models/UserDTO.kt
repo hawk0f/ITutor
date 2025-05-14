@@ -16,7 +16,7 @@ data class UserDTO(
     @SerialName("email")
     val email: String,
     @SerialName("phoneNumber")
-    val phoneNumber: String?,
+    val phoneNumber: String? = null,
     @SerialName("password")
     val password: String
 ) : DataMapper<User>

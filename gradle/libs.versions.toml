@@ -1,27 +1,26 @@
 [versions]
-agp = "8.9.1"
-composeBom = "2025.03.00"
-kotlin = "2.1.10"
-kotlinx-serialization = "1.8.0"
-coroutines = "1.10.1"
+agp = "8.10.0"
+composeBom = "2025.05.00"
+kotlin = "2.1.21"
+kotlinx-serialization = "1.8.1"
+coroutines = "1.10.2"
 material = "1.12.0"
 activity = "1.10.1"
 fragment = "1.8.6"
 constraintLayout = "2.2.1"
-ksp = "2.0.0-1.0.21"
-core = "1.15.0"
+ksp = "2.1.21-2.0.1"
+core = "1.16.0"
 splashscreen = "1.0.1"
-lifecycle = "2.8.7"
-navigation = "2.8.9"
-decoro = "1.6.0"
+lifecycle = "2.9.0"
+navigation = "2.9.0"
 retrofit = "2.11.0"
 okHttp = "5.0.0-alpha.14"
-vbpd = "1.5.9"
-dagger = "2.56"
+dagger = "2.56.2"
+hilt = "1.2.0"
 mp-android-chart = "3.1.0"
 annotationJvm = "1.9.1"
-recycler-view-animators = "4.0.2"
-security = "1.1.0-alpha06"
+security = "1.1.0-alpha07"
+work-runtime = "2.10.1"
 
 [libraries]
 # Kotlin
@@ -46,7 +45,6 @@ androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-
 # UIComponents
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
 androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
-android-vbpd = { module = "com.github.kirich1409:viewbindingpropertydelegate-noreflection", version.ref = "vbpd" }
 
 # Core
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "core" }
@@ -54,15 +52,13 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 
 # Activity
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 
 # Fragment
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 
 # Chart Libraries
 mp-android-chart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mp-android-chart" }
-
-# RecyclerView Animations
-recycler-view-animators = { module = "jp.wasabeef:recyclerview-animators", version.ref = "recycler-view-animators" }
 
 # Lifecycle
 androidx-lifecycle-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
@@ -72,12 +68,14 @@ androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-kt
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 
-#Mask TextView
-decoro = { module = "ru.tinkoff.decoro:decoro", version.ref = "decoro" }
+# Work
+androidx-work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work-runtime" }
 
 # Hilt
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt" }
+hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hilt" }
 
 # Javax
 # [javax.inject package](https://docs.oracle.com/javaee/6/api/javax/inject/package-summary.html)
@@ -107,9 +105,6 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # Hilt
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
-
-# Navigation
-androidx-navigation-safeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

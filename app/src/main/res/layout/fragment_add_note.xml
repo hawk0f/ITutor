@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="dev.hawk0f.itutor.note.presentation.ui.viewmodels.AddNoteViewModel" />
+            type="dev.hawk0f.itutor.note.presentation.ui.add.AddNoteViewModel" />
     </data>
 
     <LinearLayout

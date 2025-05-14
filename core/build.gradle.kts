@@ -3,9 +3,6 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.serialization)
 
-    // Navigation Safe Args
-    alias(libs.plugins.androidx.navigation.safeArgs)
-
     // Hilt
     alias(libs.plugins.hilt.android)
 
@@ -44,8 +41,6 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
-        dataBinding = true
         compose = true
         buildConfig = true
     }
@@ -73,17 +68,14 @@ dependencies {
     // UI Components
     api(libs.android.material)
     api(libs.androidx.constraintLayout)
-    api(libs.android.vbpd)
 
     // Core
     api(libs.androidx.core)
     api(libs.androidx.core.splashscreen)
 
-    // Animators
-    api(libs.recycler.view.animators)
-
     // Activity
     api(libs.androidx.activity)
+    api(libs.androidx.activity.compose)
 
     // Fragment
     api(libs.androidx.fragment)
@@ -115,7 +107,12 @@ dependencies {
     implementation(libs.okHttp)
     implementation(libs.okHttp.loggingInterceptor)
 
+    //work
+    api(libs.androidx.work.runtime)
+
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.hilt.work)
     ksp(libs.hilt.compiler)
 }

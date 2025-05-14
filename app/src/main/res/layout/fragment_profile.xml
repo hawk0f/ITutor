@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="dev.hawk0f.itutor.profile.presentation.ui.viewmodels.ProfileViewModel" />
+            type="dev.hawk0f.itutor.profile.presentation.ui.ProfileViewModel" />
     </data>
 
     <LinearLayout

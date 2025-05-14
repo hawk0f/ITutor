@@ -5,9 +5,9 @@ data class Student(
     val name: String,
     val surname: String,
     val age: Int,
-    val phoneNumber: String,
+    val phoneNumber: String?,
     val singlePrice: Double,
     val groupPrice: Double,
-    val note: String,
+    val note: String?,
     val userId: Int
 )

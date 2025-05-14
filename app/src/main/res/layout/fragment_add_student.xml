@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="dev.hawk0f.itutor.student.presentation.ui.viewmodels.AddStudentViewModel" />
+            type="dev.hawk0f.itutor.student.presentation.ui.add.AddStudentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

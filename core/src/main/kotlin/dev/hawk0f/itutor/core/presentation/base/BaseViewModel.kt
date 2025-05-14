@@ -4,59 +4,118 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.hawk0f.itutor.core.domain.Either
 import dev.hawk0f.itutor.core.domain.NetworkError
-import dev.hawk0f.itutor.core.presentation.UIState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 /**
  * Base class for all [ViewModel]s
  */
-abstract class BaseViewModel : ViewModel()
-{
+abstract class BaseViewModel<State, Intent, Effect> : ViewModel() {
+    // UI state
+    private val _state: MutableStateFlow<State> by lazy { MutableStateFlow(initialState) }
+    val state: StateFlow<State> = _state
+
+    // One-time effects (toasts, nav, etc.)
+    private val _effect = MutableSharedFlow<Effect>()
+    val effect: SharedFlow<Effect> = _effect
+
     /**
-     * Collect network request result without mapping for primitive types
+     * Отправка интента (события) в ViewModel.
+     * Метод вызывается из UI и обрабатывается в [handleIntent].
      *
-     * @receiver [collectEither]
+     * @param intent Событие (Intent), которое нужно обработать.
      */
-    protected fun <T> Flow<Either<NetworkError, T>>.collectNetworkRequest(state: MutableStateFlow<UIState<T>>) = collectEither(state) {
-        UIState.Success(it)
+    fun sendIntent(intent: Intent) {
+        viewModelScope.launch {
+            handleIntent(intent)
+        }
     }
 
     /**
-     * Collect network request result with mapping
+     * Обновляет текущее состояние, используя редьюсер.
      *
-     * @receiver [collectEither]
+     * @param reducer Функция, которая принимает текущее состояние и возвращает новое.
      */
-    protected fun <T, S> Flow<Either<NetworkError, T>>.collectNetworkRequestWithMapping(state: MutableStateFlow<UIState<S>>, mapToUI: (T) -> S) = collectEither(state) {
-        UIState.Success(mapToUI(it))
+    protected fun setState(reducer: State.() -> State) {
+        _state.value = _state.value.reducer()
     }
 
     /**
-     * Collect network request result and mapping [Either] to [UIState]
+     * Отправляет одноразовый [Effect], например, навигацию или тост.
      *
-     * @receiver [NetworkError] or [data][T] in [Flow] with [Either]
-     *
-     * @param T domain layer model
-     * @param S presentation layer model
-     * @param state [MutableStateFlow] with [UIState]
-     *
-     * @see viewModelScope
-     * @see launch
-     * @see [Flow.collect]
+     * @param builder Функция, создающая Effect.
      */
-    private fun <T, S> Flow<Either<NetworkError, T>>.collectEither(state: MutableStateFlow<UIState<S>>, successful: (T) -> UIState.Success<S>)
-    {
+    protected fun sendEffect(builder: () -> Effect) {
+        viewModelScope.launch {
+            _effect.emit(builder())
+        }
+    }
+
+    /**
+     * Возвращает начальное состояние для ViewModel.
+     *
+     * @return Начальный [State].
+     */
+    protected abstract val initialState: State
+
+    /**
+     * Обработка поступающих интентов.
+     * Обязательно реализуется в конкретной ViewModel.
+     *
+     * @param intent [Intent] для обработки.
+     */
+    protected abstract suspend fun handleIntent(intent: Intent)
+
+    /**
+     * Коллектит поток, обрабатывая состояния загрузки, успеха и ошибки.
+     *
+     * @param onLoading Опционально: функция, возвращающая новое состояние при начале загрузки.
+     * @param onSuccess Обработка успешного результата: функция, возвращающая новое состояние.
+     * @param onError Обработка ошибки: функция, возвращающая новое состояние.
+     */
+    protected suspend fun <T> Flow<Either<NetworkError, T>>.collectEither(
+        onLoading: (State.() -> State)? = null,
+        onSuccess: State.(T) -> State,
+        onError: (NetworkError) -> Effect
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            state.value = UIState.Loading()
-            this@collectEither.collect {
-                when (it)
-                {
-                    is Either.Left -> state.value = UIState.Error(it.value)
-                    is Either.Right -> state.value = successful(it.value)
+            if (onLoading != null) {
+                setState(onLoading)
+            }
+
+            this@collectEither.collect { result ->
+                when (result) {
+                    is Either.Left -> sendEffect { onError(result.value) }
+                    is Either.Right -> setState { onSuccess(result.value) }
                 }
             }
         }
+    }
+
+    /**
+     * Коллектит поток [Flow<Either<NetworkError, T>>], сначала отображая результат в [R],
+     * затем обрабатывая как успех или ошибку.
+     *
+     * @param onLoading Опционально: функция, возвращающая новое состояние при начале загрузки.
+     * @param mapper Маппинг результата T → R.
+     * @param onSuccess Обработка успешного результата: функция, возвращающая новое состояние.
+     * @param onError Обработка ошибки: функция, возвращающая новое состояние.
+     */
+    protected suspend fun <T, R> Flow<Either<NetworkError, T>>.collectMappedEither(
+        onLoading: (State.() -> State)? = null,
+        mapper: (T) -> R,
+        onSuccess: State.(R) -> State,
+        onError: (NetworkError) -> Effect
+    ) {
+        collectEither(
+            onLoading = onLoading,
+            onSuccess = { onSuccess(mapper(it)) },
+            onError = onError
+        )
     }
 }

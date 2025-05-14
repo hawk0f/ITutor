@@ -2,9 +2,6 @@
 plugins {
     alias(libs.plugins.androidApplication) apply false
 
-    // Navigation Safe Args
-    alias(libs.plugins.androidx.navigation.safeArgs) apply false
-
     // Hilt
     alias(libs.plugins.hilt.android) apply false
 

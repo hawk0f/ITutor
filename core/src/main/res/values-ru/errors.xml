@@ -2,27 +2,16 @@
 <resources>
 
     <string name="field_must_be_filled">Поле должно быть заполнено</string>
-
     <string name="invalid_email">Некорректный адрес электронной почты</string>
-
     <string name="invalid_age">Возраст должен быть больше 4 и меньше 100</string>
-    <string name="invalid_price">Цена должна быть целым положительным числом</string>
+    <string name="invalid_price">Цена должна быть положительным числом</string>
     <string name="incorrect_name">Некорректное имя</string>
     <string name="name_must_contain_at_least_2_characters">Имя должно содержать минимум 2 символа</string>
-
     <string name="complete_your_phone_number">Допишите номер телефона до конца</string>
-
     <string name="complete_your_phone_number_or_delete">Допишите номер телефона или сотрите его</string>
-
     <string name="password_must_not_be_less_than_6_characters">Пароль не должен быть меньше 6 символов</string>
 
     <string name="server_connection_error">Ошибка соединения с сервером</string>
-
-    <string name="fill_note_text">Введите текст для заметки</string>
-
-    <string name="choose_students">Выберите учеников для занятия</string>
-
-    <string name="fill_homework_text">Введите домашнее задание</string>
 
     //User
     <string name="no_user_with_this_email_and_password">Пользователя с такой почтой и паролем не существует</string>
@@ -41,6 +30,7 @@
     <string name="error_lesson_add">Ошибка при добавлении занятия</string>
     <string name="error_lesson_update">Ошибка при обновлении занятия</string>
     <string name="error_lesson_delete">Ошибка при удалении занятия</string>
+    <string name="choose_students">Выберите учеников для занятия</string>
 
     //Student
     <string name="student_already_exist">Ученик с такими данными уже существует</string>
@@ -57,6 +47,7 @@
     <string name="error_note_add">Ошибка при добавлении заметки</string>
     <string name="error_note_update">Ошибка при обновлении заметки</string>
     <string name="error_note_delete">Ошибка при удалении заметки</string>
+    <string name="fill_note_text">Введите текст для заметки</string>
 
     //LessonStudent
     <string name="error_get_lesson_students_data">Ошибка получения данных об учениках и занятиях</string>
@@ -65,6 +56,7 @@
     <string name="error_update_homework_status">Ошибка при обновлении статуса задания</string>
     <string name="error_add_homework">Ошибка при добавлении задания</string>
     <string name="error_update_homework">Ошибка при обновлении задания</string>
+    <string name="fill_homework_text">Введите домашнее задание</string>
 
     //Subject
     <string name="error_get_subjects">Ошибка получения предметов</string>

@@ -7,24 +7,25 @@ import dev.hawk0f.itutor.core.presentation.validation.ValidationResult
 import dev.hawk0f.itutor.core.presentation.validation.Validator
 import javax.inject.Inject
 
-class ValidateAge @Inject constructor(@ApplicationContext private val context: Context) : Validator
-{
-    override fun invoke(text: String): ValidationResult
-    {
-        return when
-        {
-            text.isEmpty() ->
-            {
-                ValidationResult(isSuccessful = false, errorMessage = context.getString(R.string.field_must_be_filled))
+class ValidateAge @Inject constructor(@ApplicationContext private val context: Context) :
+    Validator {
+    override fun invoke(text: String?): ValidationResult {
+        return when {
+            text.isNullOrEmpty() -> {
+                ValidationResult(
+                    isSuccessful = false,
+                    errorMessage = context.getString(R.string.field_must_be_filled)
+                )
             }
 
-            text.toInt() <= 4 || text.toInt() >= 100 ->
-            {
-                ValidationResult(isSuccessful = false, errorMessage = context.getString(R.string.invalid_age))
+            text.toInt() <= 4 || text.toInt() >= 100 -> {
+                ValidationResult(
+                    isSuccessful = false,
+                    errorMessage = context.getString(R.string.invalid_age)
+                )
             }
 
-            else ->
-            {
+            else -> {
                 ValidationResult(isSuccessful = true)
             }
         }
